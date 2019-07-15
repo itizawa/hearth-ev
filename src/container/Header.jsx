@@ -6,11 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink } from 'reactstrap';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -38,7 +34,7 @@ export default class Header extends React.Component {
 
     return (
       <div>
-        <Navbar style={navbar_style} expand="md">
+        <Navbar className="fixed-top" style={navbar_style} expand="md">
           <NavbarBrand href="/" style={text_style}>Hearth EV</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
