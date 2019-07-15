@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink } from 'reactstrap';
+  Button
+ } from 'reactstrap';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export default class Header extends React.Component {
     });
   }
   render() {
+
     const navbar_style={
      backgroundColor: "#00075d",
     }
@@ -32,18 +33,17 @@ export default class Header extends React.Component {
     }
 
 
+
     return (
       <div>
         <Navbar className="fixed-top" style={navbar_style} expand="md">
           <NavbarBrand href="/" style={text_style}>Hearth EV</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/" style={text_style}>Components</NavLink>
+                <Button className="bg-primary border border-white rounded-pill py-1 px-5" style={text_style}>Login</Button>
               </NavItem>
             </Nav>
-          </Collapse>
         </Navbar>
       </div>
     );
