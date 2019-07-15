@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 
 // Containerのインポート
 import Header from "./container/Header";
+import Sidebar from "./container/Sidebar";
 
 function App() {
 
@@ -16,8 +17,8 @@ function App() {
   return (
     <div style={bg_Style}>
       <Header />
-      <Row>
-        <Col md="10" className="bg">.col-3</Col>
+      <Row className="mt-5">
+        <Col className="ml-5 mt-3" md="3"><Sidebar /></Col>
       </Row>
     </div>
   );
