@@ -20,6 +20,7 @@ export default class Header extends React.Component {
     };
 
     this.toggle = this.toggle.bind(this);
+    this.onLoginHandler = this.onLoginHandler.bind(this);
   }
 
   /**
@@ -38,6 +39,7 @@ export default class Header extends React.Component {
 
   onLoginHandler() {
     console.log("login");
+    this.toggle();
   }
 
   render() {
@@ -50,7 +52,7 @@ export default class Header extends React.Component {
     };
 
     const scrol_style = {
-      height:"200px"
+      height: "200px"
     };
 
     return (
@@ -143,7 +145,10 @@ export default class Header extends React.Component {
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.onLoginHandler}>
+              <Button
+                color="primary"
+                onClick={this.onLoginHandler}
+              >
                 ログインする
               </Button>{" "}
               <Button color="secondary" onClick={this.toggle}>
