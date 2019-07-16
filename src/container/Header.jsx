@@ -12,6 +12,9 @@ import {
   ModalFooter
 } from "reactstrap";
 
+import firebase from "../firebase/firestore";
+import * as firestore from "../firebase/firestore";
+
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +42,7 @@ export default class Header extends React.Component {
 
   onLoginHandler() {
     console.log("login");
-    this.toggle();
+    firebase.auth().signInWithRedirect(firestore.providerTwitter);
   }
 
   render() {
@@ -145,10 +148,7 @@ export default class Header extends React.Component {
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button
-                color="primary"
-                onClick={this.onLoginHandler}
-              >
+              <Button color="primary" onClick={this.onLoginHandler}>
                 ログインする
               </Button>{" "}
               <Button color="secondary" onClick={this.toggle}>
