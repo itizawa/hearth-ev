@@ -19,7 +19,8 @@ export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      user_data: {}
     };
 
     this.toggle = this.toggle.bind(this);
@@ -67,6 +68,13 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Nav className="ml-auto" navbar>
             <NavItem>
+              <img
+                className="mr-2 rounded-pill border border-secondary"
+                src={this.props.user_data.photoURL}
+                alt=""
+                width="38px"
+                height="38px"
+              />
               <Button
                 onClick={this.toggle}
                 className="bg-primary border border-white rounded-pill py-1 px-5"
