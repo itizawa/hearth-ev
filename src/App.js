@@ -6,6 +6,16 @@ import Header from "./container/Header";
 import Sidebar from "./container/Sidebar";
 
 export default class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      user_img: "",
+      user_id: "",
+      displayName: ""
+    };
+  }
+
   componentDidMount() {
     console.log("this is DidMount");
   }
