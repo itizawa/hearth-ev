@@ -12,15 +12,19 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user_img: "",
-      user_id: "",
-      displayName: ""
+      user_photoURL: "",
+      user_uid: "",
+      user_displayName: ""
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user)
+      if (user) {
+        this.setState({ user_photoURL: user.photoURL });
+        this.setState({ user_uid: user.uid });
+        this.setState({ user_displayName: user.displayName });
+      }
     });
   }
 
