@@ -5,6 +5,8 @@ import { Row, Col } from "reactstrap";
 import Header from "./container/Header";
 import Sidebar from "./container/Sidebar";
 
+import firebase from "firebase/app";
+
 export default class App extends React.Component {
 
   constructor() {
@@ -17,7 +19,9 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("this is DidMount");
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log(user)
+    });
   }
 
   render() {
