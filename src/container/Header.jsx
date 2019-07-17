@@ -12,6 +12,8 @@ import {
   ModalFooter
 } from "reactstrap";
 
+import Term from "../components/article/Term"
+
 import firebase from "../firebase/firestore";
 import * as firestore from "../firebase/firestore";
 
@@ -91,6 +93,7 @@ export default class Header extends React.Component {
           >
             <ModalHeader toggle={this.toggle}>Twitterログイン</ModalHeader>
             <ModalBody>
+              <Term />
               下記の利用規約に同意したものとみなします
               <div className="overflow-auto mt-2" style={scrol_style}>
                 <h2 className="my-3 ml-3">利用規約</h2>
