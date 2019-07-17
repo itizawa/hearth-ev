@@ -8,22 +8,23 @@ import Sidebar from "./container/Sidebar";
 import firebase from "firebase/app";
 
 export default class App extends React.Component {
+  user_data = { displayName: "", photoURL: "", uid: "" };
 
   constructor() {
     super();
     this.state = {
-      user_photoURL: "",
-      user_uid: "",
-      user_displayName: ""
+      user_data: {}
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user_photoURL: user.photoURL });
-        this.setState({ user_uid: user.uid });
-        this.setState({ user_displayName: user.displayName });
+        this.user_data.displayName = user.displayName;
+        this.user_data.photoURL = user.photoURL;
+        this.user_data.uid = user.uid;
+
+        this.setState({ user_data: this.user_data });
       }
     });
   }
