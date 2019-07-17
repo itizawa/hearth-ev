@@ -6,6 +6,10 @@ import Header from "./container/Header";
 import Sidebar from "./container/Sidebar";
 
 export default class App extends React.Component {
+  componentDidMount() {
+    console.log("this is DidMount");
+  }
+
   render() {
     const bg_Style = {
       backgroundColor: "#f6f6f6",
