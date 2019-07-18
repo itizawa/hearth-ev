@@ -22,7 +22,7 @@ export default class Sidebar extends React.Component {
           <CardImg top width="100%" src={logo} alt="Card logo" />
 
           <CardBody>
-            <CardTitle>ゲストネーム</CardTitle>
+            <CardTitle>{this.props.user_data.displayName}</CardTitle>
             <CardSubtitle>Card subtitle</CardSubtitle>
             <CardText>
               Some quick example text to build on the card title and make up the
