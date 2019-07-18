@@ -1,29 +1,17 @@
 import React from "react";
 import logo from "../asset/img/logo.png";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle
-} from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
 
 export default class Sidebar extends React.Component {
-  render(){
-    return(
+  render() {
+    return (
       <Card>
-      <CardImg top width="100%" src={logo} alt="Card logo" />
+        <CardImg top width="100%" src={logo} alt="Card logo" />
 
-      <CardBody>
-        <CardTitle>ゲストネーム</CardTitle>
-        <CardSubtitle>Card subtitle</CardSubtitle>
-        <CardText>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </CardText>
-      </CardBody>
-    </Card>
-    )
+        <CardBody>
+          <CardTitle>{this.props.user_data.displayName}</CardTitle>
+        </CardBody>
+      </Card>
+    );
   }
 }
