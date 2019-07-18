@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 
 // Containerのインポート
 import Header from "./container/Header";
+import MainContainer from "./container/MainContainer";
 import Sidebar from "./container/Sidebar";
 
 import firebase from "firebase/app";
@@ -37,12 +38,15 @@ export default class App extends React.Component {
       height: "100%"
     };
 
+
+
     return (
       <div style={bg_Style}>
         <Header user_data={this.state.user_data} />
+        <MainContainer />
         <Row className="mt-5">
           <Col className="ml-5 mt-3" md="3">
-            <Sidebar user_data={this.state.user_data}/>
+            <Sidebar user_data={this.state.user_data} />
           </Col>
         </Row>
       </div>
