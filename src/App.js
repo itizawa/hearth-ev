@@ -31,17 +31,8 @@ export default class App extends React.Component {
   }
 
   render() {
-    const bg_Style = {
-      backgroundColor: "#f6f6f6",
-      position: "fixed",
-      width: "100%",
-      height: "100%"
-    };
-
-
-
     return (
-      <div style={bg_Style}>
+      <React.Fragment>
         <Header user_data={this.state.user_data} />
         <MainContainer />
         <Row className="mt-5">
@@ -49,7 +40,7 @@ export default class App extends React.Component {
             <Sidebar user_data={this.state.user_data} />
           </Col>
         </Row>
-      </div>
+      </React.Fragment>
     );
   }
 }

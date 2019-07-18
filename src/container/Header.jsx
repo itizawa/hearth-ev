@@ -59,7 +59,7 @@ export default class Header extends React.Component {
 
     return (
       <div>
-        <Navbar className="fixed-top" style={navbar_style} expand="md">
+        <Navbar style={navbar_style} className="fixed-top" expand="md">
           <NavbarBrand href="/" style={text_style}>
             Hearth EV
           </NavbarBrand>
