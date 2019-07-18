@@ -58,8 +58,8 @@ export default class Header extends React.Component {
     };
 
     return (
-      <div>
-        <Navbar className="fixed-top" style={navbar_style} expand="md">
+      <React.Fragment>
+        <Navbar style={navbar_style} expand="md">
           <NavbarBrand href="/" style={text_style}>
             Hearth EV
           </NavbarBrand>
@@ -101,7 +101,7 @@ export default class Header extends React.Component {
             </ModalFooter>
           </Modal>
         </Navbar>
-      </div>
+      </React.Fragment>
     );
   }
 }

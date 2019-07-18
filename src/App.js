@@ -1,9 +1,8 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
 
 // Containerのインポート
 import Header from "./container/Header";
-import Sidebar from "./container/Sidebar";
+import MainContainer from "./container/MainContainer";
 
 import firebase from "firebase/app";
 
@@ -30,22 +29,11 @@ export default class App extends React.Component {
   }
 
   render() {
-    const bg_Style = {
-      backgroundColor: "#f6f6f6",
-      position: "fixed",
-      width: "100%",
-      height: "100%"
-    };
-
     return (
-      <div style={bg_Style}>
+      <React.Fragment>
         <Header user_data={this.state.user_data} />
-        <Row className="mt-5">
-          <Col className="ml-5 mt-3" md="3">
-            <Sidebar user_data={this.state.user_data}/>
-          </Col>
-        </Row>
-      </div>
+        <MainContainer user_data={this.state.user_data} />
+      </React.Fragment>
     );
   }
 }
