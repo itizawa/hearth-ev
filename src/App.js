@@ -42,7 +42,7 @@ export default class App extends React.Component {
         <Header user_data={this.state.user_data} />
         <Row className="mt-5">
           <Col className="ml-5 mt-3" md="3">
-            <Sidebar />
+            <Sidebar user_data={this.state.user_data}/>
           </Col>
         </Row>
       </div>
