@@ -11,16 +11,9 @@ export default class Sidebar extends React.Component {
 
         <ListGroup>
           <ListGroupItem tag="button" action>
-            <i className="material-icons">home</i>
-          </ListGroupItem>
-          <ListGroupItem tag="button" action>
-            Dapibus ac facilisis in
-          </ListGroupItem>
-          <ListGroupItem tag="button" action>
-            Morbi leo risus
-          </ListGroupItem>
-          <ListGroupItem tag="button" action>
-            Porta ac consectetur ac
+            <p className="mb-0 align-middle">
+              <i className="material-icons mr-2">home</i>ホーム
+            </p>
           </ListGroupItem>
         </ListGroup>
       </React.Fragment>
