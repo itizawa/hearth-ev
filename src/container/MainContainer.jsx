@@ -16,20 +16,16 @@ export default class MainContainer extends React.Component {
           <Col md="3" className="pl-0">
             <Sidebar user_data={this.props.user_data} />
           </Col>
-          <BrowserRouter>
-            <div>
-              <Route
-                exact
-                path="/"
-                render={(props) => <MainApp {...this.props} />}
-              />
-            </div>
-          </BrowserRouter>
-          <Col md="5" className="px-0">
-            <Sidebar user_data={this.props.user_data} />
-          </Col>
-          <Col md="4" className="px-0">
-            <Sidebar user_data={this.props.user_data} />
+          <Col md="9">
+            <BrowserRouter>
+              <div>
+                <Route
+                  exact
+                  path="/"
+                  render={(props) => <MainApp {...this.props} />}
+                />
+              </div>
+            </BrowserRouter>
           </Col>
         </Row>
       </div>
