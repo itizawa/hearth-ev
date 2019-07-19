@@ -1,5 +1,8 @@
 import React from "react";
 
+//共通 css
+import "./App.css";
+
 // Containerのインポート
 import Header from "./container/Header";
 import MainContainer from "./container/MainContainer";
