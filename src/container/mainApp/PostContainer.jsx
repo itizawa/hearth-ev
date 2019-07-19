@@ -9,9 +9,9 @@ export default class PostContainer extends React.Component {
 
     return (
       <div className="border 2px">
-        <h1 style={header_style} className="text-white py-2 pl-1 mb-0">
+        <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
           ホーム
-        </h1>
+        </h3>
         <div className="d-flex py-1">
           <img
             className="ml-2 my-auto rounded-pill"
