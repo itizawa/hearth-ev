@@ -18,13 +18,11 @@ export default class MainContainer extends React.Component {
           </Col>
           <Col md="9">
             <BrowserRouter>
-              <div>
-                <Route
-                  exact
-                  path="/"
-                  render={(props) => <MainApp {...this.props} />}
-                />
-              </div>
+              <Route
+                exact
+                path="/"
+                render={(props) => <MainApp {...this.props} />}
+              />
             </BrowserRouter>
           </Col>
         </Row>
