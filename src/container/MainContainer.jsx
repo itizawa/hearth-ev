@@ -13,10 +13,10 @@ export default class MainContainer extends React.Component {
     return (
       <div style={container_style}>
         <Row className="mt-2 mx-0">
-          <Col md="3" className="pl-0">
+          <Col md="2" className="pl-0">
             <Sidebar user_data={this.props.user_data} />
           </Col>
-          <Col md="9">
+          <Col md="10">
             <BrowserRouter>
               <Route
                 exact
