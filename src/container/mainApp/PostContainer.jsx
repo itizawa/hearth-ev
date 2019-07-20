@@ -37,20 +37,23 @@ export default class PostContainer extends React.Component {
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             ホーム
           </h3>
-          <div className="d-flex py-1">
-            <img
-              className="ml-2 my-auto rounded-pill"
-              src={this.props.user_data.photoURL}
-              alt={this.props.user_data.photoURL}
-              width="35px"
-              height="35px"
-            />
-            <Input
-              onClick={this.toggle}
-              className="col-10 ml-2"
-              placeholder="今、何してる"
-            />
-          </div>
+          <Row className="py-2 mx-0">
+            <Col xs="2" className="pr-0">
+              <img
+                className="rounded-pill"
+                src={this.props.user_data.photoURL}
+                alt={this.props.user_data.photoURL}
+                width="auto"
+                height="80%"
+              />
+            </Col>
+            <Col xs="10 pl-0">
+              <Input
+                onClick={this.toggle}
+                placeholder="今、何してる"
+              />
+            </Col>
+          </Row>
         </div>
         <Modal
           isOpen={this.state.modal}
