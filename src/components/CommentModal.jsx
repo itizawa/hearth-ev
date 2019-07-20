@@ -60,7 +60,14 @@ export default class CommentModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.props.modal_toggle}>
+          <Button
+            color="primary"
+            onClick={this.props.modal_toggle}
+            disabled={
+              this.state.comment_text.length < 1 ||
+              this.state.comment_text.length > 150
+            }
+          >
             Submit
           </Button>{" "}
         </ModalFooter>
