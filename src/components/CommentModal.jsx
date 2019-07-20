@@ -11,6 +11,24 @@ import {
 } from "reactstrap";
 
 export default class CommentModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment_text: ""
+    };
+    this.onTextChange = this.onTextChange.bind(this);
+  }
+
+  /**
+   * コメント取得ためのイベントハンドラ
+   */
+  
+  onTextChange(e) {
+    this.setState({
+      comment_text: e.target.value
+    });
+  }
+
   render() {
     return (
       <Modal
@@ -32,7 +50,7 @@ export default class CommentModal extends React.Component {
               />
             </Col>
             <Col xs="10" className="pl-0">
-              <Input type="textarea" name="text" id="exampleText" />
+              <Input onChange={this.onTextChange} type="textarea" name="text" id="exampleText" />
             </Col>
           </Row>
         </ModalBody>
