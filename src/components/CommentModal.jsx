@@ -22,7 +22,7 @@ export default class CommentModal extends React.Component {
   /**
    * コメント取得ためのイベントハンドラ
    */
-  
+
   onTextChange(e) {
     this.setState({
       comment_text: e.target.value
@@ -50,7 +50,12 @@ export default class CommentModal extends React.Component {
               />
             </Col>
             <Col xs="10" className="pl-0">
-              <Input onChange={this.onTextChange} type="textarea" name="text" id="exampleText" />
+              <Input
+                onChange={this.onTextChange}
+                type="textarea"
+                name="text"
+                id="exampleText"
+              />
             </Col>
           </Row>
         </ModalBody>
