@@ -12,7 +12,7 @@ export default class PostContainer extends React.Component {
     this.modal_toggle = this.modal_toggle.bind(this);
   }
 
-    /**
+  /**
    * モーダル開閉のためのイベントハンドラ
    */
 
