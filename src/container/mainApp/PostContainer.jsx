@@ -3,12 +3,16 @@ import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
 import Comment from "../../components/Comment";
 
+import firebase from "firebase/app";
+
 export default class PostContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show_comment_modal: false
+      show_comment_modal: false,
+      comments: {}
     };
+    this.onReadHandler();
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -22,6 +26,26 @@ export default class PostContainer extends React.Component {
       show_comment_modal: !prevState.show_comment_modal
     }));
   }
+
+  /**
+   * データを取得するイベントハンドラ
+   */
+
+  onReadHandler = function() {
+    var comments = [];
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          comments.push(doc.data());
+        });
+        this.setState({ comments: comments });
+      })
+      .catch((err) => {
+        console.log("Error getting documents", err);
+      });
+  };
 
   render() {
     const header_style = {
