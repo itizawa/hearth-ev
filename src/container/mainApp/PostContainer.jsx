@@ -1,28 +1,24 @@
 import React from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  Col,
-  Row
-} from "reactstrap";
+import { Input, Col, Row } from "reactstrap";
+import CommentModal from "../../components/CommentModal";
 
 export default class PostContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      show_comment_modal: false
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.modal_toggle = this.modal_toggle.bind(this);
   }
 
-  toggle() {
+  /**
+   * モーダル開閉のためのイベントハンドラ
+   */
+
+  modal_toggle() {
     this.setState((prevState) => ({
-      modal: !prevState.modal
+      show_comment_modal: !prevState.show_comment_modal
     }));
   }
 
@@ -48,42 +44,15 @@ export default class PostContainer extends React.Component {
               />
             </Col>
             <Col xs="10 pl-0">
-              <Input
-                onClick={this.toggle}
-                placeholder="今、何してる"
-              />
+              <Input onClick={this.modal_toggle} placeholder="今、何してる" />
             </Col>
           </Row>
         </div>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-          className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle}>コメントする</ModalHeader>
-
-          <ModalBody>
-            <Row>
-              <Col xs="2" className="pr-0">
-                <img
-                  className="ml-2 my-auto rounded-pill"
-                  src={this.props.user_data.photoURL}
-                  alt={this.props.user_data.photoURL}
-                  width="auto"
-                  height="80%"
-                />
-              </Col>
-              <Col xs="10" className="pl-0">
-                <Input type="textarea" name="text" id="exampleText" />
-              </Col>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Submit
-            </Button>{" "}
-          </ModalFooter>
-        </Modal>
+        <CommentModal
+          modal={this.state.show_comment_modal}
+          modal_toggle={this.modal_toggle}
+          user_data={this.props.user_data}
+        />
       </>
     );
   }
