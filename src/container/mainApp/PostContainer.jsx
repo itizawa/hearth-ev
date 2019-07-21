@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
+import Comment from "../../components/Comment";
 
 export default class PostContainer extends React.Component {
   constructor(props) {
@@ -47,6 +48,7 @@ export default class PostContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="今、何してる" />
             </Col>
           </Row>
+          <Comment user_data={this.props.user_data} />
         </div>
         <CommentModal
           modal={this.state.show_comment_modal}
