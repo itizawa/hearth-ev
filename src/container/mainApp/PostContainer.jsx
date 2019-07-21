@@ -28,7 +28,7 @@ export default class PostContainer extends React.Component {
     };
 
     return (
-      <>
+      <React.Fragment>
         <div className="border 2px">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             ホーム
@@ -53,7 +53,7 @@ export default class PostContainer extends React.Component {
           modal_toggle={this.modal_toggle}
           user_data={this.props.user_data}
         />
-      </>
+      </React.Fragment>
     );
   }
 }
