@@ -34,16 +34,16 @@ export default class PostContainer extends React.Component {
             ホーム
           </h3>
           <Row className="py-2 mx-0">
-            <Col xs="2" className="pr-0">
+            <Col xs="1" className="px-1">
               <img
                 className="rounded-pill"
                 src={this.props.user_data.photoURL}
                 alt={this.props.user_data.photoURL}
-                width="auto"
-                height="80%"
+                width="80%"
+                height="auto"
               />
             </Col>
-            <Col xs="10 pl-0">
+            <Col xs="11 pl-0">
               <Input onClick={this.modal_toggle} placeholder="今、何してる" />
             </Col>
           </Row>
