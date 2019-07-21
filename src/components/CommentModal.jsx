@@ -10,6 +10,11 @@ import {
   Row
 } from "reactstrap";
 
+import firebase from "firebase/app";
+
+// functionのインポート
+import getNow from "../function/getNow";
+
 export default class CommentModal extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +22,7 @@ export default class CommentModal extends React.Component {
       comment_text: ""
     };
     this.onTextChange = this.onTextChange.bind(this);
+    this.onPostComment = this.onPostComment.bind(this);
   }
 
   /**
@@ -27,6 +33,31 @@ export default class CommentModal extends React.Component {
     this.setState({
       comment_text: e.target.value
     });
+  }
+
+  /**
+   * コメント投稿のイベントハンドラ
+   */
+
+  onPostComment() {
+    const db = firebase.firestore();
+    var addComment = db
+      .collection("Comments")
+      .add({
+        creator: this.props.user_data,
+        comment_data: {
+          text: this.state.comment_text,
+          like: {},
+          date: getNow(),
+          topic: ""
+        }
+      })
+      .then((ref) => {
+        console.log("Added document with ID: ", ref.id);
+        this.setState({ comment_text: "" });
+      });
+    this.props.modal_toggle();
+    return Promise.all([addComment]);
   }
 
   render() {
@@ -62,7 +93,7 @@ export default class CommentModal extends React.Component {
         <ModalFooter>
           <Button
             color="primary"
-            onClick={this.props.modal_toggle}
+            onClick={this.onPostComment}
             disabled={
               this.state.comment_text.length < 1 ||
               this.state.comment_text.length > 150
