@@ -4,6 +4,13 @@ import Sidebar from "../Sidebar";
 import PostContainer from "./PostContainer";
 
 export default class MainApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_id: this.props.match.params.user_id || ""
+    };
+  }
+
   render() {
     return (
       <React.Fragment>

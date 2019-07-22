@@ -21,7 +21,16 @@ export default class MainContainer extends React.Component {
               <Route
                 exact
                 path="/"
-                render={(props) => <MainApp {...this.props} />}
+                render={(props) => (
+                  <MainApp {...this.props} match={props.match} />
+                )}
+              />
+              <Route
+                exact
+                path="/user/:user_id"
+                render={(props) => (
+                  <MainApp {...this.props} match={props.match} />
+                )}
               />
             </BrowserRouter>
           </Col>
