@@ -14,13 +14,15 @@ export default class Comment extends React.Component {
     return (
       <Row className="mx-0 py-2 px-2 border-top">
         <Col xs="1" className="px-0">
-          <img
-            className="rounded-pill border"
-            src={this.props.comment.creator_img}
-            alt={this.props.comment.creator_img}
-            width="80%"
-            height="auto"
-          />
+          <Link to={"/user/" + this.props.comment.creator_id}>
+            <img
+              className="rounded-pill border"
+              src={this.props.comment.creator_img}
+              alt={this.props.comment.creator_img}
+              width="80%"
+              height="auto"
+            />
+          </Link>
         </Col>
         <Col xs="11" className="px-0">
           <h5>
