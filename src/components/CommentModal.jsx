@@ -44,13 +44,13 @@ export default class CommentModal extends React.Component {
     var addComment = db
       .collection("Comments")
       .add({
-        creator: this.props.user_data,
-        comment_data: {
-          text: this.state.comment_text,
-          like: {},
-          date: getNow(),
-          topic: ""
-        }
+        creator: this.props.user_data.displayName,
+        creator_id: this.props.user_data.uid,
+        creator_img: this.props.user_data.photoURL,
+        text: this.state.comment_text,
+        like: {},
+        create_at: getNow(),
+        topic: ""
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
