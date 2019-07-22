@@ -37,7 +37,7 @@ export default class PostContainer extends React.Component {
     const db = firebase.firestore();
     db.collection("Comments")
       .orderBy("create_at", "desc")
-      .limit(10)
+      .limit(50)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
