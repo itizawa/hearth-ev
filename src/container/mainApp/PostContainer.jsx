@@ -45,6 +45,7 @@ export default class PostContainer extends React.Component {
       .catch((err) => {
         console.log("Error getting documents", err);
       });
+    return Promise.all([db]);
   };
 
   render() {
@@ -69,11 +70,14 @@ export default class PostContainer extends React.Component {
               />
             </Col>
             <Col xs="11 pl-0">
-              <Input onClick={this.modal_toggle} placeholder="今、何してる" />
+              <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          <Comment user_data={this.props.user_data} />
+          {this.state.comments.map((comment, index) => {
+            return <Comment key={index} comment={comment} />;
+          })}
         </div>
+
         <CommentModal
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
