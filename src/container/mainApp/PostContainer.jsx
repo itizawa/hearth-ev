@@ -25,6 +25,7 @@ export default class PostContainer extends React.Component {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
     }));
+    this.onReadHandler();
   }
 
   /**
@@ -35,6 +36,8 @@ export default class PostContainer extends React.Component {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
+      .orderBy("create_at", "desc")
+      .limit(10)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
