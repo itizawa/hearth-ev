@@ -5,7 +5,7 @@ import Comment from "../../components/Comment";
 
 import firebase from "firebase/app";
 
-export default class PostContainer extends React.Component {
+export default class CenterContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
