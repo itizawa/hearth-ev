@@ -10,7 +10,7 @@ export default class PostContainer extends React.Component {
     super(props);
     this.state = {
       show_comment_modal: false,
-      comments: {}
+      comments: []
     };
     this.onReadHandler();
 
