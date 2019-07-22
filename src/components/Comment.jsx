@@ -22,16 +22,12 @@ export default class Comment extends React.Component {
           />
         </Col>
         <Col xs="11" className="px-0">
-          <strong>{this.props.comment.creator}</strong>
-          <p className="mb-0">
-            {this.props.comment.text}
-          </p>
+          <h5>
+            <strong>{this.props.comment.creator}</strong>
+            <small className="text-muted ml-1">{this.props.comment.create_at}</small>
+          </h5>
+          <p className="mb-0">{this.props.comment.text}</p>
         </Col>
-        {/* <div>{this.props.comments[0].text}</div> */}
-
-        {/* {this.props.comments.map((text, index) => {
-          return <li key={index}> {text.text} </li>;
-        })} */}
       </Row>
     );
   }
