@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import Sidebar from "../Sidebar";
 import CenterContainer from "./CenterContainer";
+import { getUser } from "../../function/user";
 
 export default class MainApp extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class MainApp extends React.Component {
 
   userPageProcess = () => {
     this.setState({ screen_status: { userPage: true } });
+    getUser(this.state.focus_user.id)
   };
 
   render() {
