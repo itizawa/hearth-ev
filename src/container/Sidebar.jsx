@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../asset/img/logo.png";
+import { Link } from "react-router-dom";
 
 import { CardImg, ListGroup, ListGroupItem } from "reactstrap";
 
@@ -11,9 +12,11 @@ export default class Sidebar extends React.Component {
 
         <ListGroup>
           <ListGroupItem tag="button" action>
-            <p className="mb-0 align-middle">
-              <i className="material-icons mr-2">home</i>ホーム
-            </p>
+            <Link to={"/"}>
+              <p className="mb-0 align-middle">
+                <i className="material-icons mr-2">home</i>ホーム
+              </p>
+            </Link>
           </ListGroupItem>
         </ListGroup>
       </React.Fragment>

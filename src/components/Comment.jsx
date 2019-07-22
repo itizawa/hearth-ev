@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class Comment extends React.Component {
   constructor(props) {
@@ -23,8 +24,12 @@ export default class Comment extends React.Component {
         </Col>
         <Col xs="11" className="px-0">
           <h5>
-            <strong>{this.props.comment.creator}</strong>
-            <small className="text-muted ml-1">{this.props.comment.create_at}</small>
+            <Link to={"/user/" + this.props.comment.creator_id}>
+              <strong>{this.props.comment.creator}</strong>
+            </Link>
+            <small className="text-muted ml-1">
+              {this.props.comment.create_at}
+            </small>
           </h5>
           <p className="mb-0">{this.props.comment.text}</p>
         </Col>

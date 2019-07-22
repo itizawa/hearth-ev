@@ -30,7 +30,7 @@ export default class MainApp extends React.Component {
 
   userPageProcess = () => {
     this.setState({ screen_status: { userPage: true } });
-    getUser(this.state.focus_user.id)
+    getUser(this.state.focus_user.id);
   };
 
   render() {
