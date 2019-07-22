@@ -7,13 +7,19 @@ export default class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: this.props.match.params.user_id || ""
+      focus_user:{
+        id: this.props.match.params.user_id || "",
+      },
+
+      screen_status: {
+        userPage: false
+      }
     };
   }
 
   componentDidMount() {
-    if (this.state.user_id) {
-      this.userPageProcess()
+    if (this.state.focus_user.id) {
+      this.userPageProcess();
     }
   }
 
@@ -22,7 +28,7 @@ export default class MainApp extends React.Component {
    */
 
   userPageProcess = () => {
-    console.log("aaa")
+    this.setState({ screen_status:{userPage: true} });
   };
 
   render() {
