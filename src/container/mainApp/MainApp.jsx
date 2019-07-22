@@ -11,6 +11,20 @@ export default class MainApp extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.state.user_id) {
+      this.userPageProcess()
+    }
+  }
+
+  /**
+   * ユーザーページの場合の処理
+   */
+
+  userPageProcess = () => {
+    console.log("aaa")
+  };
+
   render() {
     return (
       <React.Fragment>
