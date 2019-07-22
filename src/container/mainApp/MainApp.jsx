@@ -7,8 +7,8 @@ export default class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus_user:{
-        id: this.props.match.params.user_id || "",
+      focus_user: {
+        id: this.props.match.params.user_id || ""
       },
 
       screen_status: {
@@ -28,7 +28,7 @@ export default class MainApp extends React.Component {
    */
 
   userPageProcess = () => {
-    this.setState({ screen_status:{userPage: true} });
+    this.setState({ screen_status: { userPage: true } });
   };
 
   render() {
