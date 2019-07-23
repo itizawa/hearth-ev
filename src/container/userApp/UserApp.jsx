@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import Sidebar from "../Sidebar";
+import ViewContainer from "./ViewContainer";
 import CenterContainer from "./CenterContainer";
 
 import firebase from "firebase/app";
@@ -55,7 +55,7 @@ export default class UserApp extends React.Component {
             />
           </Col>
           <Col md="5" className="px-0">
-            <Sidebar user_data={this.props.user_data} />
+            <ViewContainer user_data={this.props.user_data} />
           </Col>
         </Row>
       </React.Fragment>
