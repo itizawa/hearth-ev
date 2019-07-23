@@ -35,8 +35,8 @@ export default class CenterContainer extends React.Component {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .orderBy("create_at", "desc")
-      .limit(50)
+      .where("creator_id", "==", this.props.focus_user.id)
+      .limit(30)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
@@ -59,7 +59,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="border 2px">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            ホーム
+            {this.props.focus_user.name}
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">

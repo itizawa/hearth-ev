@@ -3,6 +3,7 @@ import { Row, Col } from "reactstrap";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Route } from "react-router-dom";
 import MainApp from "./mainApp/MainApp";
+import UserApp from "./userApp/UserApp";
 
 export default class MainContainer extends React.Component {
   render() {
@@ -21,15 +22,13 @@ export default class MainContainer extends React.Component {
               <Route
                 exact
                 path="/"
-                render={(props) => (
-                  <MainApp {...this.props} match={props.match} />
-                )}
+                render={(props) => <MainApp {...this.props} />}
               />
               <Route
                 exact
                 path="/user/:user_id"
                 render={(props) => (
-                  <MainApp {...this.props} match={props.match} />
+                  <UserApp {...this.props} match={props.match} />
                 )}
               />
             </Col>
