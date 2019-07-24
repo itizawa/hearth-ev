@@ -13,9 +13,6 @@ export default class Sidebar extends React.Component {
     const row_style={
       height:"50px"
     }
-    const photo_style={
-      transform: "translate(0px, -80%)"
-    }
     return (
       <React.Fragment>
         <div className="border 2px">
@@ -23,7 +20,6 @@ export default class Sidebar extends React.Component {
           <CardBody>
             <Row className="py-2 mx-0" style={row_style}>
               <Col xs="8">
-                <h5></h5>
               </Col>
               <Col xs="4" className="px-1">
 
