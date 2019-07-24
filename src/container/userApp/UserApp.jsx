@@ -14,10 +14,8 @@ export default class UserApp extends React.Component {
         name: "UserPage"
       }
     };
-  }
-
-  componentDidMount() {
     this.userPageProcess();
+
   }
 
   /**
