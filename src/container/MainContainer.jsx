@@ -36,7 +36,7 @@ export default class MainContainer extends React.Component {
               />
               <Route
                 exact
-                path="/card/:card_name"
+                path="/card/:card_id"
                 render={(props) => (
                   <CardApp {...this.props} match={props.match} />
                 )}

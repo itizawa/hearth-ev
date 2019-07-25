@@ -2,14 +2,13 @@ import React from "react";
 
 import CardView from "./CardView";
 
-export default class Sidebar extends React.Component {
+export default class ViewContainer extends React.Component {
   render() {
 
     return (
       <React.Fragment>
         <div className="border 2px">
-          <CardView />
-
+          <CardView focus_card={this.props.focus_card}/>
         </div>
       </React.Fragment>
     );

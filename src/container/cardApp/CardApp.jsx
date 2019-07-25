@@ -10,7 +10,8 @@ export default class CardApp extends React.Component {
     super(props);
     this.state = {
       focus_card: {
-        name: this.props.match.params.card_name
+        name: "CardPage",
+        id: this.props.match.params.card_id
       }
     };
     this.fetchCardData();
@@ -24,7 +25,7 @@ export default class CardApp extends React.Component {
     firebase
       .firestore()
       .collection("Cards")
-      .doc(this.state.focus_card.name)
+      .doc(this.state.focus_card.id)
       .get()
       .then((doc) => {
         if (!doc.exists) {

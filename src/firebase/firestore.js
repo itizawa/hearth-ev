@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import { firebaseConfig } from './config';
 import 'firebase/auth';
 import 'firebase/database';
+import "firebase/storage";
 
 firebase.initializeApp(firebaseConfig);
 
