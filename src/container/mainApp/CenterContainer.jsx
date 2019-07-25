@@ -35,7 +35,7 @@ export default class CenterContainer extends React.Component {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .orderBy("create_at", "desc")
+      .orderBy("timestamp", "desc")
       .limit(50)
       .get()
       .then((snapshot) => {
