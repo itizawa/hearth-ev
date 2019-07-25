@@ -19,7 +19,8 @@ export default class CommentModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment_text: ""
+      comment_text: "",
+      topic: this.props.topic || ""
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
@@ -50,8 +51,7 @@ export default class CommentModal extends React.Component {
         text: this.state.comment_text,
         like: {},
         create_at: getNow(),
-        topic: "",
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        topic: this.state.topic
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
