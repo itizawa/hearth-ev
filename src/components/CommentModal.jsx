@@ -55,7 +55,11 @@ export default class CommentModal extends React.Component {
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
-        this.setState({ comment_text: "" });
+        db.collection("Users")
+          .doc(this.props.user_data.uid)
+          .update({
+            comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
+          });
       });
     this.props.modal_toggle();
     return Promise.all([addComment]);

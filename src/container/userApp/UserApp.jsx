@@ -11,7 +11,8 @@ export default class UserApp extends React.Component {
     this.state = {
       focus_user: {
         id: this.props.match.params.user_id,
-        name: "UserPage"
+        name: "UserPage",
+        comments:[]
       }
     };
     this.userPageProcess();
