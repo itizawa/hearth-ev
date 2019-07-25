@@ -15,6 +15,7 @@ export default class CardApp extends React.Component {
     };
     this.cardPageProcess();
   }
+  
   /**
    * カードデータを取得する
    */
