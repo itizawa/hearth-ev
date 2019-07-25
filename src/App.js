@@ -17,9 +17,11 @@ export default class App extends React.Component {
     this.state = {
       user_data: {}
     };
+
+    this.setUpUser();
   }
 
-  componentDidMount() {
+  setUpUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.user_data.displayName = user.displayName;
