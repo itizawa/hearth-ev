@@ -12,7 +12,7 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: false,
       comments: []
     };
-    this.onReadHandler();
+    this.fetchCardComment();
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -28,10 +28,10 @@ export default class CenterContainer extends React.Component {
   }
 
   /**
-   * データを取得するイベントハンドラ
+   * コメントを取得するイベントハンドラ
    */
 
-  onReadHandler = function() {
+  fetchCardComment = function() {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
