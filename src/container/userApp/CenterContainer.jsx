@@ -1,9 +1,7 @@
 import React from "react";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
-import Comment from "../../components/Comment";
-
-import firebase from "firebase/app";
+import UserComment from "./UserComment";
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -12,7 +10,6 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: false,
       comments: []
     };
-    this.onReadHandler();
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -26,29 +23,6 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: !prevState.show_comment_modal
     }));
   }
-
-  /**
-   * データを取得するイベントハンドラ
-   */
-
-  onReadHandler = function() {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .where("creator_id", "==", this.props.focus_user.id)
-      .limit(30)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
-  };
 
   render() {
     const header_style = {
@@ -75,8 +49,8 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.state.comments.map((comment, index) => {
-            return <Comment key={index} comment={comment} />;
+          {this.props.focus_user.comments.reverse().map((id, index) => {
+            return <UserComment key={index} id={id} />;
           })}
         </div>
 
