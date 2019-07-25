@@ -6,7 +6,8 @@ export default class CardView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      card_image: ""
+      card_image: "",
+      card_id: this.props.focus_card.id || ""
     };
 
     this.fetchCardImage();
@@ -18,7 +19,7 @@ export default class CardView extends React.Component {
 
   fetchCardImage() {
     var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.props.focus_card.id}.png`);
+    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`);
 
     spaceRef.getDownloadURL().then((url) => {
       this.setState({ card_image: url });
@@ -26,14 +27,20 @@ export default class CardView extends React.Component {
   }
 
   render() {
+    const img_frame={
+      height:"700px",
+      paddingLeft:"20%"
+    }
     return (
       <React.Fragment>
+        <div style={img_frame}>
         <img
           src={this.state.card_image}
           alt={this.state.card_image}
-          width="80%"
-          height="auto"
+          width="auto"
+          height="60%"
         />
+        </div>
       </React.Fragment>
     );
   }
