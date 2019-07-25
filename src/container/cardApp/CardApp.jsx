@@ -15,14 +15,15 @@ export default class CardApp extends React.Component {
     };
     this.fetchCardData();
   }
-  
+
   /**
    * カードデータを取得する
    */
 
   fetchCardData = () => {
-    const db = firebase.firestore();
-    db.collection("Users")
+    firebase
+      .firestore()
+      .collection("Cards")
       .doc(this.state.focus_card.name)
       .get()
       .then((doc) => {
@@ -30,7 +31,7 @@ export default class CardApp extends React.Component {
           console.log("No such document!");
         } else {
           this.setState({
-            focus_user: doc.data()
+            focus_card: doc.data()
           });
         }
       })
