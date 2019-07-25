@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import firebase from "firebase/app";
 
-export default class Comment extends React.Component {
+export default class UserComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,16 +12,17 @@ export default class Comment extends React.Component {
       comment: {}
     };
 
-    this.userPageProcess();
+    this.fetchUserComment();
   }
 
   /**
    * コメントデータを取得する
    */
 
-  userPageProcess = () => {
-    const db = firebase.firestore();
-    db.collection("Comments")
+  fetchUserComment = () => {
+    firebase
+      .firestore()
+      .collection("Comments")
       .doc(this.state.id)
       .get()
       .then((doc) => {
@@ -57,7 +58,9 @@ export default class Comment extends React.Component {
             <Link to={"/user/" + this.state.comment.creator_id}>
               <strong>{this.state.comment.creator}</strong>
             </Link>
-            <small className="text-muted ml-1">{this.state.comment.create_at}</small>
+            <small className="text-muted ml-1">
+              {this.state.comment.create_at}
+            </small>
           </h5>
           <p className="mb-0">{this.state.comment.text}</p>
         </Col>

@@ -1,21 +1,16 @@
 import React from "react";
 import logo from "../../asset/img/logo.png";
 
-import {
-  CardImg,
-  CardBody,
-  Row,
-  Col
-} from "reactstrap";
+import { CardImg, CardBody, Row, Col } from "reactstrap";
 
 export default class Sidebar extends React.Component {
   render() {
-    const row_style={
-      height:"50px"
-    }
-    const photo_style={
+    const row_style = {
+      height: "50px"
+    };
+    const photo_style = {
       transform: "translate(0px, -80%)"
-    }
+    };
     return (
       <React.Fragment>
         <div className="border 2px">

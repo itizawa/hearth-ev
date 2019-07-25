@@ -15,14 +15,15 @@ export default class UserApp extends React.Component {
         comments:[]
       }
     };
-    this.userPageProcess();
+
+    this.fetchUserData();
   }
 
   /**
    * ユーザーデータを取得する
    */
 
-  userPageProcess = () => {
+  fetchUserData = () => {
     const db = firebase.firestore();
     db.collection("Users")
       .doc(this.state.focus_user.id)
