@@ -21,6 +21,10 @@ export default class App extends React.Component {
     this.setUpUser();
   }
 
+  /**
+   * アプリ表示時にユーザーをセットする
+   */
+
   setUpUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
