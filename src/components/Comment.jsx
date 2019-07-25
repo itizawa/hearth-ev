@@ -9,7 +9,6 @@ export default class Comment extends React.Component {
       comments: this.props.comments
     };
   }
-  componentDidMount() {}
   render() {
     return (
       <Row className="mx-0 py-2 px-2 border-top">
