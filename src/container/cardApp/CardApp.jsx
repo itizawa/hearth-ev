@@ -13,14 +13,14 @@ export default class CardApp extends React.Component {
         name: this.props.match.params.card_name
       }
     };
-    this.cardPageProcess();
+    this.fetchCardData();
   }
   
   /**
    * カードデータを取得する
    */
 
-  cardPageProcess = () => {
+  fetchCardData = () => {
     const db = firebase.firestore();
     db.collection("Users")
       .doc(this.state.focus_card.name)
