@@ -84,7 +84,7 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={this.props.user_data}
-          focus_card={this.props.focus_card} 
+          card_id={this.props.focus_card.id} 
         />
       </React.Fragment>
     );

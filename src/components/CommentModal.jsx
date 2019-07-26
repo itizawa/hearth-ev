@@ -21,7 +21,7 @@ export default class CommentModal extends React.Component {
     this.state = {
       comment_text: "",
       topic: this.props.topic || "",
-      card_id: this.props.focus_card.id || "" 
+      card_id: this.props.card_id || "" 
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
