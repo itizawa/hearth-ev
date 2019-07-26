@@ -7,7 +7,7 @@ export default class CardView extends React.Component {
     super(props);
     this.state = {
       card_image: "",
-      card_id: this.props.focus_card.id || ""
+      card_id: this.props.focus_card.id || "" 
     };
 
     this.fetchCardImage();
@@ -19,7 +19,7 @@ export default class CardView extends React.Component {
 
   fetchCardImage() {
     var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`);
+    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`); //imgとidは兼用
 
     spaceRef.getDownloadURL().then((url) => {
       this.setState({ card_image: url });
