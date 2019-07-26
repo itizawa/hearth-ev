@@ -13,7 +13,7 @@ export default class Sidebar extends React.Component {
         <ListGroup>
           <ListGroupItem tag="button" action>
             <Link to={"/"}>
-              <p className="mb-0 align-middle">
+              <p className="text-body mb-0 align-middle">
                 <i className="material-icons mr-2">home</i>ホーム
               </p>
             </Link>

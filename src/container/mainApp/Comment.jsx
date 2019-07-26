@@ -26,7 +26,7 @@ export default class MainComment extends React.Component {
         <Col xs="11" className="px-0">
           <h5>
             <Link to={"/user/" + this.props.comment.creator_id}>
-              <strong>{this.props.comment.creator}</strong>
+              <strong className="text-body">{this.props.comment.creator}</strong>
             </Link>
             <small className="text-muted ml-1">
               {this.props.comment.create_at}
