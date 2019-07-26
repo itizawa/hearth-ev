@@ -27,7 +27,7 @@ export default class Header extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.onLoginHandler = this.onLoginHandler.bind(this);
-    this.onCreateUser = this.onCreateUser.bind(this);
+    this.CreateUser = this.CreateUser.bind(this);
   }
 
   /**
@@ -49,14 +49,14 @@ export default class Header extends React.Component {
     firebase
       .auth()
       .signInWithRedirect(firestore.providerTwitter)
-      .then(this.onCreateUser());
+      .then(this.CreateUser());
   }
 
   /**
    * 初ログイン時のアカウント作成
    */
 
-  onCreateUser() {
+  CreateUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const name = user.displayName;
@@ -72,7 +72,6 @@ export default class Header extends React.Component {
             uid: uid
           },{merge: true})
           .then((ref) => {
-            console.log("Added document with ID: ", ref.id);
             this.setState({ comment_text: "" });
           });
         return Promise.all([addComment]);
