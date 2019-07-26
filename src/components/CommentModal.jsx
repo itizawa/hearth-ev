@@ -20,7 +20,8 @@ export default class CommentModal extends React.Component {
     super(props);
     this.state = {
       comment_text: "",
-      topic: this.props.topic || ""
+      topic: this.props.topic || "",
+      card_id: this.props.focus_card.id || "" 
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
@@ -51,7 +52,8 @@ export default class CommentModal extends React.Component {
         text: this.state.comment_text,
         like: {},
         create_at: getNow(),
-        topic: this.state.topic
+        topic: this.state.topic,
+        card_id: this.state.card_id
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
@@ -60,8 +62,8 @@ export default class CommentModal extends React.Component {
           .update({
             comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
           });
-        if(this.state.topic){
-          console.log("exist topic")
+        if(this.state.card_id){
+          console.log("exist card")
         }
       });
     this.props.modal_toggle();
