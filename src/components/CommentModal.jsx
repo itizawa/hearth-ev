@@ -53,7 +53,8 @@ export default class CommentModal extends React.Component {
         like: {},
         create_at: getNow(),
         topic: this.state.topic,
-        card_id: this.state.card_id
+        card_id: this.state.card_id,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
