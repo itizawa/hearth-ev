@@ -1,9 +1,7 @@
 import React from "react";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
-import Comment from "../../components/Comment";
-
-import firebase from "firebase/app";
+import CardComment from "./CardComment";
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -12,7 +10,6 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: false,
       comments: []
     };
-    this.fetchCardComment();
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -26,29 +23,6 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: !prevState.show_comment_modal
     }));
   }
-
-  /**
-   * コメントを取得するイベントハンドラ
-   */
-
-  fetchCardComment = function() {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .orderBy("create_at", "desc")
-      .limit(50)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
-  };
 
   render() {
     const header_style = {
@@ -75,8 +49,8 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.state.comments.map((comment, index) => {
-            return <Comment key={index} comment={comment} />;
+          {this.props.focus_card.comments.reverse().map((id, index) => {
+            return <CardComment key={index} id={id} />;
           })}
         </div>
 
@@ -84,7 +58,7 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={this.props.user_data}
-          card_id={this.props.focus_card.id} 
+          card_id={this.props.focus_card.id}
         />
       </React.Fragment>
     );
