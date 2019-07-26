@@ -49,16 +49,18 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.props.focus_card.comments.reverse().map((id, index) => {
-            return <CardComment key={index} id={id} />;
-          })}
+          {this.props.focus_card.comments && //commentsが空の時でも動くように
+            this.props.focus_card.comments.reverse().map((id, index) => {
+              return <CardComment key={index} id={id} />;
+            })}
         </div>
 
         <CommentModal
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={this.props.user_data}
-          card_id={this.props.focus_card.id}
+          card_id={this.props.focus_card.img}
+          card_name={this.props.focus_card.name}
         />
       </React.Fragment>
     );

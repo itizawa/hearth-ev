@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
-import Comment from "../../components/Comment";
+import MainComment from "./Comment";
 
 import firebase from "firebase/app";
 
@@ -76,7 +76,7 @@ export default class CenterContainer extends React.Component {
             </Col>
           </Row>
           {this.state.comments.map((comment, index) => {
-            return <Comment key={index} comment={comment} />;
+            return <MainComment key={index} comment={comment} />;
           })}
         </div>
 
