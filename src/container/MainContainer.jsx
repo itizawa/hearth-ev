@@ -2,8 +2,11 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Route } from "react-router-dom";
+
+// Componentのimport
 import MainApp from "./mainApp/MainApp";
 import UserApp from "./userApp/UserApp";
+import CardApp from "./cardApp/CardApp";
 
 export default class MainContainer extends React.Component {
   render() {
@@ -29,6 +32,13 @@ export default class MainContainer extends React.Component {
                 path="/user/:user_id"
                 render={(props) => (
                   <UserApp {...this.props} match={props.match} />
+                )}
+              />
+              <Route
+                exact
+                path="/card/:card_id"
+                render={(props) => (
+                  <CardApp {...this.props} match={props.match} />
                 )}
               />
             </Col>
