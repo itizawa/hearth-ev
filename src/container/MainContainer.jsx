@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import MainApp from "./mainApp/MainApp";
 import UserApp from "./userApp/UserApp";
 import CardApp from "./cardApp/CardApp";
+import CardList from "./cardList/CardList";
 
 export default class MainContainer extends React.Component {
   render() {
@@ -39,6 +40,13 @@ export default class MainContainer extends React.Component {
                 path="/card/:card_id"
                 render={(props) => (
                   <CardApp {...this.props} match={props.match} />
+                )}
+              />
+              <Route
+                exact
+                path="/card"
+                render={(props) => (
+                  <CardList {...this.props}  />
                 )}
               />
             </Col>
