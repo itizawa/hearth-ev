@@ -62,8 +62,13 @@ export default class CommentModal extends React.Component {
           .update({
             comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
           });
+        // カードについてのコメントはカード以下にcomment_idを保存  
         if(this.state.card_id){
-          console.log("exist card")
+          db.collection("Cards")
+          .doc(this.state.card_id)
+          .update({
+            comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
+          });
         }
       });
     this.props.modal_toggle();
