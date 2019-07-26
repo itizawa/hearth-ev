@@ -10,10 +10,12 @@ export default class CardApp extends React.Component {
     super(props);
     this.state = {
       focus_card: {
+        id: this.props.match.params.card_id,
         name: "CardPage",
-        id: this.props.match.params.card_id
+        comments:[]
       }
     };
+    
     this.fetchCardData();
   }
 
