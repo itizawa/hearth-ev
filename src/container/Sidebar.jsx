@@ -18,6 +18,13 @@ export default class Sidebar extends React.Component {
               </p>
             </Link>
           </ListGroupItem>
+          <ListGroupItem tag="button" action>
+            <Link to={"/card"}>
+              <p className="text-body mb-0 align-middle">
+                <i className="material-icons mr-2">class</i>カード
+              </p>
+            </Link>
+          </ListGroupItem>
         </ListGroup>
       </React.Fragment>
     );
