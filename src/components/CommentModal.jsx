@@ -60,6 +60,9 @@ export default class CommentModal extends React.Component {
           .update({
             comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
           });
+        if(this.state.topic){
+          console.log("exist topic")
+        }
       });
     this.props.modal_toggle();
     return Promise.all([addComment]);
