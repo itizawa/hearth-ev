@@ -75,12 +75,12 @@ class CardView extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Col sm="6" className="text-center mt-2">
+        <Col sm="4" className="text-center mt-2">
           <Link to={"/card/" + this.props.card_id}>
             <img
               src={this.state.card_image}
               alt={this.state.card_image}
-              width="80%"
+              width="100%"
               height="auto"
             />
           </Link>
