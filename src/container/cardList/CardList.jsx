@@ -1,4 +1,6 @@
 import React from "react";
+import { Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import firebase from "firebase/app";
 
@@ -20,7 +22,7 @@ export default class CardList extends React.Component {
     var cards = [];
     const db = firebase.firestore();
     db.collection("Cards")
-      .where("hero", "==", "druid")
+      .where("hero", "==", this.props.hero)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -39,8 +41,50 @@ export default class CardList extends React.Component {
     return (
       <React.Fragment>
         {this.state.cards.map((card, index) => {
-          return <div key={index}>{card.name}</div>;
+          return <CardView key={index} card_id={card.img} />; // imgとidは兼用
         })}
+      </React.Fragment>
+    );
+  }
+}
+
+class CardView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      card_image: "",
+      card_id: this.props.card_id || ""
+    };
+
+    this.fetchCardImage();
+  }
+
+  /**
+   * カード画像の取得
+   */
+
+  fetchCardImage() {
+    var storageRef = firebase.storage().ref();
+    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`); //imgとidは兼用
+
+    spaceRef.getDownloadURL().then((url) => {
+      this.setState({ card_image: url });
+    });
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Col sm="6" className="text-center mt-2">
+          <Link to={"/card/" + this.props.card_id}>
+            <img
+              src={this.state.card_image}
+              alt={this.state.card_image}
+              width="80%"
+              height="auto"
+            />
+          </Link>
+        </Col>
       </React.Fragment>
     );
   }

@@ -19,8 +19,8 @@ export default class CenterContainer extends React.Component {
     super(props);
     this.state = {
       activeTab: 0,
-      hero: ["druid", "mage"],
-      hero_J: ["ドルイド", "メイジ"]
+      hero: ["druid", "mage", "hunter"],
+      hero_J: ["ドルイド", "メイジ", "ハンター"]
     };
 
     this.toggle = this.toggle.bind(this);
@@ -52,7 +52,7 @@ export default class CenterContainer extends React.Component {
           </h3>
           <CardImg top width="100%" src={探検同盟} alt="Card logo" />
           <Nav tabs className="pl-2 mt-3">
-            {this.state.hero_J.map((hero,index) => {
+            {this.state.hero_J.map((hero, index) => {
               return (
                 <NavItem key={index}>
                   <NavLink
@@ -71,7 +71,7 @@ export default class CenterContainer extends React.Component {
             })}
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
-            {this.state.hero.map((hero,index) => {
+            {this.state.hero.map((hero, index) => {
               return (
                 <TabPane tabId={index}>
                   <Row key={index}>
