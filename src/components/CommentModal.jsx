@@ -20,7 +20,7 @@ export default class CommentModal extends React.Component {
     super(props);
     this.state = {
       comment_text: "",
-      topic: this.props.topic || "",
+      topic: this.props.topic || ""
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
@@ -83,7 +83,12 @@ export default class CommentModal extends React.Component {
         toggle={this.props.modal_toggle}
         className={this.props.className}
       >
-        <ModalHeader toggle={this.props.modal_toggle}>コメントする</ModalHeader>
+        <ModalHeader toggle={this.props.modal_toggle}>
+          コメントする
+          <span hidden={!this.props.card_name} className="text-primary ml-3">
+            #{this.props.card_name}
+          </span>
+        </ModalHeader>
 
         <ModalBody>
           <Row>
