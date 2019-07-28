@@ -43,15 +43,6 @@ export default class CardApp extends React.Component {
       });
   };
 
-  /**
-   * コメント投稿時にIdをcommentsに挿入する
-   */
-
-  pushCommentId = (id) =>{
-    console.log(id)
-  }
-
-
   render() {
     return (
       <React.Fragment>
@@ -60,7 +51,6 @@ export default class CardApp extends React.Component {
             <CenterContainer
               user_data={this.props.user_data}
               focus_card={this.state.focus_card}
-              pushCommentId={this.pushCommentId}
             />
           </Col>
           <Col md="5" className="px-0">

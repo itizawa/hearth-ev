@@ -72,5 +72,4 @@ export default class CenterContainer extends React.Component {
 CenterContainer.propTypes={
   user_data:PropTypes.object,
   focus_user:PropTypes.object,
-  pushCommentId:PropTypes.func
 }

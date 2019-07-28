@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
 import UserComment from "./UserComment";
 
@@ -36,20 +35,6 @@ export default class CenterContainer extends React.Component {
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             {this.props.focus_user.name}
           </h3>
-          <Row className="py-2 mx-0">
-            <Col xs="1" className="px-1">
-              <img
-                className="rounded-pill"
-                src={this.props.user_data.photoURL}
-                alt={this.props.user_data.photoURL}
-                width="80%"
-                height="auto"
-              />
-            </Col>
-            <Col xs="11 pl-0">
-              <Input onClick={this.modal_toggle} placeholder="コメントする" />
-            </Col>
-          </Row>
           {this.props.focus_user.comments.reverse().map((id, index) => {
             return <UserComment key={index} id={id} />;
           })}
