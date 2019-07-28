@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Modal,
@@ -127,3 +128,9 @@ export default class CommentModal extends React.Component {
     );
   }
 }
+
+CommentModal.propTypes = {
+  modal:PropTypes.bool,
+  modal_toggle:PropTypes.func,
+  user_data: PropTypes.object
+};
