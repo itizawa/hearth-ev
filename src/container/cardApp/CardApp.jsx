@@ -16,18 +16,20 @@ export default class CardApp extends React.Component {
       }
     };
     
-    this.fetchCardData();
+    this.fetchCardData(this.state.focus_card.id);
+
+    // this.fetchCardData= this.fetchCardData.bind(this);
   }
 
   /**
    * カードデータを取得する
    */
 
-  fetchCardData = () => {
+  fetchCardData = (id) => {
     firebase
       .firestore()
       .collection("Cards")
-      .doc(this.state.focus_card.id)
+      .doc(id)
       .get()
       .then((doc) => {
         if (!doc.exists) {
@@ -51,6 +53,7 @@ export default class CardApp extends React.Component {
             <CenterContainer
               user_data={this.props.user_data}
               focus_card={this.state.focus_card}
+              fetchCardData={this.fetchCardData}
             />
           </Col>
           <Col md="5" className="px-0">
