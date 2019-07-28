@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import firebase from "firebase/app";
 
@@ -7,7 +8,7 @@ export default class CardView extends React.Component {
     super(props);
     this.state = {
       card_image: "",
-      card_id: this.props.focus_card.id || "" 
+      card_id: this.props.focus_card.id || ""
     };
 
     this.fetchCardImage();
@@ -27,21 +28,25 @@ export default class CardView extends React.Component {
   }
 
   render() {
-    const img_frame={
-      height:"700px",
-      paddingLeft:"20%"
-    }
+    const img_frame = {
+      height: "700px",
+      paddingLeft: "20%"
+    };
     return (
       <React.Fragment>
         <div style={img_frame}>
-        <img
-          src={this.state.card_image}
-          alt={this.state.card_image}
-          width="auto"
-          height="60%"
-        />
+          <img
+            src={this.state.card_image}
+            alt={this.state.card_image}
+            width="auto"
+            height="60%"
+          />
         </div>
       </React.Fragment>
     );
   }
 }
+
+CardView.propTypes = {
+  focus_card: PropTypes.object
+};
