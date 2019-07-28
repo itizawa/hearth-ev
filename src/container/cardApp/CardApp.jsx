@@ -12,22 +12,22 @@ export default class CardApp extends React.Component {
       focus_card: {
         id: this.props.match.params.card_id,
         name: "CardPage",
-        comments:[]
+        comments: []
       }
     };
-    
-    this.fetchCardData();
+
+    this.fetchCardData(this.state.focus_card.id);
   }
 
   /**
    * カードデータを取得する
    */
 
-  fetchCardData = () => {
+  fetchCardData = (id) => {
     firebase
       .firestore()
       .collection("Cards")
-      .doc(this.state.focus_card.id)
+      .doc(id)
       .get()
       .then((doc) => {
         if (!doc.exists) {

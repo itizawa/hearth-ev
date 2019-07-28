@@ -62,6 +62,7 @@ export default class CenterContainer extends React.Component {
           user_data={this.props.user_data}
           card_id={this.props.focus_card.img}
           card_name={this.props.focus_card.name}
+          pushCommentId={this.props.pushCommentId}
         />
       </React.Fragment>
     );
@@ -70,5 +71,5 @@ export default class CenterContainer extends React.Component {
 
 CenterContainer.propTypes={
   user_data:PropTypes.object,
-  focus_user:PropTypes.object
+  focus_user:PropTypes.object,
 }

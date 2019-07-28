@@ -26,6 +26,7 @@ export default class CenterContainer extends React.Component {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
     }));
+    this.fetchHomeComment();
   }
 
   /**
