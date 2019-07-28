@@ -12,13 +12,11 @@ export default class CardApp extends React.Component {
       focus_card: {
         id: this.props.match.params.card_id,
         name: "CardPage",
-        comments:[]
+        comments: []
       }
     };
-    
-    this.fetchCardData(this.state.focus_card.id);
 
-    // this.fetchCardData= this.fetchCardData.bind(this);
+    this.fetchCardData(this.state.focus_card.id);
   }
 
   /**
@@ -45,6 +43,15 @@ export default class CardApp extends React.Component {
       });
   };
 
+  /**
+   * コメント投稿時にIdをcommentsに挿入する
+   */
+
+  pushCommentId = (id) =>{
+    console.log(id)
+  }
+
+
   render() {
     return (
       <React.Fragment>
@@ -53,7 +60,7 @@ export default class CardApp extends React.Component {
             <CenterContainer
               user_data={this.props.user_data}
               focus_card={this.state.focus_card}
-              fetchCardData={this.fetchCardData}
+              pushCommentId={this.pushCommentId}
             />
           </Col>
           <Col md="5" className="px-0">

@@ -71,6 +71,7 @@ export default class CommentModal extends React.Component {
             .update({
               comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
             });
+          this.props.pushCommentId(ref.id);
         }
       });
     this.props.modal_toggle();
@@ -132,6 +133,7 @@ export default class CommentModal extends React.Component {
 CommentModal.propTypes = {
   modal: PropTypes.bool.isRequired,
   modal_toggle: PropTypes.func.isRequired,
+  pushCommentId: PropTypes.func,
   user_data: PropTypes.object.isRequired,
   card_id: PropTypes.string,
   card_name: PropTypes.string
