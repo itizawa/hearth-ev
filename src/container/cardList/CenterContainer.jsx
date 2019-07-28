@@ -73,7 +73,7 @@ export default class CenterContainer extends React.Component {
           <TabContent activeTab={this.state.activeTab}>
             {this.state.hero.map((hero, index) => {
               return (
-                <TabPane tabId={index}>
+                <TabPane tabId={index} key={index}>
                   <Row key={index}>
                     <Col sm="12" key={index}>
                       <CardList hero={hero} key={index} />
