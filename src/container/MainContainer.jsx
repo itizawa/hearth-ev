@@ -57,5 +57,5 @@ export default class MainContainer extends React.Component {
 }
 
 MainContainer.propTypes = {
-  user_data: PropTypes.array
+  user_data: PropTypes.object
 };
