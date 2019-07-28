@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
 import { CardImg, CardBody, Row, Col } from "reactstrap";
 
-export default class Sidebar extends React.Component {
+export default class ViewContainer extends React.Component {
   render() {
     const row_style = {
       height: "50px"
@@ -37,3 +38,8 @@ export default class Sidebar extends React.Component {
     );
   }
 }
+
+ViewContainer.propTypes = {
+  user_data: PropTypes.object,
+  focus_user: PropTypes.object
+};
