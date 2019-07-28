@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -78,3 +79,7 @@ export default class UserComment extends React.Component {
     );
   }
 }
+
+UserComment.propTypes = {
+  id: PropTypes.string
+};
