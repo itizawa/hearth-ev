@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import CardView from "./CardView";
 
@@ -13,4 +14,9 @@ export default class ViewContainer extends React.Component {
       </React.Fragment>
     );
   }
+}
+
+ViewContainer.propTypes={
+  user_data:PropTypes.object,
+  focus_user:PropTypes.object
 }
