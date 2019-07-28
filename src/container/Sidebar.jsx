@@ -8,6 +8,7 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <div className="pt-2 sticky-top">
         <CardImg top width="100%" src={logo} alt="Card logo" />
 
         <ListGroup>
@@ -26,6 +27,7 @@ export default class Sidebar extends React.Component {
             </Link>
           </ListGroupItem>
         </ListGroup>
+        </div>
       </React.Fragment>
     );
   }
