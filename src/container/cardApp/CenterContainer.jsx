@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
 import CardComment from "./CardComment";
@@ -65,4 +66,9 @@ export default class CenterContainer extends React.Component {
       </React.Fragment>
     );
   }
+}
+
+CenterContainer.propTypes={
+  user_data:PropTypes.object,
+  focus_user:PropTypes.object
 }

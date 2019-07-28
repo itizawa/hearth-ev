@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -45,9 +46,7 @@ export default class MainContainer extends React.Component {
               <Route
                 exact
                 path="/card"
-                render={(props) => (
-                  <CardListApp {...this.props}  />
-                )}
+                render={(props) => <CardListApp {...this.props} />}
               />
             </Col>
           </Row>
@@ -56,3 +55,7 @@ export default class MainContainer extends React.Component {
     );
   }
 }
+
+MainContainer.propTypes = {
+  user_data: PropTypes.object
+};

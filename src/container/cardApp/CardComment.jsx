@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -56,7 +57,9 @@ export default class CardComment extends React.Component {
         <Col xs="11" className="px-0">
           <h5>
             <Link to={"/user/" + this.state.comment.creator_id}>
-              <strong className="text-body">{this.state.comment.creator}</strong>
+              <strong className="text-body">
+                {this.state.comment.creator}
+              </strong>
             </Link>
             <small className="text-muted ml-1">
               {this.state.comment.create_at}
@@ -68,3 +71,7 @@ export default class CardComment extends React.Component {
     );
   }
 }
+
+CardComment.propsType = {
+  id: PropTypes.string
+};

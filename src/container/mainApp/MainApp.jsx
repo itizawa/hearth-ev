@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
 import Sidebar from "../Sidebar";
 import CenterContainer from "./CenterContainer";
@@ -19,3 +20,7 @@ export default class MainApp extends React.Component {
     );
   }
 }
+
+MainApp.propTypes = {
+  user_data: PropTypes.object
+};
