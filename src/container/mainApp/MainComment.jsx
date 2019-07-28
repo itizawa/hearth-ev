@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Col, Row, Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -99,3 +100,7 @@ export default class MainComment extends React.Component {
     );
   }
 }
+
+MainComment.propTypes = {
+  comment: PropTypes.object
+};
