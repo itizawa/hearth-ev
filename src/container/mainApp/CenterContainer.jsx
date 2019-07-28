@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
 import MainComment from "./Comment";
@@ -89,3 +90,7 @@ export default class CenterContainer extends React.Component {
     );
   }
 }
+
+CenterContainer.propTypes = {
+  user_data: PropTypes.object
+};
