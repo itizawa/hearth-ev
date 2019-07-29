@@ -11,6 +11,7 @@ import {
   Row,
   CustomInput
 } from "reactstrap";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 
 import firebase from "firebase/app";
 
@@ -126,7 +127,11 @@ export default class CommentModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter className="p-2">
-          <CustomInput
+          <TwitterShareButton title="テストタイトル" via="inouetakumon" url="https://hearth-ev.com/">
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
+          {/* TODO react-shareの設定後 */}
+          {/* <CustomInput
             onClick={this.switch_toggle}
             checked={this.state.tweet_permission}
             className="mr-3"
@@ -134,7 +139,7 @@ export default class CommentModal extends React.Component {
             id="exampleCustomSwitch"
             name="customSwitch"
             label="Tweetする"
-          />
+          /> */}
           <Button
             color="primary"
             onClick={this.onPostComment}
