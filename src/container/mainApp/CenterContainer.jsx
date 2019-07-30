@@ -33,7 +33,7 @@ export default class CenterContainer extends React.Component {
    * データを取得するイベントハンドラ
    */
 
-  fetchHomeComment = function() {
+  fetchHomeComment = () => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
@@ -78,7 +78,14 @@ export default class CenterContainer extends React.Component {
             </Col>
           </Row>
           {this.state.comments.map((comment, index) => {
-            return <MainComment key={index} comment={comment} />;
+            return (
+              <MainComment
+                fetchHomeComment={this.fetchHomeComment}
+                key={index}
+                comment={comment}
+                user_data={this.props.user_data}
+              />
+            );
           })}
         </div>
 

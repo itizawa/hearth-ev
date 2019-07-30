@@ -118,6 +118,8 @@ export default class MainComment extends React.Component {
           modal={this.state.show_delete_modal}
           modal_toggle={this.delete_modal_toggle}
           comment={this.props.comment}
+          user_data={this.props.user_data}
+          fetchHomeComment={this.props.fetchHomeComment}
         />
       </React.Fragment>
     );
@@ -125,5 +127,7 @@ export default class MainComment extends React.Component {
 }
 
 MainComment.propTypes = {
-  comment: PropTypes.object
+  comment: PropTypes.object,
+  user_data: PropTypes.object,
+  fetchHomeComment: PropTypes.func
 };

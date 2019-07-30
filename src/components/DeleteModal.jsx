@@ -37,17 +37,22 @@ export default class DeleteModal extends React.Component {
    */
 
   onPostComment() {
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .doc(this.props.comment.comment_id)
-      .delete()
-      .then(function() {
-        console.log("Document successfully deleted!");
-      })
-      .catch(function(error) {
-        console.error("Error removing document: ", error);
-      });
-    this.props.modal_toggle();
+    if (this.props.comment.creator_id === this.props.user_data.uid) {
+      const db = firebase.firestore();
+      db.collection("Comments")
+        .doc(this.props.comment.comment_id)
+        .delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+          this.props.fetchHomeComment();
+          this.props.modal_toggle();
+        })
+        .catch(function(error) {
+          console.error("Error removing document: ", error);
+        });
+    } else {
+      this.props.modal_toggle();
+    }
   }
 
   render() {
@@ -100,5 +105,7 @@ export default class DeleteModal extends React.Component {
 }
 
 DeleteModal.propTypes = {
-  comment: PropTypes.object
+  comment: PropTypes.object,
+  user_data: PropTypes.object,
+  fetchHomeComment: PropTypes.func
 };
