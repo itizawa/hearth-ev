@@ -26,6 +26,11 @@ export default class Comment extends React.Component {
     }));
   }
 
+  fetchComment(){
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+  }
+
   render() {
     const { comment, user_data } = this.props;
 
@@ -65,6 +70,7 @@ export default class Comment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={comment}
           user_data={user_data}
+          fetchComment={this.fetchComment}
         />
       </React.Fragment>
     );

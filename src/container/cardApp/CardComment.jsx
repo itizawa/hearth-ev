@@ -41,7 +41,10 @@ export default class CardComment extends React.Component {
 
   render() {
     return (
-      <Comment comment={this.state.comment} user_data={this.props.user_data} />
+      <Comment
+        comment={this.state.comment}
+        user_data={this.props.user_data}
+      />
     );
   }
 }

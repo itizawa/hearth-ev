@@ -119,7 +119,7 @@ export default class MainComment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={this.props.comment}
           user_data={this.props.user_data}
-          fetchHomeComment={this.props.fetchHomeComment}
+          fetchComment={this.props.fetchHomeComment}
         />
       </React.Fragment>
     );

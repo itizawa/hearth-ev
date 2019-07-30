@@ -44,7 +44,7 @@ export default class DeleteModal extends React.Component {
         .delete()
         .then(() => {
           console.log("Document successfully deleted!");
-          this.props.fetchHomeComment();
+          this.props.fetchComment();
           this.props.modal_toggle();
         })
         .catch(function(error) {
@@ -121,5 +121,5 @@ export default class DeleteModal extends React.Component {
 DeleteModal.propTypes = {
   comment: PropTypes.object,
   user_data: PropTypes.object,
-  fetchHomeComment: PropTypes.func
+  fetchComment: PropTypes.func
 };
