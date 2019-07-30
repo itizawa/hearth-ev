@@ -8,8 +8,7 @@ import {
   ModalFooter,
   Input,
   Col,
-  Row,
-  CustomInput
+  Row
 } from "reactstrap";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 
@@ -127,9 +126,14 @@ export default class CommentModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter className="p-2">
-          <TwitterShareButton title="テストタイトル" via="inouetakumon" url="https://hearth-ev.com/">
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
+          <div hidden={!this.props.card_name}>
+            <TwitterShareButton
+              title={this.state.comment_text + "#" + this.props.card_name}
+              url="https://hearth-ev.com/"
+            >
+              <TwitterIcon size={32} round={true} />
+            </TwitterShareButton>
+          </div>
           {/* TODO react-shareの設定後 */}
           {/* <CustomInput
             onClick={this.switch_toggle}
