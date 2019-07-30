@@ -57,6 +57,13 @@ export default class Comment extends React.Component {
                 <i className="material-icons btn p-0">clear</i>
               </span>
             </h5>
+            {comment.card_id && (
+              <Link to={"/card/" + comment.card_id}>
+                <span className="" href="#" >
+                  #{comment.card_name}
+                </span>
+              </Link>
+            )}
             <p className="mb-0">{comment.text}</p>
           </Col>
         </Row>
