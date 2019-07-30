@@ -10,6 +10,7 @@ import {
   Col,
   Row
 } from "reactstrap";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 
 import firebase from "firebase/app";
 
@@ -20,9 +21,11 @@ export default class CommentModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      tweet_permission: true,
       comment_text: "",
       topic: this.props.topic || ""
     };
+    this.switch_toggle = this.switch_toggle.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
   }
@@ -35,6 +38,16 @@ export default class CommentModal extends React.Component {
     this.setState({
       comment_text: e.target.value
     });
+  }
+
+  /**
+   * Toggle Switch のためのイベントハンドラ
+   */
+
+  switch_toggle() {
+    this.setState((prevState) => ({
+      tweet_permission: !prevState.tweet_permission
+    }));
   }
 
   /**
@@ -112,7 +125,25 @@ export default class CommentModal extends React.Component {
             </Col>
           </Row>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="p-2">
+          <div hidden={!this.props.card_name}>
+            <TwitterShareButton
+              title={this.state.comment_text + "#" + this.props.card_name}
+              url="https://hearth-ev.com/"
+            >
+              <TwitterIcon size={32} round={true} />
+            </TwitterShareButton>
+          </div>
+          {/* TODO react-shareの設定後 */}
+          {/* <CustomInput
+            onClick={this.switch_toggle}
+            checked={this.state.tweet_permission}
+            className="mr-3"
+            type="switch"
+            id="exampleCustomSwitch"
+            name="customSwitch"
+            label="Tweetする"
+          /> */}
           <Button
             color="primary"
             onClick={this.onPostComment}
