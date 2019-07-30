@@ -71,6 +71,7 @@ export default class MainComment extends React.Component {
             <small className="text-muted ml-1">
               {this.props.comment.create_at}
             </small>
+            <span className="text-muted float-right"><i class="material-icons">clear</i></span>
           </h5>
           {this.props.comment.card_id && (
             <Link to={"/card/" + this.props.comment.card_id}>
