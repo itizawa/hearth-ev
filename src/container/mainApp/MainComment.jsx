@@ -31,7 +31,7 @@ export default class MainComment extends React.Component {
     this.setState((prevState) => ({
       show_delete_modal: !prevState.show_delete_modal
     }));
-    this.props.fetchHomeComment()
+    this.props.fetchHomeComment();
   }
 
   /**
@@ -62,15 +62,17 @@ export default class MainComment extends React.Component {
       maxWidth: "400px"
     };
 
+    const { comment, user_data } = this.props;
+
     return (
       <React.Fragment>
         <Row className="mx-0 py-2 px-2 border-top">
           <Col xs="1" className="px-0">
-            <Link to={"/user/" + this.props.comment.creator_id}>
+            <Link to={"/user/" + comment.creator_id}>
               <img
                 className="rounded-pill border"
-                src={this.props.comment.creator_img}
-                alt={this.props.comment.creator_img}
+                src={comment.creator_img}
+                alt={comment.creator_img}
                 width="80%"
                 height="auto"
               />
@@ -78,22 +80,22 @@ export default class MainComment extends React.Component {
           </Col>
           <Col xs="11" className="px-0">
             <h5 className="mb-0">
-              <Link to={"/user/" + this.props.comment.creator_id}>
-                <strong className="text-body">
-                  {this.props.comment.creator}
-                </strong>
+              <Link to={"/user/" + comment.creator_id}>
+                <strong className="text-body">{comment.creator}</strong>
               </Link>
-              <small className="text-muted ml-1">
-                {this.props.comment.create_at}
-              </small>
-              <span hidden={this.props.comment.creator_id !== this.props.user_data.uid} className="text-muted float-right" onClick={this.delete_modal_toggle}>
+              <small className="text-muted ml-1">{comment.create_at}</small>
+              <span
+                hidden={comment.creator_id !== user_data.uid}
+                className="text-muted float-right"
+                onClick={this.delete_modal_toggle}
+              >
                 <i className="material-icons btn p-0">clear</i>
               </span>
             </h5>
-            {this.props.comment.card_id && (
-              <Link to={"/card/" + this.props.comment.card_id}>
+            {comment.card_id && (
+              <Link to={"/card/" + comment.card_id}>
                 <span className="" href="#" id="TooltipExample">
-                  #{this.props.comment.card_name}
+                  #{comment.card_name}
                 </span>
                 <Tooltip
                   style={tooltip}
@@ -112,14 +114,14 @@ export default class MainComment extends React.Component {
               </Link>
             )}
 
-            <p className="mb-0">{this.props.comment.text}</p>
+            <p className="mb-0">{comment.text}</p>
           </Col>
         </Row>
         <DeleteModal
           modal={this.state.show_delete_modal}
           modal_toggle={this.delete_modal_toggle}
-          comment={this.props.comment}
-          user_data={this.props.user_data}
+          comment={comment}
+          user_data={user_data}
         />
       </React.Fragment>
     );
