@@ -93,6 +93,7 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={this.props.user_data}
+          fetchComment={this.fetchHomeComment}
         />
       </React.Fragment>
     );

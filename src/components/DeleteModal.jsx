@@ -44,7 +44,6 @@ export default class DeleteModal extends React.Component {
         .delete()
         .then(() => {
           console.log("Document successfully deleted!");
-          this.props.fetchHomeComment();
           this.props.modal_toggle();
         })
         .catch(function(error) {
@@ -72,6 +71,8 @@ export default class DeleteModal extends React.Component {
   }
 
   render() {
+    const { comment } = this.props;
+
     return (
       <Modal
         isOpen={this.props.modal}
@@ -87,22 +88,18 @@ export default class DeleteModal extends React.Component {
               <Col xs="1" className="px-0">
                 <img
                   className="rounded-pill border"
-                  src={this.props.comment.creator_img}
-                  alt={this.props.comment.creator_img}
+                  src={comment.creator_img}
+                  alt={comment.creator_img}
                   width="80%"
                   height="auto"
                 />
               </Col>
               <Col xs="11" className="px-0">
                 <h5 className="mb-0">
-                  <strong className="text-body">
-                    {this.props.comment.creator}
-                  </strong>
-                  <small className="text-muted ml-1">
-                    {this.props.comment.create_at}
-                  </small>
+                  <strong className="text-body">{comment.creator}</strong>
+                  <small className="text-muted ml-1">{comment.create_at}</small>
                 </h5>
-                <p className="mb-0">{this.props.comment.text}</p>
+                <p className="mb-0">{comment.text}</p>
               </Col>
             </Row>
           </Card>
@@ -123,5 +120,5 @@ export default class DeleteModal extends React.Component {
 DeleteModal.propTypes = {
   comment: PropTypes.object,
   user_data: PropTypes.object,
-  fetchHomeComment: PropTypes.func
+  fetchComment: PropTypes.func
 };

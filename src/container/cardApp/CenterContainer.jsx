@@ -30,18 +30,20 @@ export default class CenterContainer extends React.Component {
       backgroundColor: "#00075d"
     };
 
+    const { focus_card, user_data } = this.props;
+
     return (
       <React.Fragment>
         <div className="border 2px">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {this.props.focus_card.name}
+            {focus_card.name}
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
               <img
                 className="rounded-pill"
-                src={this.props.user_data.photoURL}
-                alt={this.props.user_data.photoURL}
+                src={user_data.photoURL}
+                alt={user_data.photoURL}
                 width="80%"
                 height="auto"
               />
@@ -50,18 +52,18 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.props.focus_card.comments && //commentsが空の時でも動くように
-            this.props.focus_card.comments.reverse().map((id, index) => {
-              return <CardComment key={index} id={id} />;
+          {focus_card.comments && //commentsが空の時でも動くように
+            focus_card.comments.reverse().map((id, index) => {
+              return <CardComment key={index} id={id} user_data={user_data} />;
             })}
         </div>
 
         <CommentModal
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
-          user_data={this.props.user_data}
-          card_id={this.props.focus_card.img}
-          card_name={this.props.focus_card.name}
+          user_data={user_data}
+          card_id={focus_card.img}
+          card_name={focus_card.name}
           pushCommentId={this.props.pushCommentId}
         />
       </React.Fragment>
@@ -69,7 +71,7 @@ export default class CenterContainer extends React.Component {
   }
 }
 
-CenterContainer.propTypes={
-  user_data:PropTypes.object,
-  focus_user:PropTypes.object,
-}
+CenterContainer.propTypes = {
+  user_data: PropTypes.object,
+  focus_user: PropTypes.object
+};

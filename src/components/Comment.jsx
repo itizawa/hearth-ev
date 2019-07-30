@@ -1,25 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Col, Row, Tooltip } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
-import DeleteModal from "../../components/DeleteModal";
 
-import firebase from "firebase/app";
+import DeleteModal from "./DeleteModal";
 
-export default class MainComment extends React.Component {
+export default class Comment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show_delete_modal: false,
-      comments: this.props.comments,
-      tooltipOpen: false,
-      card_image: ""
+      comments: this.props.comments
     };
-    if (this.props.comment.card_id) {
-      this.fetchCardImage();
-    }
 
-    this.tooltip_toggle = this.tooltip_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
   }
 
@@ -31,37 +24,9 @@ export default class MainComment extends React.Component {
     this.setState((prevState) => ({
       show_delete_modal: !prevState.show_delete_modal
     }));
-    this.props.fetchHomeComment();
-  }
-
-  /**
-   * カード画像の取得
-   */
-
-  fetchCardImage() {
-    var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.props.comment.card_id}.png`); //imgとidは兼用
-
-    spaceRef.getDownloadURL().then((url) => {
-      this.setState({ card_image: url });
-    });
-  }
-
-  /**
-   * ツールチップ開閉のためのイベントハンドラ
-   */
-
-  tooltip_toggle() {
-    this.setState({
-      tooltipOpen: !this.state.tooltipOpen
-    });
   }
 
   render() {
-    const tooltip = {
-      maxWidth: "400px"
-    };
-
     const { comment, user_data } = this.props;
 
     return (
@@ -79,7 +44,7 @@ export default class MainComment extends React.Component {
             </Link>
           </Col>
           <Col xs="11" className="px-0">
-            <h5 className="mb-0">
+            <h5>
               <Link to={"/user/" + comment.creator_id}>
                 <strong className="text-body">{comment.creator}</strong>
               </Link>
@@ -94,26 +59,11 @@ export default class MainComment extends React.Component {
             </h5>
             {comment.card_id && (
               <Link to={"/card/" + comment.card_id}>
-                <span className="" href="#" id="TooltipExample">
+                <span className="" href="#" >
                   #{comment.card_name}
                 </span>
-                <Tooltip
-                  style={tooltip}
-                  placement="right"
-                  isOpen={this.state.tooltipOpen}
-                  target="TooltipExample"
-                  toggle={this.tooltip_toggle}
-                >
-                  <img
-                    src={this.state.card_image}
-                    alt={this.state.card_image}
-                    width="100%"
-                    height="auto"
-                  />
-                </Tooltip>
               </Link>
             )}
-
             <p className="mb-0">{comment.text}</p>
           </Col>
         </Row>
@@ -122,14 +72,14 @@ export default class MainComment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={comment}
           user_data={user_data}
+          fetchComment={this.fetchComment}
         />
       </React.Fragment>
     );
   }
 }
 
-MainComment.propTypes = {
-  comment: PropTypes.object,
-  user_data: PropTypes.object,
-  fetchHomeComment: PropTypes.func
+Comment.propsType = {
+  comment: PropTypes.object.isRequired,
+  user_data: PropTypes.object
 };

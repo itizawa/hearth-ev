@@ -36,7 +36,13 @@ export default class CenterContainer extends React.Component {
             {this.props.focus_user.name}
           </h3>
           {this.props.focus_user.comments.reverse().map((id, index) => {
-            return <UserComment key={index} id={id} />;
+            return (
+              <UserComment
+                key={index}
+                id={id}
+                user_data={this.props.user_data}
+              />
+            );
           })}
         </div>
 
@@ -50,7 +56,7 @@ export default class CenterContainer extends React.Component {
   }
 }
 
-CenterContainer.propTypes={
-  user_data:PropTypes.object,
-  focus_user:PropTypes.object
-}
+CenterContainer.propTypes = {
+  user_data: PropTypes.object,
+  focus_user: PropTypes.object
+};
