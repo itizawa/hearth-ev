@@ -31,6 +31,7 @@ export default class MainComment extends React.Component {
     this.setState((prevState) => ({
       show_delete_modal: !prevState.show_delete_modal
     }));
+    this.props.fetchHomeComment()
   }
 
   /**
@@ -119,7 +120,6 @@ export default class MainComment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={this.props.comment}
           user_data={this.props.user_data}
-          fetchComment={this.props.fetchHomeComment}
         />
       </React.Fragment>
     );

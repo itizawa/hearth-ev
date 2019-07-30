@@ -44,7 +44,6 @@ export default class DeleteModal extends React.Component {
         .delete()
         .then(() => {
           console.log("Document successfully deleted!");
-          this.props.fetchComment();
           this.props.modal_toggle();
         })
         .catch(function(error) {
