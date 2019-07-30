@@ -72,6 +72,10 @@ export default class CommentModal extends React.Component {
       })
       .then((ref) => {
         console.log("Added document with ID: ", ref.id);
+        // IDを保存する
+        db.collection("Comments")
+          .doc(ref.id)
+          .set({comment_id:ref.id},{merge:true})
         db.collection("Users")
           .doc(this.props.user_data.uid)
           .update({
