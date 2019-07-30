@@ -85,7 +85,7 @@ export default class MainComment extends React.Component {
               <small className="text-muted ml-1">
                 {this.props.comment.create_at}
               </small>
-              <span className="text-muted float-right" onClick={this.delete_modal_toggle}>
+              <span hidden={this.props.comment.creator_id !== this.props.user_data.uid} className="text-muted float-right" onClick={this.delete_modal_toggle}>
                 <i className="material-icons btn p-0">clear</i>
               </span>
             </h5>
