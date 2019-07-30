@@ -47,5 +47,6 @@ export default class CardComment extends React.Component {
 }
 
 CardComment.propsType = {
-  id: PropTypes.string
+  id: PropTypes.string,
+  user_data: PropTypes.pbject
 };
