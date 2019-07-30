@@ -52,7 +52,7 @@ export default class CenterContainer extends React.Component {
           </Row>
           {this.props.focus_card.comments && //commentsが空の時でも動くように
             this.props.focus_card.comments.reverse().map((id, index) => {
-              return <CardComment key={index} id={id} />;
+              return <CardComment key={index} id={id} user_data={this.props.user_data}/>;
             })}
         </div>
 
