@@ -11,6 +11,8 @@ import {
   Card
 } from "reactstrap";
 
+import firebase from "firebase/app";
+
 export default class DeleteModal extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,16 @@ export default class DeleteModal extends React.Component {
    */
 
   onPostComment() {
-    console.log("delete!");
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .doc(this.props.comment.comment_id)
+      .delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
+      });
     this.props.modal_toggle();
   }
 
