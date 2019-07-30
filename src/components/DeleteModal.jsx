@@ -50,6 +50,13 @@ export default class DeleteModal extends React.Component {
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
+      db.collection("Users")
+        .doc(this.props.user_data.uid)
+        .update({
+          comments: firebase.firestore.FieldValue.arrayRemove(
+            this.props.comment.comment_id
+          )
+        });
     } else {
       this.props.modal_toggle();
     }
