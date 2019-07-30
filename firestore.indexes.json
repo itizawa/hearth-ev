@@ -1,0 +1,19 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "コメント",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "Comments",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creat_at",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
