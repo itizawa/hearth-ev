@@ -6,6 +6,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Row,
+  Col,
+  Card
 } from "reactstrap";
 
 export default class DeleteModal extends React.Component {
@@ -43,13 +46,42 @@ export default class DeleteModal extends React.Component {
         toggle={this.props.modal_toggle}
         className={this.props.className}
       >
-        <ModalHeader toggle={this.props.modal_toggle}>削除する？</ModalHeader>
-
-        <ModalBody>{this.props.comment.text}</ModalBody>
+        <ModalHeader toggle={this.props.modal_toggle}>
+          このコメントを削除しますか？
+        </ModalHeader>
+        <ModalBody>
+          <Card>
+            <Row className="mx-0 py-2 px-2">
+              <Col xs="1" className="px-0">
+                <img
+                  className="rounded-pill border"
+                  src={this.props.comment.creator_img}
+                  alt={this.props.comment.creator_img}
+                  width="80%"
+                  height="auto"
+                />
+              </Col>
+              <Col xs="11" className="px-0">
+                <h5 className="mb-0">
+                  <strong className="text-body">
+                    {this.props.comment.creator}
+                  </strong>
+                  <small className="text-muted ml-1">
+                    {this.props.comment.create_at}
+                  </small>
+                </h5>
+                <p className="mb-0">{this.props.comment.text}</p>
+              </Col>
+            </Row>
+          </Card>
+        </ModalBody>
         <ModalFooter className="p-2">
-          <Button color="warning" onClick={this.onPostComment}>
-            Submit
+          <Button color="danger" onClick={this.onPostComment}>
+            削除
           </Button>{" "}
+          <Button color="secondary" onClick={this.props.modal_toggle}>
+            キャンセル
+          </Button>
         </ModalFooter>
       </Modal>
     );
@@ -57,5 +89,5 @@ export default class DeleteModal extends React.Component {
 }
 
 DeleteModal.propTypes = {
-  comment:PropTypes.object,
+  comment: PropTypes.object
 };
