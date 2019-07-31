@@ -14,7 +14,8 @@ export default class MainComment extends React.Component {
       comments: this.props.comments,
       tooltipOpen: false,
       card_image: "",
-      isLiked: this.fetchIsLiked()
+      isLiked: this.fetchIsLiked(),
+      like_count: this.props.comment.like.length
     };
     if (this.props.comment.card_id) {
       this.fetchCardImage();
@@ -164,7 +165,7 @@ export default class MainComment extends React.Component {
                 className="text-muted float-right"
                 onClick={this.cancelFavorite}
               >
-                <span>{comment.like.length}</span>
+                <span>{this.state.like_count}</span>
                 <i className="material-icons p-0">star</i>
               </button>
             </Col>
@@ -174,7 +175,7 @@ export default class MainComment extends React.Component {
                 className="text-muted float-right"
                 onClick={this.pushFavorite}
               >
-                <span>{comment.like.length}</span>
+                <span>{this.state.like_count}</span>
                 <i className="material-icons p-0">star_border</i>
               </button>
             </Col>
