@@ -57,9 +57,7 @@ export default class MainComment extends React.Component {
    */
 
   fetchIsLiked() {
-    if (this.props.comment.like.length) {
-      return this.props.comment.like.includes(this.props.user_data.uid);
-    }
+    return this.props.comment.like.includes(this.props.user_data.uid);
   }
 
   /**
