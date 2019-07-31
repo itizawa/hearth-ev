@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
-import Sidebar from "../Sidebar";
 import CenterContainer from "./CenterContainer";
 
 export default class MainApp extends React.Component {
@@ -12,8 +11,8 @@ export default class MainApp extends React.Component {
           <Col md="7" className="px-0">
             <CenterContainer user_data={this.props.user_data} />
           </Col>
-          <Col md="5" className="px-0">
-            <Sidebar user_data={this.props.user_data} />
+          <Col md="5">
+            
           </Col>
         </Row>
       </React.Fragment>
