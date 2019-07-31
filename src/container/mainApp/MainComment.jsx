@@ -24,6 +24,7 @@ export default class MainComment extends React.Component {
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
     this.fetchIsLiked = this.fetchIsLiked.bind(this);
     this.pushFavorite = this.pushFavorite.bind(this);
+    this.cancelFavorite = this.cancelFavorite.bind(this);
   }
 
   /**
@@ -72,6 +73,14 @@ export default class MainComment extends React.Component {
         like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
       });
     this.setState({ isLiked: true });
+  }
+
+  /**
+   * いいねボタンを取り消したときのイベントハンドラ
+   */
+
+  cancelFavorite() {
+    console.log("aaa");
   }
 
   /**
@@ -147,7 +156,7 @@ export default class MainComment extends React.Component {
             <Col xs="12" className="p-0">
               <button
                 className="text-muted float-right"
-                onClick={this.pushFavorite}
+                onClick={this.cancelFavorite}
               >
                 <span>{comment.like.length}</span>
                 <i className="material-icons p-0">star</i>
