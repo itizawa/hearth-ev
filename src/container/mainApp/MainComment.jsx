@@ -14,7 +14,7 @@ export default class MainComment extends React.Component {
       comments: this.props.comments,
       tooltipOpen: false,
       card_image: "",
-      isLiked: false
+      isLiked: this.fetchIsLiked()
     };
     if (this.props.comment.card_id) {
       this.fetchCardImage();
@@ -22,6 +22,7 @@ export default class MainComment extends React.Component {
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
+    this.fetchIsLiked = this.fetchIsLiked.bind(this);
     this.pushFavorite = this.pushFavorite.bind(this);
   }
 
@@ -47,6 +48,16 @@ export default class MainComment extends React.Component {
     spaceRef.getDownloadURL().then((url) => {
       this.setState({ card_image: url });
     });
+  }
+
+  /**
+   * Likeボタンを押しているかどうかの確認
+   */
+
+  fetchIsLiked() {
+    if (this.props.comment.like.length) {
+      return this.props.comment.like.includes(this.props.user_data.uid);
+    }
   }
 
   /**
