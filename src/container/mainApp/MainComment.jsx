@@ -13,7 +13,8 @@ export default class MainComment extends React.Component {
       show_delete_modal: false,
       comments: this.props.comments,
       tooltipOpen: false,
-      card_image: ""
+      card_image: "",
+      isLiked: false
     };
     if (this.props.comment.card_id) {
       this.fetchCardImage();
@@ -59,6 +60,7 @@ export default class MainComment extends React.Component {
       .update({
         like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
       });
+    this.setState({ isLiked: true });
   }
 
   /**
@@ -132,6 +134,7 @@ export default class MainComment extends React.Component {
           </Col>
           <Col xs="12" className="p-0">
             <button
+              hidden={this.state.isLiked}
               className="text-muted float-right"
               onClick={this.pushFavorite}
             >
