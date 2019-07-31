@@ -116,6 +116,12 @@ export default class MainComment extends React.Component {
 
             <p className="mb-0">{comment.text}</p>
           </Col>
+          <Col xs="12" className="p-0">
+            <button className="text-muted float-right">
+              <span>0</span>
+              <i class="material-icons p-0">star_border</i>
+            </button>
+          </Col>
         </Row>
         <DeleteModal
           modal={this.state.show_delete_modal}
