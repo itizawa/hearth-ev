@@ -85,7 +85,9 @@ export default class MainComment extends React.Component {
     db.collection("Comments")
       .doc(this.props.comment.comment_id)
       .update({
-        like: firebase.firestore.FieldValue.arrayRemove(this.props.user_data.uid)
+        like: firebase.firestore.FieldValue.arrayRemove(
+          this.props.user_data.uid
+        )
       });
     this.setState({ isLiked: false });
   }
