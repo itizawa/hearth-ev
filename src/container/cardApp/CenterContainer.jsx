@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
+
 import CommentModal from "../../components/CommentModal";
-import CardComment from "./CardComment";
+import Comment from "../../components/Comment"
+
+import firebase from "firebase/app";
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -11,6 +14,8 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: false,
       comments: []
     };
+
+    this.fetchCardComment();
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -24,6 +29,28 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: !prevState.show_comment_modal
     }));
   }
+
+  /**
+   * コメントデータを取得する
+   */
+
+  fetchCardComment = () => {
+    var comments = [];
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .where("card_id", "==", this.props.focus_card.id)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          comments.push(doc.data());
+        });
+        this.setState({ comments: comments });
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      });
+    return Promise.all([db]);
+  };
 
   render() {
     const header_style = {
@@ -52,10 +79,15 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {focus_card.comments && //commentsが空の時でも動くように
-            focus_card.comments.reverse().map((id, index) => {
-              return <CardComment key={index} id={id} user_data={user_data} />;
-            })}
+          {this.state.comments.map((comment, index) => {
+            return (
+              <Comment
+                key={index}
+                comment={comment}
+                user_data={this.props.user_data}
+              />
+            );
+          })}
         </div>
 
         <CommentModal
@@ -73,5 +105,5 @@ export default class CenterContainer extends React.Component {
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object,
-  focus_user: PropTypes.object
+  focus_card: PropTypes.object
 };
