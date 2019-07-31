@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
+
 import CommentModal from "../../components/CommentModal";
-import MainComment from "./MainComment";
+import Comment from "../../components/Comment";
 
 import firebase from "firebase/app";
 
@@ -79,7 +80,7 @@ export default class CenterContainer extends React.Component {
           </Row>
           {this.state.comments.map((comment, index) => {
             return (
-              <MainComment
+              <Comment
                 fetchHomeComment={this.fetchHomeComment}
                 key={index}
                 comment={comment}
