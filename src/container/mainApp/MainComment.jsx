@@ -74,6 +74,7 @@ export default class MainComment extends React.Component {
         like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
       });
     this.setState({ isLiked: true });
+    this.setState({ like_count: this.state.like_count+1})
   }
 
   /**
@@ -90,6 +91,7 @@ export default class MainComment extends React.Component {
         )
       });
     this.setState({ isLiked: false });
+    this.setState({ like_count: this.state.like_count-1})
   }
 
   /**
