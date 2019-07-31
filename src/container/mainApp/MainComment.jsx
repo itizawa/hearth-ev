@@ -48,6 +48,14 @@ export default class MainComment extends React.Component {
   }
 
   /**
+   * いいねボタンを押したときのイベントハンドラ
+   */
+
+  pushFavorite(){
+    console.log("like")
+  }
+
+  /**
    * ツールチップ開閉のためのイベントハンドラ
    */
 
@@ -117,9 +125,9 @@ export default class MainComment extends React.Component {
             <p className="mb-0">{comment.text}</p>
           </Col>
           <Col xs="12" className="p-0">
-            <button className="text-muted float-right">
+            <button className="text-muted float-right" onClick={this.pushFavorite}>
               <span>0</span>
-              <i class="material-icons p-0">star_border</i>
+              <i className="material-icons p-0">star_border</i>
             </button>
           </Col>
         </Row>
