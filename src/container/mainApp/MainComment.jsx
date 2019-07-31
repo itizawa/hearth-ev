@@ -21,6 +21,7 @@ export default class MainComment extends React.Component {
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
+    this.pushFavorite = this.pushFavorite.bind(this);
   }
 
   /**
@@ -51,8 +52,13 @@ export default class MainComment extends React.Component {
    * いいねボタンを押したときのイベントハンドラ
    */
 
-  pushFavorite(){
-    console.log("like")
+  pushFavorite() {
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .doc(this.props.comment.comment_id)
+      .update({
+        like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
+      });
   }
 
   /**
@@ -125,7 +131,10 @@ export default class MainComment extends React.Component {
             <p className="mb-0">{comment.text}</p>
           </Col>
           <Col xs="12" className="p-0">
-            <button className="text-muted float-right" onClick={this.pushFavorite}>
+            <button
+              className="text-muted float-right"
+              onClick={this.pushFavorite}
+            >
               <span>0</span>
               <i className="material-icons p-0">star_border</i>
             </button>
