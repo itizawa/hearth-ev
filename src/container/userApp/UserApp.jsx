@@ -53,7 +53,7 @@ export default class UserApp extends React.Component {
               focus_user={this.state.focus_user}
             />
           </Col>
-          <Col md="5" className="px-0">
+          <Col md="5" className="px-1">
             <ViewContainer
               user_data={this.props.user_data}
               focus_user={this.state.focus_user}
