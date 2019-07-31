@@ -84,7 +84,7 @@ export default class CenterContainer extends React.Component {
               <Comment
                 key={index}
                 comment={comment}
-                user_data={this.props.user_data}
+                user_data={user_data}
               />
             );
           })}
