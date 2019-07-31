@@ -30,7 +30,7 @@ export default class CardView extends React.Component {
   render() {
     const img_frame = {
       height: "700px",
-      paddingLeft: "20%"
+      padding: "5% 10%"
     };
     return (
       <React.Fragment>
@@ -38,8 +38,8 @@ export default class CardView extends React.Component {
           <img
             src={this.state.card_image}
             alt={this.state.card_image}
-            width="auto"
-            height="60%"
+            width="100%"
+            height="auto"
           />
         </div>
       </React.Fragment>
