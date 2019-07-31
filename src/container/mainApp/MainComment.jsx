@@ -143,16 +143,27 @@ export default class MainComment extends React.Component {
 
             <p className="mb-0">{comment.text}</p>
           </Col>
-          <Col xs="12" className="p-0">
-            <button
-              hidden={this.state.isLiked}
-              className="text-muted float-right"
-              onClick={this.pushFavorite}
-            >
-              <span>0</span>
-              <i className="material-icons p-0">star_border</i>
-            </button>
-          </Col>
+          {this.state.isLiked ? (
+            <Col xs="12" className="p-0">
+              <button
+                className="text-muted float-right"
+                onClick={this.pushFavorite}
+              >
+                <span>{comment.like.length}</span>
+                <i className="material-icons p-0">star</i>
+              </button>
+            </Col>
+          ) : (
+            <Col xs="12" className="p-0">
+              <button
+                className="text-muted float-right"
+                onClick={this.pushFavorite}
+              >
+                <span>{comment.like.length}</span>
+                <i className="material-icons p-0">star_border</i>
+              </button>
+            </Col>
+          )}
         </Row>
         <DeleteModal
           modal={this.state.show_delete_modal}
