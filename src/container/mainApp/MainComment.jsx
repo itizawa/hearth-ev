@@ -13,7 +13,9 @@ export default class MainComment extends React.Component {
       show_delete_modal: false,
       comments: this.props.comments,
       tooltipOpen: false,
-      card_image: ""
+      card_image: "",
+      isLiked: this.fetchIsLiked(),
+      like_count: this.props.comment.like.length
     };
     if (this.props.comment.card_id) {
       this.fetchCardImage();
@@ -21,6 +23,9 @@ export default class MainComment extends React.Component {
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
+    this.fetchIsLiked = this.fetchIsLiked.bind(this);
+    this.pushFavorite = this.pushFavorite.bind(this);
+    this.cancelFavorite = this.cancelFavorite.bind(this);
   }
 
   /**
@@ -45,6 +50,46 @@ export default class MainComment extends React.Component {
     spaceRef.getDownloadURL().then((url) => {
       this.setState({ card_image: url });
     });
+  }
+
+  /**
+   * Likeボタンを押しているかどうかの確認
+   */
+
+  fetchIsLiked() {
+    return this.props.comment.like.includes(this.props.user_data.uid);
+  }
+
+  /**
+   * いいねボタンを押したときのイベントハンドラ
+   */
+
+  pushFavorite() {
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .doc(this.props.comment.comment_id)
+      .update({
+        like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
+      });
+    this.setState({ isLiked: true });
+    this.setState({ like_count: this.state.like_count + 1 });
+  }
+
+  /**
+   * いいねボタンを取り消したときのイベントハンドラ
+   */
+
+  cancelFavorite() {
+    const db = firebase.firestore();
+    db.collection("Comments")
+      .doc(this.props.comment.comment_id)
+      .update({
+        like: firebase.firestore.FieldValue.arrayRemove(
+          this.props.user_data.uid
+        )
+      });
+    this.setState({ isLiked: false });
+    this.setState({ like_count: this.state.like_count - 1 });
   }
 
   /**
@@ -116,6 +161,27 @@ export default class MainComment extends React.Component {
 
             <p className="mb-0">{comment.text}</p>
           </Col>
+          {this.state.isLiked ? (
+            <Col xs="12" className="p-0">
+              <button
+                className="text-muted float-right"
+                onClick={this.cancelFavorite}
+              >
+                <span>{this.state.like_count}</span>
+                <i className="material-icons p-0">star</i>
+              </button>
+            </Col>
+          ) : (
+            <Col xs="12" className="p-0">
+              <button
+                className="text-muted float-right"
+                onClick={this.pushFavorite}
+              >
+                <span>{this.state.like_count}</span>
+                <i className="material-icons p-0">star_border</i>
+              </button>
+            </Col>
+          )}
         </Row>
         <DeleteModal
           modal={this.state.show_delete_modal}

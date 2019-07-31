@@ -63,7 +63,7 @@ export default class CommentModal extends React.Component {
         creator_id: this.props.user_data.uid,
         creator_img: this.props.user_data.photoURL,
         text: this.state.comment_text,
-        like: {},
+        like: [],
         create_at: getNow(),
         topic: this.state.topic,
         card_id: this.props.card_id || "",
