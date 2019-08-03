@@ -38,6 +38,7 @@ export default class CenterContainer extends React.Component {
     const db = firebase.firestore();
     db.collection("Comments")
       .where("creator_id", "==", this.props.focus_user.id)
+      .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
