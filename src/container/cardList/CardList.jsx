@@ -42,7 +42,7 @@ export default class CardList extends React.Component {
     return (
       <React.Fragment>
         {this.state.cards.map((card, index) => {
-          return <CardView key={index} card_id={card.img} />; // imgとidは兼用
+          return <CardView key={index} card_img={card.card_img} card_id={card.card_id}/>; // imgとidは兼用
         })}
       </React.Fragment>
     );
@@ -53,24 +53,8 @@ class CardView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      card_image: "",
-      card_id: this.props.card_id || ""
+      card_img: this.props.card_img || ""
     };
-
-    this.fetchCardImage();
-  }
-
-  /**
-   * カード画像の取得
-   */
-
-  fetchCardImage() {
-    var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`); //imgとidは兼用
-
-    spaceRef.getDownloadURL().then((url) => {
-      this.setState({ card_image: url });
-    });
   }
 
   render() {
@@ -79,8 +63,8 @@ class CardView extends React.Component {
         <Col sm="4" className="text-center mt-2">
           <Link to={"/card/" + this.props.card_id}>
             <img
-              src={this.state.card_image}
-              alt={this.state.card_image}
+              src={this.state.card_img}
+              alt={this.state.card_img}
               width="100%"
               height="auto"
             />
