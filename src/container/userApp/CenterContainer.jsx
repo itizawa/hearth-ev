@@ -4,8 +4,6 @@ import CommentModal from "../../components/CommentModal";
 
 import Comment from "../../components/Comment";
 
-import orderByDate from "../../function/processData";
-
 import firebase from "firebase/app";
 
 export default class CenterContainer extends React.Component {
@@ -40,12 +38,12 @@ export default class CenterContainer extends React.Component {
     const db = firebase.firestore();
     db.collection("Comments")
       .where("creator_id", "==", this.props.focus_user.id)
+      .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           comments.push(doc.data());
         });
-        comments.sort(orderByDate);
         this.setState({ comments: comments });
       })
       .catch(function(error) {
