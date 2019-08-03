@@ -14,7 +14,7 @@ export default class ViewContainer extends React.Component {
     };
     return (
       <React.Fragment>
-        <div className="border 2px">
+        <div className="bg-white border 2px">
           <CardImg top width="100%" src={logo} alt="Card logo" />
           <CardBody>
             <Row className="py-2 mx-0" style={row_style}>
