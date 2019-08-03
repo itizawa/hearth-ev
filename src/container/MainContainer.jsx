@@ -9,6 +9,7 @@ import MainApp from "./mainApp/MainApp";
 import UserApp from "./userApp/UserApp";
 import CardApp from "./cardApp/CardApp";
 import CardListApp from "./cardList/CardListApp";
+import TestApp from "./TestApp";
 
 export default class MainContainer extends React.Component {
   render() {
@@ -47,6 +48,11 @@ export default class MainContainer extends React.Component {
                 exact
                 path="/card"
                 render={(props) => <CardListApp {...this.props} />}
+              />
+              <Route
+                exact
+                path="/test"
+                render={(props) => <TestApp {...this.props} />}
               />
             </Col>
           </Row>
