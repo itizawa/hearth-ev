@@ -8,10 +8,12 @@ export default class TestApp extends React.Component {
     super(props);
     this.state = {
       name: "",
-      image: ""
+      image: "",
+      hero: ""
     };
     this.onCardChange = this.onCardChange.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
+    this.onHeroChange = this.onHeroChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
   }
   /**
@@ -35,6 +37,16 @@ export default class TestApp extends React.Component {
   }
 
   /**
+   * hero取得ためのイベントハンドラ
+   */
+
+  onHeroChange(e) {
+    this.setState({
+      hero: e.target.value
+    });
+  }
+
+  /**
    * コメント投稿のイベントハンドラ
    */
 
@@ -45,7 +57,7 @@ export default class TestApp extends React.Component {
       .add({
         card_img: this.state.image,
         card_name: this.state.name,
-        hero: "druid",
+        hero: this.state.hero,
         expansion: "探検同盟"
       })
       .then((ref) => {
@@ -75,6 +87,13 @@ export default class TestApp extends React.Component {
           name="text"
           id="exampleText"
           placeholder="カードの画像"
+        />
+        <Input
+          onChange={this.onHeroChange}
+          type="textarea"
+          name="text"
+          id="exampleText"
+          placeholder="ヒーロー"
         />
         <Button color="primary" onClick={this.onPostComment}>
           AddCard
