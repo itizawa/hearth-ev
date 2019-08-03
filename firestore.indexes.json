@@ -1,15 +1,29 @@
 {
   "indexes": [
     {
-      "collectionGroup": "コメント",
+      "collectionGroup": "Comments",
       "queryScope": "COLLECTION_GROUP",
       "fields": [
         {
-          "fieldPath": "Comments",
+          "fieldPath": "card_id",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "creat_at",
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Comments",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "creator_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
           "order": "DESCENDING"
         }
       ]
