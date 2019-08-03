@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
 
 import CommentModal from "../../components/CommentModal";
-import Comment from "../../components/Comment"
+import Comment from "../../components/Comment";
 
 import firebase from "firebase/app";
 
@@ -44,12 +44,21 @@ export default class CenterContainer extends React.Component {
         querySnapshot.forEach((doc) => {
           comments.push(doc.data());
         });
+        comments.sort(this.compare);
         this.setState({ comments: comments });
       })
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
     return Promise.all([db]);
+  };
+
+  compare = (a,b) => {
+    let r = 0;
+    if( a.timestamp < b.timestamp ){ r = -1; }
+    else if( a.timestamp > b.timestamp ){ r = 1; }
+  
+    return r;
   };
 
   render() {
@@ -81,11 +90,7 @@ export default class CenterContainer extends React.Component {
           </Row>
           {this.state.comments.map((comment, index) => {
             return (
-              <Comment
-                key={index}
-                comment={comment}
-                user_data={user_data}
-              />
+              <Comment key={index} comment={comment} user_data={user_data} />
             );
           })}
         </div>
