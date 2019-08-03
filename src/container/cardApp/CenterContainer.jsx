@@ -5,6 +5,8 @@ import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/CommentModal";
 import Comment from "../../components/Comment";
 
+import orderByDate from "../../function/processData"
+
 import firebase from "firebase/app";
 
 export default class CenterContainer extends React.Component {
@@ -44,21 +46,13 @@ export default class CenterContainer extends React.Component {
         querySnapshot.forEach((doc) => {
           comments.push(doc.data());
         });
-        comments.sort(this.compare);
+        comments.sort(orderByDate);
         this.setState({ comments: comments });
       })
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
     return Promise.all([db]);
-  };
-
-  compare = (a,b) => {
-    let r = 0;
-    if( a.timestamp < b.timestamp ){ r = -1; }
-    else if( a.timestamp > b.timestamp ){ r = 1; }
-  
-    return r;
   };
 
   render() {
