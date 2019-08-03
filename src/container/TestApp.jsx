@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Input } from "reactstrap";
 
+// eslint-disable-next-line no-unused-vars
 import firebase from "firebase/app";
 
 export default class TestApp extends React.Component {
