@@ -60,7 +60,7 @@ export default class CenterContainer extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="border 2px">
+        <div className="bg-white border 2px">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             ホーム
           </h3>
