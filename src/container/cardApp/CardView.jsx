@@ -1,30 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import firebase from "firebase/app";
-
 export default class CardView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      card_image: "",
       card_id: this.props.focus_card.id || ""
     };
-
-    this.fetchCardImage();
-  }
-
-  /**
-   * カード画像の取得
-   */
-
-  fetchCardImage() {
-    var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.state.card_id}.png`); //imgとidは兼用
-
-    spaceRef.getDownloadURL().then((url) => {
-      this.setState({ card_image: url });
-    });
   }
 
   render() {
@@ -36,8 +18,8 @@ export default class CardView extends React.Component {
       <React.Fragment>
         <div style={img_frame}>
           <img
-            src={this.state.card_image}
-            alt={this.state.card_image}
+            src={this.props.focus_card.card_img}
+            alt={this.props.focus_card.card_img}
             width="100%"
             height="auto"
           />

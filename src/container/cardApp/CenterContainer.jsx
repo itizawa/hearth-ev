@@ -64,7 +64,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="border 2px">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {focus_card.name}
+            {focus_card.card_name}
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
@@ -91,8 +91,8 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={user_data}
-          card_id={focus_card.img}
-          card_name={focus_card.name}
+          card_id={focus_card.card_id}
+          card_name={focus_card.card_name}
           pushCommentId={this.props.pushCommentId}
         />
       </React.Fragment>
