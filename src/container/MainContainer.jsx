@@ -21,7 +21,7 @@ export default class MainContainer extends React.Component {
       <BrowserRouter>
         <div style={container_style}>
           <Row className="mx-0">
-            <Col lg="2" className="px-2">
+            <Col xl="2" className="px-2">
               <Sidebar user_data={this.props.user_data} />
             </Col>
             <Col lg="10" className="mt-2">
