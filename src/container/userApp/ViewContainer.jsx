@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
 import { CardImg, CardBody, Row, Col, Card } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class ViewContainer extends React.Component {
   render() {
@@ -38,20 +39,24 @@ export default class ViewContainer extends React.Component {
             <Row>
               <Col xs="6" className="btn text-center">
                 <Card className="p-1">
-                  <p className="mb-0">獲得いいね</p>
-                  <strong className="text-primary">
-                    <i className="material-icons">grade</i>
-                    {focus_user.acquired}
-                  </strong>
+                  <Link to={`/user/${focus_user.uid}/like`}>
+                    <p className="mb-0">獲得いいね</p>
+                    <strong className="text-primary">
+                      <i className="material-icons">grade</i>
+                      {focus_user.acquired}
+                    </strong>
+                  </Link>
                 </Card>
               </Col>
               <Col xs="6" className="btn text-center">
                 <Card className="p-1">
-                  <p className="mb-0">コメント</p>
-                  <strong className="text-primary">
-                    <i className="material-icons">mode_comment</i>
-                    {focus_user.comments.length}
-                  </strong>
+                  <Link to={`/user/${focus_user.uid}/timestamp`}>
+                    <p className="mb-0">コメント</p>
+                    <strong className="text-primary">
+                      <i className="material-icons">mode_comment</i>
+                      {focus_user.comments.length}
+                    </strong>
+                  </Link>
                 </Card>
               </Col>
             </Row>

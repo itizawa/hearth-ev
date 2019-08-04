@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import ViewContainer from "./ViewContainer";
 import CenterContainer from "./CenterContainer";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 
@@ -12,12 +13,11 @@ export default class UserApp extends React.Component {
       focus_user: {
         id: this.props.match.params.user_id,
         name: "UserPage",
-        comments:[]
+        comments: []
       }
     };
 
     this.fetchUserData();
-
   }
 
   /**
@@ -48,10 +48,19 @@ export default class UserApp extends React.Component {
       <React.Fragment>
         <Row>
           <Col md="7" className="px-0">
-            <CenterContainer
-              user_data={this.props.user_data}
-              focus_user={this.state.focus_user}
-            />
+            <BrowserRouter>
+              <Route
+                exact
+                path="/user/:user_id/:order"
+                render={(props) => (
+                  <CenterContainer
+                    {...this.props}
+                    focus_user={this.state.focus_user}
+                    match={props.match}
+                  />
+                )}
+              />
+            </BrowserRouter>
           </Col>
           <Col md="5" className="px-1">
             <ViewContainer
