@@ -8,7 +8,7 @@ export default class ViewContainer extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="bg-white border 2px">
+        <div className="bg-white border 2px shadow-sm">
           <CardView focus_card={this.props.focus_card}/>
         </div>
       </React.Fragment>
