@@ -53,7 +53,7 @@ export default class CardApp extends React.Component {
               focus_card={this.state.focus_card}
             />
           </Col>
-          <Col md="5" className="px-0">
+          <Col md="5" className="px-1">
             <ViewContainer
               user_data={this.props.user_data}
               focus_card={this.state.focus_card}
