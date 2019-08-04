@@ -38,17 +38,11 @@ export default class App extends React.Component {
   }
 
   render() {
-    const bgStyle = {
-      backgroundColor: "#e6ecf0",
-      position: "fixed",
-      height: "100%",
-      width: "100%"
-    };
     return (
-      <div style={bgStyle}>
+      <React.Fragment>
         <Header user_data={this.state.user_data} />
         <MainContainer user_data={this.state.user_data} />
-      </div>
+      </React.Fragment>
     );
   }
 }
