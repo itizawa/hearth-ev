@@ -41,7 +41,7 @@ export default class ViewContainer extends React.Component {
                   <p className="mb-0">獲得いいね</p>
                   <strong className="text-primary">
                     <i className="material-icons">grade</i>
-                    {focus_user.acquired_fav}
+                    {focus_user.acquired}
                   </strong>
                 </Card>
               </Col>

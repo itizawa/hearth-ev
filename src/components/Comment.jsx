@@ -69,7 +69,7 @@ export default class Comment extends React.Component {
       });
     db.collection("Users")
       .doc(this.props.comment.creator_id)
-      .update("acquired_fav", firebase.firestore.FieldValue.increment(1));
+      .update("acquired", firebase.firestore.FieldValue.increment(1));
     this.setState({ isLiked: true });
     this.setState({ like_count: this.state.like_count + 1 });
   }
@@ -89,7 +89,7 @@ export default class Comment extends React.Component {
       });
     db.collection("Users")
       .doc(this.props.comment.creator_id)
-      .update("acquired_fav", firebase.firestore.FieldValue.increment(-1));
+      .update("acquired", firebase.firestore.FieldValue.increment(-1));
     this.setState({ isLiked: false });
     this.setState({ like_count: this.state.like_count - 1 });
   }
