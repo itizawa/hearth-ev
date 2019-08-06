@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Button,
+  Input,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Row,
-  Col,
-  Card
+  Col
 } from "reactstrap";
 
 import firebase from "firebase/app";
@@ -17,9 +17,21 @@ export default class ReEditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweet_permission: true
+      tweet_permission: true,
+      comment_text: this.props.comment.text
     };
-    this.onPostComment = this.onPostComment.bind(this);
+    this.reEditComment = this.reEditComment.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
+  }
+
+  /**
+   * コメント取得ためのイベントハンドラ
+   */
+
+  onTextChange(e) {
+    this.setState({
+      comment_text: e.target.value
+    });
   }
 
   /**
@@ -33,42 +45,12 @@ export default class ReEditModal extends React.Component {
   }
 
   /**
-   * コメント削除のイベントハンドラ
+   * コメント再編集のイベントハンドラ
    */
 
-  onPostComment() {
-    if (this.props.comment.creator_id === this.props.user_data.uid) {
-      const db = firebase.firestore();
-      db.collection("Comments")
-        .doc(this.props.comment.comment_id)
-        .delete()
-        .then(() => {
-          console.log("Document successfully deleted!");
-          this.props.modal_toggle();
-        })
-        .catch(function(error) {
-          console.error("Error removing document: ", error);
-        });
-      db.collection("Users")
-        .doc(this.props.user_data.uid)
-        .update({
-          comments: firebase.firestore.FieldValue.arrayRemove(
-            this.props.comment.comment_id
-          )
-        });
-      if (this.props.comment.card_id) {
-        db.collection("Cards")
-          .doc(this.props.comment.card_id)
-          .update({
-            comments: firebase.firestore.FieldValue.arrayRemove(
-              this.props.comment.comment_id
-            )
-          });
-      }
-    } else {
-      this.props.modal_toggle();
-    }
-    this.props.fetchComment();
+  reEditComment() {
+    // TODO 再編集のイベントの作成
+    this.props.modal_toggle();
   }
 
   render() {
@@ -81,34 +63,44 @@ export default class ReEditModal extends React.Component {
         className={this.props.className}
       >
         <ModalHeader toggle={this.props.modal_toggle}>
-          このコメントを削除しますか？
+          コメントを編集する
         </ModalHeader>
         <ModalBody>
-          <Card>
-            <Row className="mx-0 py-2 px-2">
-              <Col xs="1" className="px-0">
-                <img
-                  className="rounded-pill border"
-                  src={comment.creator_img}
-                  alt={comment.creator_img}
-                  width="80%"
-                  height="auto"
-                />
-              </Col>
-              <Col xs="11" className="px-0">
-                <h5 className="mb-0">
-                  <strong className="text-body">{comment.creator}</strong>
-                  <small className="text-muted ml-1">{comment.create_at}</small>
-                </h5>
-                <p className="mb-0">{comment.text}</p>
-              </Col>
-            </Row>
-          </Card>
+          <Row className="mx-0 py-2 px-2">
+            <Col xs="1" className="px-0">
+              <img
+                className="rounded-pill border"
+                src={comment.creator_img}
+                alt={comment.creator_img}
+                width="80%"
+                height="auto"
+              />
+            </Col>
+            <Col xs="11" className="px-0">
+              <h5 className="mb-0">
+                <strong className="text-body">{comment.creator}</strong>
+                <small className="text-muted ml-1">{comment.create_at}</small>
+              </h5>
+            </Col>
+            <Input
+              className="mt-2"
+              value={this.state.comment_text}
+              type="textarea"
+              onChange={this.onTextChange}
+            />
+          </Row>
         </ModalBody>
         <ModalFooter className="p-2">
-          <Button color="danger" onClick={this.onPostComment}>
-            削除
-          </Button>{" "}
+          <Button
+            color="info"
+            onClick={this.reEditComment}
+            disabled={
+              this.state.comment_text.length < 1 ||
+              this.state.comment_text.length > 150
+            }
+          >
+            更新
+          </Button>
           <Button color="secondary" onClick={this.props.modal_toggle}>
             キャンセル
           </Button>
