@@ -11,10 +11,9 @@ export default class CenterContainer extends React.Component {
     this.state = {
       show_comment_modal: false,
       comments: [],
-      order: this.props.match.params.order
     };
 
-    this.fetchUserComment(this.state.order, this.props.focus_user.id);
+    this.fetchUserComment(this.props.focus_user.id);
   }
 
   /**
@@ -22,14 +21,13 @@ export default class CenterContainer extends React.Component {
    */
 
   fetchUserComment = (
-    order = this.props.match.params.order,
     user_id = this.props.focus_user.uid
   ) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
       .where("creator_id", "==", user_id)
-      .orderBy(order, "desc")
+      .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
