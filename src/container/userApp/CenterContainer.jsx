@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CommentModal from "../../components/CommentModal";
 
 import Comment from "../../components/Comment";
 
@@ -12,34 +11,23 @@ export default class CenterContainer extends React.Component {
     this.state = {
       show_comment_modal: false,
       comments: [],
-      order: this.props.match.params.order
     };
 
-    this.fetchUserComment(this.state.order);
-
-    this.modal_toggle = this.modal_toggle.bind(this);
-  }
-
-  /**
-   * モーダル開閉のためのイベントハンドラ
-   */
-
-  modal_toggle() {
-    this.setState((prevState) => ({
-      show_comment_modal: !prevState.show_comment_modal
-    }));
+    this.fetchUserComment(this.props.focus_user.id);
   }
 
   /**
    * コメントデータを取得する
    */
 
-  fetchUserComment = (order) => {
+  fetchUserComment = (
+    user_id = this.props.focus_user.uid
+  ) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .where("creator_id", "==", this.props.focus_user.id)
-      .orderBy(order, "desc")
+      .where("creator_id", "==", user_id)
+      .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -70,16 +58,11 @@ export default class CenterContainer extends React.Component {
                 key={index}
                 comment={comment}
                 user_data={this.props.user_data}
+                fetchComment={this.fetchUserComment}
               />
             );
           })}
         </div>
-
-        <CommentModal
-          modal={this.state.show_comment_modal}
-          modal_toggle={this.modal_toggle}
-          user_data={this.props.user_data}
-        />
       </React.Fragment>
     );
   }

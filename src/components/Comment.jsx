@@ -172,6 +172,7 @@ export default class Comment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={comment}
           user_data={user_data}
+          fetchComment={this.props.fetchComment}
         />
       </React.Fragment>
     );
