@@ -24,6 +24,13 @@ export default class Sidebar extends React.Component {
                 <i className="material-icons mr-2">class</i>カード
               </p>
             </Link>
+          </ListGroupItem>          
+          <ListGroupItem tag="button" action>
+            <Link to={"/card"}>
+              <p className="text-body mb-0 align-middle">
+                <i className="material-icons mr-2">account_circle</i>マイページ
+              </p>
+            </Link>
           </ListGroupItem>
         </ListGroup>
       </div>
