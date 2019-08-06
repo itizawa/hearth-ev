@@ -33,7 +33,7 @@ export default class DeleteModal extends React.Component {
   }
 
   /**
-   * コメント投稿のイベントハンドラ
+   * コメント削除のイベントハンドラ
    */
 
   onPostComment() {
