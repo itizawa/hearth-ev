@@ -1,6 +1,7 @@
 import React from "react";
 
 import firebase from "firebase/app";
+import UserListItem from "../../components/UserListItem";
 
 export default class ViewContainer extends React.Component {
   constructor(props) {
@@ -45,6 +46,11 @@ export default class ViewContainer extends React.Component {
             TopUser
           </h3>
         </div>
+        {this.state.users.map((user, index) => {
+            return (
+              <UserListItem key={index} user_data={user}/>
+            );
+          })}
       </React.Fragment>
     );
   }
