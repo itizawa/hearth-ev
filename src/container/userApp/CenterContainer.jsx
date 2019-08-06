@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CommentModal from "../../components/CommentModal";
 
 import Comment from "../../components/Comment";
 
@@ -17,18 +16,6 @@ export default class CenterContainer extends React.Component {
 
     this.fetchUserComment(this.state.order);
 
-    this.modal_toggle = this.modal_toggle.bind(this);
-  }
-
-  /**
-   * モーダル開閉のためのイベントハンドラ
-   */
-
-  modal_toggle() {
-    this.setState((prevState) => ({
-      show_comment_modal: !prevState.show_comment_modal
-    }));
-    this.fetchUserComment();
   }
 
   /**
@@ -75,12 +62,6 @@ export default class CenterContainer extends React.Component {
             );
           })}
         </div>
-
-        <CommentModal
-          modal={this.state.show_comment_modal}
-          modal_toggle={this.modal_toggle}
-          user_data={this.props.user_data}
-        />
       </React.Fragment>
     );
   }
