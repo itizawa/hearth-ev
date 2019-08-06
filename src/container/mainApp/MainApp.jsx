@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
 import CenterContainer from "./CenterContainer";
+import ViewContainer from "./ViewContainer";
 
 export default class MainApp extends React.Component {
   render() {
@@ -12,7 +13,7 @@ export default class MainApp extends React.Component {
             <CenterContainer user_data={this.props.user_data} />
           </Col>
           <Col md="5">
-            
+            <ViewContainer />
           </Col>
         </Row>
       </React.Fragment>
