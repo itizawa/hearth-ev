@@ -14,19 +14,21 @@ export default class CenterContainer extends React.Component {
       order: this.props.match.params.order
     };
 
-    this.fetchUserComment(this.state.order);
-
+    this.fetchUserComment(this.state.order, this.props.focus_user.id);
   }
 
   /**
    * コメントデータを取得する
    */
 
-  fetchUserComment = (order) => {
+  fetchUserComment = (
+    order = this.props.match.params.order,
+    user_id = this.props.focus_user.uid
+  ) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .where("creator_id", "==", this.props.focus_user.id)
+      .where("creator_id", "==", user_id)
       .orderBy(order, "desc")
       .get()
       .then((querySnapshot) => {
@@ -58,6 +60,7 @@ export default class CenterContainer extends React.Component {
                 key={index}
                 comment={comment}
                 user_data={this.props.user_data}
+                fetchComment={this.fetchUserComment}
               />
             );
           })}
