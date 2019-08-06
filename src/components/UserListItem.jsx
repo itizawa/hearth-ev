@@ -18,6 +18,20 @@ export default class UserListItem extends React.Component {
             />
           </Link>
         </Col>
+        <Col xs="10" className="px-0">
+          <h5 className="mb-0">
+            <Link to={"/user/" + user_data.uid + "/timestamp"}>
+              <strong className="text-body">{user_data.name}</strong>
+            </Link>
+            <p className="mb-0">
+              獲得いいね
+              <strong className="text-primary">
+                <i className="material-icons">grade</i>
+                {user_data.acquired}
+              </strong>
+            </p>
+          </h5>
+        </Col>
       </Row>
     );
   }
