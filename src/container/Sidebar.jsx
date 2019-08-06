@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import logo from "../asset/img/logo.png";
 import { Link } from "react-router-dom";
 
@@ -37,3 +39,7 @@ export default class Sidebar extends React.Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  user_data: PropTypes.object
+};
