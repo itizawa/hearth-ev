@@ -64,7 +64,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {focus_card.card_name}
+            Card Page
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
