@@ -62,7 +62,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {this.props.focus_user.name}<span className="ml-3">{this.state.order}{"順に並べてます"}</span>
+            {this.props.focus_user.name}
           </h3>
           {this.state.comments.map((comment, index) => {
             return (
