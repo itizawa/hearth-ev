@@ -27,6 +27,7 @@ export default class Sidebar extends React.Component {
               </p>
             </Link>
           </ListGroupItem>
+          {/* TODO: ログアウトボタン実装後に非表示実装 */}
           <ListGroupItem tag="button" action>
             <Link to={"/user/" + this.props.user_data.uid}>
               <p className="text-body mb-0 align-middle">
