@@ -91,6 +91,7 @@ export default class CommentModal extends React.Component {
         }
       });
     this.props.modal_toggle();
+    this.props.fetchComment();
     return Promise.all([addComment]);
   }
 

@@ -15,9 +15,10 @@ export default class CenterContainer extends React.Component {
       comments: []
     };
 
-    this.fetchCardComment();
+    this.fetchCardComment(this.props.focus_card.id);
 
     this.modal_toggle = this.modal_toggle.bind(this);
+    this.fetchCardComment = this.fetchCardComment.bind(this);
   }
 
   /**
@@ -34,11 +35,11 @@ export default class CenterContainer extends React.Component {
    * コメントデータを取得する
    */
 
-  fetchCardComment = () => {
+  fetchCardComment = (target=this.props.focus_card.card_id) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .where("card_id", "==", this.props.focus_card.id)
+      .where("card_id", "==", target)
       .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
@@ -94,6 +95,7 @@ export default class CenterContainer extends React.Component {
           card_id={focus_card.card_id}
           card_name={focus_card.card_name}
           pushCommentId={this.props.pushCommentId}
+          fetchComment={this.fetchCardComment}
         />
       </React.Fragment>
     );
