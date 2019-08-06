@@ -38,22 +38,25 @@ export default class ViewContainer extends React.Component {
             <Row>
               <Col xs="6" className="text-center">
                 <Card className="p-1">
-                    <p className="mb-0">獲得いいね</p>
-                    <strong className="text-primary">
-                      <i className="material-icons">grade</i>
-                      {focus_user.acquired}
-                    </strong>
+                  <p className="mb-0">獲得いいね</p>
+                  <strong className="text-primary">
+                    <i className="material-icons">grade</i>
+                    {focus_user.acquired}
+                  </strong>
                 </Card>
               </Col>
               <Col xs="6" className="text-center">
                 <Card className="p-1">
-                    <p className="mb-0">コメント</p>
-                    <strong className="text-primary">
-                      <i className="material-icons">mode_comment</i>
-                      {focus_user.comments.length}
-                    </strong>
+                  <p className="mb-0">コメント</p>
+                  <strong className="text-primary">
+                    <i className="material-icons">mode_comment</i>
+                    {focus_user.comments.length}
+                  </strong>
                 </Card>
               </Col>
+            </Row>
+            <Row className="py-4 mx-0">
+              <p>これはテストプロフィールです</p>
             </Row>
           </CardBody>
         </div>
