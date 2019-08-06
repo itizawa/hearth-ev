@@ -11,10 +11,11 @@ export default class CenterContainer extends React.Component {
     super(props);
     this.state = {
       show_comment_modal: false,
-      comments: []
+      comments: [],
+      order: this.props.match.params.order
     };
 
-    this.fetchUserComment();
+    this.fetchUserComment(this.state.order);
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -33,12 +34,12 @@ export default class CenterContainer extends React.Component {
    * コメントデータを取得する
    */
 
-  fetchUserComment = () => {
+  fetchUserComment = (order) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
       .where("creator_id", "==", this.props.focus_user.id)
-      .orderBy("timestamp", "desc")
+      .orderBy(order, "desc")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

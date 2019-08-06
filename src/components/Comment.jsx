@@ -67,6 +67,9 @@ export default class Comment extends React.Component {
       .update({
         like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
       });
+    db.collection("Users")
+      .doc(this.props.comment.creator_id)
+      .update("acquired", firebase.firestore.FieldValue.increment(1));
     this.setState({ isLiked: true });
     this.setState({ like_count: this.state.like_count + 1 });
   }
@@ -84,6 +87,9 @@ export default class Comment extends React.Component {
           this.props.user_data.uid
         )
       });
+    db.collection("Users")
+      .doc(this.props.comment.creator_id)
+      .update("acquired", firebase.firestore.FieldValue.increment(-1));
     this.setState({ isLiked: false });
     this.setState({ like_count: this.state.like_count - 1 });
   }
@@ -99,14 +105,13 @@ export default class Comment extends React.Component {
   }
 
   render() {
-
     const { comment, user_data } = this.props;
 
     return (
       <React.Fragment>
         <Row className="mx-0 py-2 px-2 border-top">
           <Col xs="1" className="px-0">
-            <Link to={"/user/" + comment.creator_id}>
+            <Link to={"/user/" + comment.creator_id + "/timestamp"}>
               <img
                 className="rounded-pill border"
                 src={comment.creator_img}
@@ -118,7 +123,7 @@ export default class Comment extends React.Component {
           </Col>
           <Col xs="11" className="px-0">
             <h5 className="mb-0">
-              <Link to={"/user/" + comment.creator_id}>
+              <Link to={"/user/" + comment.creator_id + "/timestamp"}>
                 <strong className="text-body">{comment.creator}</strong>
               </Link>
               <small className="text-muted ml-1">{comment.create_at}</small>

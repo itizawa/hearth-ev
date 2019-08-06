@@ -31,7 +31,6 @@ export default class MainContainer extends React.Component {
                 render={(props) => <MainApp {...this.props} />}
               />
               <Route
-                exact
                 path="/user/:user_id"
                 render={(props) => (
                   <UserApp {...this.props} match={props.match} />
