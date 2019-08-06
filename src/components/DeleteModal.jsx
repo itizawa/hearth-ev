@@ -68,6 +68,7 @@ export default class DeleteModal extends React.Component {
     } else {
       this.props.modal_toggle();
     }
+    this.props.fetchComment();
   }
 
   render() {
@@ -120,5 +121,5 @@ export default class DeleteModal extends React.Component {
 DeleteModal.propTypes = {
   comment: PropTypes.object,
   user_data: PropTypes.object,
-  fetchComment: PropTypes.func
+  fetchComment: PropTypes.func.isRequired
 };

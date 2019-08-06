@@ -83,7 +83,7 @@ export default class CenterContainer extends React.Component {
           </Row>
           {this.state.comments.map((comment, index) => {
             return (
-              <Comment key={index} comment={comment} user_data={user_data} />
+              <Comment key={index} comment={comment} user_data={user_data} fetchComment={this.fetchCardComment}/>
             );
           })}
         </div>
