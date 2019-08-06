@@ -50,7 +50,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {this.props.focus_user.name}
+            User Page
           </h3>
           {this.state.comments.map((comment, index) => {
             return (
