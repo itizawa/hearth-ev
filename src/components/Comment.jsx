@@ -26,7 +26,16 @@ export default class Comment extends React.Component {
   }
 
   /**
-   * モーダル開閉のためのイベントハンドラ
+   * 再編集モーダル開閉のためのイベントハンドラ
+   */
+
+  reEdit_modal_toggle() {
+    console.log("hello")
+    // TODO Modal開閉
+  }
+
+  /**
+   * 削除モーダル開閉のためのイベントハンドラ
    */
 
   delete_modal_toggle() {
@@ -137,6 +146,7 @@ export default class Comment extends React.Component {
               <span
                 hidden={comment.creator_id !== user_data.uid}
                 className="text-muted float-right"
+                onClick={this.reEdit_modal_toggle}
               >
                 <i className="material-icons btn p-0 mr-2">edit</i>
               </span>
