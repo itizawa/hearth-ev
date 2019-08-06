@@ -81,7 +81,7 @@ export default class CenterContainer extends React.Component {
           {this.state.comments.map((comment, index) => {
             return (
               <Comment
-                fetchHomeComment={this.fetchHomeComment}
+                fetchComment={this.fetchHomeComment}
                 key={index}
                 comment={comment}
                 user_data={this.props.user_data}
