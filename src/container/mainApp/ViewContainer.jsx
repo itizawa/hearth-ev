@@ -45,12 +45,10 @@ export default class ViewContainer extends React.Component {
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             TopUser
           </h3>
-        </div>
-        {this.state.users.map((user, index) => {
-            return (
-              <UserListItem key={index} user_data={user}/>
-            );
+          {this.state.users.map((user, index) => {
+            return <UserListItem key={index} user_data={user} />;
           })}
+        </div>
       </React.Fragment>
     );
   }
