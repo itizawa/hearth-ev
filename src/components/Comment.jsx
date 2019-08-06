@@ -4,6 +4,7 @@ import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal";
+import ReEditModal from "./ReEditModal";
 
 import firebase from "firebase/app";
 
@@ -19,6 +20,7 @@ export default class Comment extends React.Component {
     };
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
+    this.reEdit_modal_toggle = this.reEdit_modal_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
     this.fetchIsLiked = this.fetchIsLiked.bind(this);
     this.pushFavorite = this.pushFavorite.bind(this);
@@ -30,8 +32,9 @@ export default class Comment extends React.Component {
    */
 
   reEdit_modal_toggle() {
-    console.log("hello")
-    // TODO Modal開閉
+    this.setState((prevState) => ({
+      reEdit_delete_modal: !prevState.reEdit_delete_modal
+    }));
   }
 
   /**
@@ -188,6 +191,12 @@ export default class Comment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={comment}
           user_data={user_data}
+          fetchComment={this.props.fetchComment}
+        />
+        <ReEditModal
+          modal={this.state.reEdit_delete_modal}
+          modal_toggle={this.reEdit_modal_toggle}
+          comment={comment}
           fetchComment={this.props.fetchComment}
         />
       </React.Fragment>
