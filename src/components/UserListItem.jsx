@@ -1,8 +1,25 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default class UserListItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      tooltipOpen: false
+    };
+  }
+  /**
+   * ツールチップのイベントハンドラ
+   */
+  toggle() {
+    this.setState({
+      tooltipOpen: !this.state.tooltipOpen
+    });
+  }
+
   render() {
     const { user_data } = this.props;
     return (
@@ -23,12 +40,20 @@ export default class UserListItem extends React.Component {
             <Link to={"/user/" + user_data.uid + "/timestamp"}>
               <strong className="text-body">{user_data.name}</strong>
             </Link>
-            <p className="mb-0">
-              獲得いいね
-              <strong className="text-primary">
+            <p className="my-1">
+              <span className="text-primary" href="#" id={user_data.uid}>
                 <i className="material-icons">grade</i>
                 {user_data.acquired}
-              </strong>
+              </span>
+              <Tooltip
+                placement="right"
+                isOpen={this.state.tooltipOpen}
+                autohide={false}
+                target={user_data.uid}
+                toggle={this.toggle}
+              >
+                いいね獲得数
+              </Tooltip>
             </p>
           </h5>
         </Col>
