@@ -168,6 +168,7 @@ export default class CommentModal extends React.Component {
 CommentModal.propTypes = {
   modal: PropTypes.bool.isRequired,
   modal_toggle: PropTypes.func.isRequired,
+  fetchComment: PropTypes.func.isRequired,
   user_data: PropTypes.object.isRequired,
   card_id: PropTypes.string,
   card_name: PropTypes.string
