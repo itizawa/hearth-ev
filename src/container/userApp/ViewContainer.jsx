@@ -36,7 +36,7 @@ export default class ViewContainer extends React.Component {
               </Col>
             </Row>
             <Row>
-              <Col xs="6" className="btn text-center">
+              <Col xs="6" className="text-center">
                 <Card className="p-1">
                     <p className="mb-0">獲得いいね</p>
                     <strong className="text-primary">
@@ -45,7 +45,7 @@ export default class ViewContainer extends React.Component {
                     </strong>
                 </Card>
               </Col>
-              <Col xs="6" className="btn text-center">
+              <Col xs="6" className="text-center">
                 <Card className="p-1">
                     <p className="mb-0">コメント</p>
                     <strong className="text-primary">
