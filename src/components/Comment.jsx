@@ -134,6 +134,12 @@ export default class Comment extends React.Component {
               >
                 <i className="material-icons btn p-0">clear</i>
               </span>
+              <span
+                hidden={comment.creator_id !== user_data.uid}
+                className="text-muted float-right"
+              >
+                <i className="material-icons btn p-0 mr-2">edit</i>
+              </span>
             </h5>
             {comment.card_id && (
               <Link to={"/card/" + comment.card_id}>
