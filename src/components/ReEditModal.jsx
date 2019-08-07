@@ -17,7 +17,6 @@ export default class ReEditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweet_permission: true,
       comment_text: this.props.comment.text
     };
     this.reEditComment = this.reEditComment.bind(this);
@@ -32,16 +31,6 @@ export default class ReEditModal extends React.Component {
     this.setState({
       comment_text: e.target.value
     });
-  }
-
-  /**
-   * Toggle Switch のためのイベントハンドラ
-   */
-
-  switch_toggle() {
-    this.setState((prevState) => ({
-      tweet_permission: !prevState.tweet_permission
-    }));
   }
 
   /**
