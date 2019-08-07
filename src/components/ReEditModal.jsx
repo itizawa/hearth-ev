@@ -37,8 +37,8 @@ export default class ReEditModal extends React.Component {
    * コメント再編集のイベントハンドラ
    */
 
-  reEditComment() {
-    firebase
+  async reEditComment() {
+    await firebase
       .firestore()
       .collection("Comments")
       .doc(this.props.comment.comment_id)
