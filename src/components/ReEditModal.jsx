@@ -46,6 +46,7 @@ export default class ReEditModal extends React.Component {
         text: this.state.comment_text
       });
     this.props.modal_toggle();
+    this.props.fetchComment();
   }
 
   render() {
