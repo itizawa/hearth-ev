@@ -38,7 +38,13 @@ export default class ReEditModal extends React.Component {
    */
 
   reEditComment() {
-    // TODO 再編集のイベントの作成
+    firebase
+      .firestore()
+      .collection("Comments")
+      .doc(this.props.comment.comment_id)
+      .update({
+        text: this.state.comment_text
+      });
     this.props.modal_toggle();
   }
 
@@ -81,7 +87,7 @@ export default class ReEditModal extends React.Component {
         </ModalBody>
         <ModalFooter className="p-2">
           <Button
-            color="info"
+            color="primary"
             onClick={this.reEditComment}
             disabled={
               this.state.comment_text.length < 1 ||
