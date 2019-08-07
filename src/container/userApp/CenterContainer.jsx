@@ -44,10 +44,10 @@ export default class CenterContainer extends React.Component {
       backgroundColor: "#00075d"
     };
 
-    const comment = this.state.comments.map((comment, index) => {
+    const comment = this.state.comments.map((comment) => {
       return (
         <Comment
-          key={index}
+          key={comment.comment_id}
           comment={comment}
           user_data={this.props.user_data}
           fetchComment={this.fetchUserComment}
