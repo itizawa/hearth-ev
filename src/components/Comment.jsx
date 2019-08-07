@@ -4,6 +4,7 @@ import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal";
+import ReEditModal from "./ReEditModal";
 
 import firebase from "firebase/app";
 
@@ -19,6 +20,7 @@ export default class Comment extends React.Component {
     };
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
+    this.reEdit_modal_toggle = this.reEdit_modal_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
     this.fetchIsLiked = this.fetchIsLiked.bind(this);
     this.pushFavorite = this.pushFavorite.bind(this);
@@ -26,7 +28,17 @@ export default class Comment extends React.Component {
   }
 
   /**
-   * モーダル開閉のためのイベントハンドラ
+   * 再編集モーダル開閉のためのイベントハンドラ
+   */
+
+  reEdit_modal_toggle() {
+    this.setState((prevState) => ({
+      reEdit_delete_modal: !prevState.reEdit_delete_modal
+    }));
+  }
+
+  /**
+   * 削除モーダル開閉のためのイベントハンドラ
    */
 
   delete_modal_toggle() {
@@ -134,6 +146,13 @@ export default class Comment extends React.Component {
               >
                 <i className="material-icons btn p-0">clear</i>
               </span>
+              <span
+                hidden={comment.creator_id !== user_data.uid}
+                className="text-muted float-right"
+                onClick={this.reEdit_modal_toggle}
+              >
+                <i className="material-icons btn p-0 mr-2">edit</i>
+              </span>
             </h5>
             {comment.card_id && (
               <Link to={"/card/" + comment.card_id}>
@@ -172,6 +191,12 @@ export default class Comment extends React.Component {
           modal_toggle={this.delete_modal_toggle}
           comment={comment}
           user_data={user_data}
+          fetchComment={this.props.fetchComment}
+        />
+        <ReEditModal
+          modal={this.state.reEdit_delete_modal}
+          modal_toggle={this.reEdit_modal_toggle}
+          comment={comment}
           fetchComment={this.props.fetchComment}
         />
       </React.Fragment>
