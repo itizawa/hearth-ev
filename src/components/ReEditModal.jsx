@@ -109,7 +109,7 @@ export default class ReEditModal extends React.Component {
 }
 
 ReEditModal.propTypes = {
-  comment: PropTypes.object,
-  user_data: PropTypes.object,
+  comment: PropTypes.object.isRequired,
+  user_data: PropTypes.object.isRequired,
   fetchComment: PropTypes.func.isRequired
 };
