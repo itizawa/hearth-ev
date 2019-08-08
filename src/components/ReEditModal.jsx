@@ -38,15 +38,17 @@ export default class ReEditModal extends React.Component {
    */
 
   async reEditComment() {
-    await firebase
-      .firestore()
-      .collection("Comments")
-      .doc(this.props.comment.comment_id)
-      .update({
-        text: this.state.comment_text
-      });
-    this.props.modal_toggle();
-    this.props.fetchComment();
+    if (this.props.comment.creator_id === this.props.user_data.uid) {
+      await firebase
+        .firestore()
+        .collection("Comments")
+        .doc(this.props.comment.comment_id)
+        .update({
+          text: this.state.comment_text
+        });
+      this.props.modal_toggle();
+      this.props.fetchComment();
+    }
   }
 
   render() {

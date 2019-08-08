@@ -197,6 +197,7 @@ export default class Comment extends React.Component {
           modal={this.state.reEdit_delete_modal}
           modal_toggle={this.reEdit_modal_toggle}
           comment={comment}
+          user_data={user_data}
           fetchComment={this.props.fetchComment}
         />
       </React.Fragment>
