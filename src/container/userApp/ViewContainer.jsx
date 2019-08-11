@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
+import firebase from "firebase/app";
+
 import { Button, CardImg, CardBody, Row, Col, Card, Input } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
@@ -41,7 +43,13 @@ export default class ViewContainer extends React.Component {
    */
   async postNewBio() {
     if (this.props.focus_user.uid === this.props.user_data.uid) {
-      await console.log(this.state.bio_text);
+      await firebase
+        .firestore()
+        .collection("Users")
+        .doc(this.props.user_data.uid)
+        .update({
+          bio: this.state.bio_text
+        });
       this.showEditer();
     }
   }
