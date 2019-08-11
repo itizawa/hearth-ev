@@ -19,6 +19,15 @@ export default class ViewContainer extends React.Component {
   }
 
   /**
+   * 取得したユーザーbioをセットする
+   */
+  componentDidUpdate(prevProps) {
+    if (this.props.focus_user.bio !== prevProps.focus_user.bio) {
+      this.setState({ bio_text: this.props.focus_user.bio });
+    }
+  }
+
+  /**
    * プロフィール取得ためのイベントハンドラ
    */
   onTextChange(e) {
