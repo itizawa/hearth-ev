@@ -58,11 +58,22 @@ export default class CenterContainer extends React.Component {
       backgroundColor: "#00075d"
     };
 
+    const comment = this.state.comments.map((comment) => {
+      return (
+        <Comment
+          key={comment.comment_id}
+          comment={comment}
+          user_data={this.props.user_data}
+          fetchComment={this.fetchHomeComment}
+        />
+      );
+    });
+
     return (
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            ホーム
+            Home
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
@@ -78,16 +89,7 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.state.comments.map((comment, index) => {
-            return (
-              <Comment
-                fetchComment={this.fetchHomeComment}
-                key={index}
-                comment={comment}
-                user_data={this.props.user_data}
-              />
-            );
-          })}
+          {comment}
         </div>
 
         <CommentModal

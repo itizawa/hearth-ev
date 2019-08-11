@@ -34,7 +34,7 @@ export default class CenterContainer extends React.Component {
    * コメントデータを取得する
    */
 
-  fetchCardComment = (target=this.props.focus_card.card_id) => {
+  fetchCardComment = (target = this.props.focus_card.card_id) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
@@ -60,11 +60,22 @@ export default class CenterContainer extends React.Component {
 
     const { focus_card, user_data } = this.props;
 
+    const comment = this.state.comments.map((comment) => {
+      return (
+        <Comment
+          key={comment.comment_id}
+          comment={comment}
+          user_data={user_data}
+          fetchComment={this.fetchCardComment}
+        />
+      );
+    });
+
     return (
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            {focus_card.card_name}
+            Card Page
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
@@ -80,11 +91,7 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
-          {this.state.comments.map((comment, index) => {
-            return (
-              <Comment key={index} comment={comment} user_data={user_data} fetchComment={this.fetchCardComment}/>
-            );
-          })}
+          {comment}
         </div>
 
         <CommentModal
