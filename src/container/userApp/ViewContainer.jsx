@@ -48,6 +48,18 @@ export default class ViewContainer extends React.Component {
   };
 
   /**
+   * エディターを消すためのイベントハンドラー
+   */
+  hideEditor = () => {
+    if (this.props.focus_user.uid === this.props.user_data.uid) {
+      this.setState((prevState) => ({
+        show_profile_editer: !prevState.show_profile_editer
+      }));
+    }
+    this.setState({ bio_text: this.props.focus_user.bio });
+  };
+
+  /**
    * ユーザーbioの更新
    */
   async postNewBio() {
@@ -59,7 +71,9 @@ export default class ViewContainer extends React.Component {
         .update({
           bio: this.state.bio_text
         });
-      this.showEditer();
+      this.setState((prevState) => ({
+        show_profile_editer: !prevState.show_profile_editer
+      }));
     }
   }
 
@@ -114,7 +128,10 @@ export default class ViewContainer extends React.Component {
               </Col>
             </Row>
             <Row className="pt-4 mx-0">
-              <Col xs="11" className="p-0">
+              <Col
+                xs={!this.state.show_profile_editer ? "11" : "12"}
+                className="p-0"
+              >
                 {!this.state.show_profile_editer ? (
                   <p className="m-0">{this.state.bio_text}</p>
                 ) : (
@@ -127,17 +144,30 @@ export default class ViewContainer extends React.Component {
                     />
                     <Button
                       className="mt-2 float-right"
+                      color="secondary"
+                      onClick={() => {
+                        this.hideEditor();
+                      }}
+                    >
+                      キャンセル
+                    </Button>
+                    <Button
+                      className="mr-1 mt-2 float-right"
                       color="primary"
                       onClick={() => {
                         this.postNewBio();
                       }}
                     >
-                      更新する
+                      更新
                     </Button>
                   </>
                 )}
               </Col>
-              <Col xs="1" className="p-0">
+              <Col
+                hidden={this.state.show_profile_editer}
+                xs="1"
+                className="p-0"
+              >
                 <span
                   hidden={focus_user.uid !== user_data.uid}
                   className="text-muted float-right"
