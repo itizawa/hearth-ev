@@ -29,9 +29,11 @@ export default class ViewContainer extends React.Component {
    * エディターを表示するためのイベントハンドラー
    */
   showEditer = () => {
-    this.setState((prevState) => ({
-      show_profile_editer: !prevState.show_profile_editer
-    }));
+    if (this.props.focus_user.uid === this.props.user_data.uid) {
+      this.setState((prevState) => ({
+        show_profile_editer: !prevState.show_profile_editer
+      }));
+    }
   };
 
   render() {
