@@ -39,7 +39,7 @@ export default class ViewContainer extends React.Component {
   /**
    * エディターを表示するためのイベントハンドラー
    */
-  showEditer = () => {
+  showEditor = () => {
     if (this.props.focus_user.uid === this.props.user_data.uid) {
       this.setState((prevState) => ({
         show_profile_editer: !prevState.show_profile_editer
@@ -172,7 +172,7 @@ export default class ViewContainer extends React.Component {
                   hidden={focus_user.uid !== user_data.uid}
                   className="text-muted float-right"
                   onClick={() => {
-                    this.showEditer();
+                    this.showEditor();
                   }}
                 >
                   <i className="material-icons btn p-0 mr-2">edit</i>
