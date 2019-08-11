@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Navbar,
   NavbarToggler,
@@ -136,3 +137,7 @@ export default class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  user_data: PropTypes.object,
+};
