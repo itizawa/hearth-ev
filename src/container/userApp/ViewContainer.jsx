@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
-import { CardImg, CardBody, Row, Col, Card, Input } from "reactstrap";
+import { Button, CardImg, CardBody, Row, Col, Card, Input } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
   constructor(props) {
@@ -35,6 +35,16 @@ export default class ViewContainer extends React.Component {
       }));
     }
   };
+
+  /**
+   * ユーザーbioの更新
+   */
+  async postNewBio() {
+    if (this.props.focus_user.uid === this.props.user_data.uid) {
+      await console.log(this.state.bio_text);
+      this.showEditer();
+    }
+  }
 
   render() {
     const row_style = {
@@ -86,17 +96,28 @@ export default class ViewContainer extends React.Component {
                 </Card>
               </Col>
             </Row>
-            <Row className="py-4 mx-0">
+            <Row className="pt-4 mx-0">
               <Col xs="11" className="p-0">
                 {!this.state.show_profile_editer ? (
                   <p className="m-0">{this.state.bio_text}</p>
                 ) : (
-                  <Input
-                    className="m-0"
-                    value={this.state.bio_text}
-                    type="textarea"
-                    onChange={this.onTextChange}
-                  />
+                  <>
+                    <Input
+                      className="m-0"
+                      value={this.state.bio_text}
+                      type="textarea"
+                      onChange={this.onTextChange}
+                    />
+                    <Button
+                      className="mt-2 float-right"
+                      color="primary"
+                      onClick={() => {
+                        this.postNewBio();
+                      }}
+                    >
+                      更新する
+                    </Button>
+                  </>
                 )}
               </Col>
               <Col xs="1" className="p-0">
