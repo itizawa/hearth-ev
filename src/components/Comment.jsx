@@ -4,6 +4,7 @@ import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal";
+import ReEditModal from "./ReEditModal";
 
 import firebase from "firebase/app";
 
@@ -15,10 +16,12 @@ export default class Comment extends React.Component {
       comments: this.props.comments,
       tooltipOpen: false,
       isLiked: this.fetchIsLiked(),
-      like_count: this.props.comment.like.length
+      like_count: this.props.comment.like.length,
+      show_operation_button: false
     };
 
     this.tooltip_toggle = this.tooltip_toggle.bind(this);
+    this.reEdit_modal_toggle = this.reEdit_modal_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
     this.fetchIsLiked = this.fetchIsLiked.bind(this);
     this.pushFavorite = this.pushFavorite.bind(this);
@@ -26,7 +29,17 @@ export default class Comment extends React.Component {
   }
 
   /**
-   * モーダル開閉のためのイベントハンドラ
+   * 再編集モーダル開閉のためのイベントハンドラ
+   */
+
+  reEdit_modal_toggle() {
+    this.setState((prevState) => ({
+      reEdit_delete_modal: !prevState.reEdit_delete_modal
+    }));
+  }
+
+  /**
+   * 削除モーダル開閉のためのイベントハンドラ
    */
 
   delete_modal_toggle() {
@@ -75,6 +88,17 @@ export default class Comment extends React.Component {
   }
 
   /**
+   * マウスオーバーした時のイベントハンドラ
+   */
+  onMouseOver() {
+    this.setState({ show_operation_button: true });
+  }
+
+  onMouseLeave() {
+    this.setState({ show_operation_button: false });
+  }
+
+  /**
    * いいねボタンを取り消したときのイベントハンドラ
    */
 
@@ -109,7 +133,15 @@ export default class Comment extends React.Component {
 
     return (
       <React.Fragment>
-        <Row className="mx-0 py-2 px-2 border-top">
+        <Row
+          className="mx-0 py-2 px-2 border-top"
+          onMouseOver={() => {
+            this.onMouseOver();
+          }}
+          onMouseLeave={() => {
+            this.onMouseLeave();
+          }}
+        >
           <Col xs="1" className="px-0">
             <Link to={"/user/" + comment.creator_id + "/timestamp"}>
               <img
@@ -132,7 +164,24 @@ export default class Comment extends React.Component {
                 className="text-muted float-right"
                 onClick={this.delete_modal_toggle}
               >
-                <i className="material-icons btn p-0">clear</i>
+                <i
+                  hidden={!this.state.show_operation_button}
+                  className="material-icons btn p-0"
+                >
+                  clear
+                </i>
+              </span>
+              <span
+                hidden={comment.creator_id !== user_data.uid}
+                className="text-muted float-right"
+                onClick={this.reEdit_modal_toggle}
+              >
+                <i
+                  hidden={!this.state.show_operation_button}
+                  className="material-icons btn p-0 mr-2"
+                >
+                  edit
+                </i>
               </span>
             </h5>
             {comment.card_id && (
@@ -170,6 +219,13 @@ export default class Comment extends React.Component {
         <DeleteModal
           modal={this.state.show_delete_modal}
           modal_toggle={this.delete_modal_toggle}
+          comment={comment}
+          user_data={user_data}
+          fetchComment={this.props.fetchComment}
+        />
+        <ReEditModal
+          modal={this.state.reEdit_delete_modal}
+          modal_toggle={this.reEdit_modal_toggle}
           comment={comment}
           user_data={user_data}
           fetchComment={this.props.fetchComment}

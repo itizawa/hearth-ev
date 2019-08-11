@@ -23,9 +23,10 @@ export default class UserApp extends React.Component {
    * ユーザーデータを取得する
    */
 
-  fetchUserData = () => {
-    const db = firebase.firestore();
-    db.collection("Users")
+  fetchUserData = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
       .doc(this.state.focus_user.id)
       .get()
       .then((doc) => {

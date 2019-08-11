@@ -36,10 +36,11 @@ export default class DeleteModal extends React.Component {
    * コメント削除のイベントハンドラ
    */
 
-  onPostComment() {
+  async onPostComment() {
     if (this.props.comment.creator_id === this.props.user_data.uid) {
-      const db = firebase.firestore();
-      db.collection("Comments")
+      await firebase
+        .firestore()
+        .collection("Comments")
         .doc(this.props.comment.comment_id)
         .delete()
         .then(() => {
@@ -49,7 +50,9 @@ export default class DeleteModal extends React.Component {
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
-      db.collection("Users")
+      await firebase
+        .firestore()
+        .collection("Users")
         .doc(this.props.user_data.uid)
         .update({
           comments: firebase.firestore.FieldValue.arrayRemove(
@@ -57,7 +60,9 @@ export default class DeleteModal extends React.Component {
           )
         });
       if (this.props.comment.card_id) {
-        db.collection("Cards")
+        await firebase
+          .firestore()
+          .collection("Cards")
           .doc(this.props.comment.card_id)
           .update({
             comments: firebase.firestore.FieldValue.arrayRemove(

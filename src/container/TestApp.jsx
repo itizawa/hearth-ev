@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { Button, Input } from "reactstrap";
 
 // eslint-disable-next-line no-unused-vars
@@ -52,25 +53,24 @@ export default class TestApp extends React.Component {
    */
 
   onPostComment() {
-    // 使用するときはローカル環境でコメントアウトを外して使用
-    // const db = firebase.firestore();
-    // var addComment = db
-    //   .collection("Cards")
-    //   .add({
-    //     card_img: this.state.image,
-    //     card_name: this.state.name,
-    //     hero: this.state.hero,
-    //     expansion: "探検同盟"
-    //   })
-    //   .then((ref) => {
-    //     console.log("Added document with ID: ", ref.id);
-    //     // IDを保存する
-    //     db.collection("Cards")
-    //       .doc(ref.id)
-    //       .set({ card_id: ref.id }, { merge: true });
-    //   });
+    const db = firebase.firestore();
+    var addComment = db
+      .collection("Cards")
+      .add({
+        card_img: this.state.image,
+        card_name: this.state.name,
+        hero: this.state.hero,
+        expansion: "探検同盟"
+      })
+      .then((ref) => {
+        console.log("Added document with ID: ", ref.id);
+        // IDを保存する
+        db.collection("Cards")
+          .doc(ref.id)
+          .set({ card_id: ref.id }, { merge: true });
+      });
 
-    // return Promise.all([addComment]);
+    return Promise.all([addComment]);
   }
 
   render() {
@@ -97,9 +97,10 @@ export default class TestApp extends React.Component {
           id="exampleText"
           placeholder="ヒーロー"
         />
-        <Button color="primary" onClick={this.onPostComment}>
+        {/* 使用するときはローカル環境でコメントアウトを外して使用 */}
+        {/* <Button color="primary" onClick={this.onPostComment}>
           AddCard
-        </Button>
+        </Button> */}
       </React.Fragment>
     );
   }
