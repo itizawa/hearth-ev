@@ -5,6 +5,11 @@ import logo from "../../asset/img/logo.png";
 import { CardImg, CardBody, Row, Col, Card } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
+
+  showEditer = () => {
+    console.log("push!");
+  };
+  
   render() {
     const row_style = {
       height: "50px"
@@ -63,6 +68,9 @@ export default class ViewContainer extends React.Component {
                 <span
                   hidden={focus_user.uid !== user_data.uid}
                   className="text-muted float-right"
+                  onClick={() => {
+                    this.showEditer();
+                  }}
                 >
                   <i className="material-icons btn p-0 mr-2">edit</i>
                 </span>
