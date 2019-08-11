@@ -5,11 +5,22 @@ import logo from "../../asset/img/logo.png";
 import { CardImg, CardBody, Row, Col, Card } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      show_profile_editer: false
+    };
+  }
 
+  /**
+   * エディターを表示するためのイベントハンドラー
+   */
   showEditer = () => {
-    console.log("push!");
+    this.setState((prevState) => ({
+      show_profile_editer: !prevState.show_profile_editer
+    }));
   };
-  
+
   render() {
     const row_style = {
       height: "50px"
