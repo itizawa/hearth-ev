@@ -2,14 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
-import { CardImg, CardBody, Row, Col, Card,Input } from "reactstrap";
+import { CardImg, CardBody, Row, Col, Card, Input } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      // bioを登録していない場合初期プロフィールを表示する
+      bio_text: this.props.focus_user.bio || "これはテストコメントです",
       show_profile_editer: false
     };
+
+    this.onTextChange = this.onTextChange.bind(this);
+  }
+
+  /**
+   * プロフィール取得ためのイベントハンドラ
+   */
+  onTextChange(e) {
+    this.setState({
+      bio_text: e.target.value
+    });
   }
 
   /**
@@ -74,14 +87,14 @@ export default class ViewContainer extends React.Component {
             <Row className="py-4 mx-0">
               <Col xs="11" className="p-0">
                 {!this.state.show_profile_editer ? (
-                  <p className="m-0">これはテストプロフィールです</p>
+                  <p className="m-0">{this.state.bio_text}</p>
                 ) : (
                   <Input
-                  className="m-0"
-                  // value={this.state.comment_text}
-                  type="textarea"
-                  // TODO onChange={this.onTextChange}
-                />
+                    className="m-0"
+                    value={this.state.bio_text}
+                    type="textarea"
+                    onChange={this.onTextChange}
+                  />
                 )}
               </Col>
               <Col xs="1" className="p-0">
