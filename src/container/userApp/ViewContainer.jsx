@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "../../asset/img/logo.png";
 
-import { CardImg, CardBody, Row, Col, Card } from "reactstrap";
+import { CardImg, CardBody, Row, Col, Card,Input } from "reactstrap";
 
 export default class ViewContainer extends React.Component {
   constructor() {
@@ -73,7 +73,16 @@ export default class ViewContainer extends React.Component {
             </Row>
             <Row className="py-4 mx-0">
               <Col xs="11" className="p-0">
-                <p className="m-0">これはテストプロフィールです</p>
+                {!this.state.show_profile_editer ? (
+                  <p className="m-0">これはテストプロフィールです</p>
+                ) : (
+                  <Input
+                  className="m-0"
+                  // value={this.state.comment_text}
+                  type="textarea"
+                  // TODO onChange={this.onTextChange}
+                />
+                )}
               </Col>
               <Col xs="1" className="p-0">
                 <span
