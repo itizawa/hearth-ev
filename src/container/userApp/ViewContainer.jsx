@@ -13,7 +13,7 @@ export default class ViewContainer extends React.Component {
       transform: "translate(0px, -80%)"
     };
 
-    const { focus_user } = this.props;
+    const { focus_user, user_data } = this.props;
 
     return (
       <React.Fragment>
@@ -56,7 +56,17 @@ export default class ViewContainer extends React.Component {
               </Col>
             </Row>
             <Row className="py-4 mx-0">
-              <p>これはテストプロフィールです</p>
+              <Col xs="11" className="p-0">
+                <p className="m-0">これはテストプロフィールです</p>
+              </Col>
+              <Col xs="1" className="p-0">
+                <span
+                  hidden={focus_user.uid !== user_data.uid}
+                  className="text-muted float-right"
+                >
+                  <i className="material-icons btn p-0 mr-2">edit</i>
+                </span>
+              </Col>
             </Row>
           </CardBody>
         </div>
