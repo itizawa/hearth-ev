@@ -59,7 +59,13 @@ export default class Header extends React.Component {
    * ログアウトイベントハンドラ
    */
   onLogoutHandler() {
-    console.log("logout");
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        window.location.reload();
+      })
+      .catch(function(error) {});
   }
 
   /**
@@ -109,7 +115,7 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Nav className="ml-auto" navbar>
             <NavItem>
-              {!this.props.user_data ? (
+              {!this.props.user_data.uid ? (
                 <Button
                   onClick={this.toggle}
                   className="bg-primary border border-white rounded-pill py-1 px-5"
@@ -133,7 +139,11 @@ export default class Header extends React.Component {
                       {this.props.user_data.displayName}
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem onClick={()=>{this.onLogoutHandler()}}>
+                    <DropdownItem
+                      onClick={() => {
+                        this.onLogoutHandler();
+                      }}
+                    >
                       <i className="material-icons">exit_to_app</i> Logiout
                     </DropdownItem>
                   </DropdownMenu>
