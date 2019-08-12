@@ -147,7 +147,7 @@ export default class Comment extends React.Component {
               <img
                 className="rounded-pill border"
                 src={comment.creator_img}
-                alt={comment.creator_img}
+                alt={"data"}
                 width="80%"
                 height="auto"
               />

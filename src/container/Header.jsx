@@ -1,5 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -9,7 +13,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  UncontrolledDropdown
 } from "reactstrap";
 
 import Term from "../components/article/Term";
@@ -33,7 +38,6 @@ export default class Header extends React.Component {
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   toggle() {
     this.setState((prevState) => ({
       modal: !prevState.modal
@@ -43,7 +47,6 @@ export default class Header extends React.Component {
   /**
    * ログインイベントハンドラ
    */
-
   onLoginHandler() {
     console.log("login");
     firebase
@@ -53,24 +56,39 @@ export default class Header extends React.Component {
   }
 
   /**
+   * ログアウトイベントハンドラ
+   */
+  onLogoutHandler() {
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        window.location.reload();
+      })
+      .catch(function(error) {});
+  }
+
+  /**
    * 初ログイン時のアカウント作成
    */
-
   CreateUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const name = user.displayName;
-        const photoURL = user.photoURL;
+        const photoURL = user.providerData[0].photoURL;
         const uid = user.uid;
         const db = firebase.firestore();
         var addComment = db
           .collection("Users")
           .doc(uid)
-          .set({
-            name: name,
-            photoURL: photoURL,
-            uid: uid
-          },{merge: true})
+          .set(
+            {
+              name: name,
+              photoURL: photoURL,
+              uid: uid
+            },
+            { merge: true }
+          )
           .then((ref) => {
             this.setState({ comment_text: "" });
           });
@@ -97,20 +115,40 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <img
-                className="mr-2 rounded-pill border border-secondary"
-                src={this.props.user_data.photoURL}
-                alt=""
-                width="38px"
-                height="38px"
-              />
-              <Button
-                onClick={this.toggle}
-                className="bg-primary border border-white rounded-pill py-1 px-5"
-                style={text_style}
-              >
-                Login
-              </Button>
+              {!this.props.user_data.uid ? (
+                <Button
+                  onClick={this.toggle}
+                  className="bg-primary border border-white rounded-pill py-1 px-5"
+                  style={text_style}
+                >
+                  Login
+                </Button>
+              ) : (
+                <UncontrolledDropdown direction="left">
+                  <DropdownToggle>
+                    <img
+                      className="mr-2 rounded-pill border border-secondary"
+                      src={this.props.user_data.photoURL}
+                      alt=""
+                      width="38px"
+                      height="38px"
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem disabled>
+                      {this.props.user_data.displayName}
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem
+                      onClick={() => {
+                        this.onLogoutHandler();
+                      }}
+                    >
+                      <i className="material-icons">exit_to_app</i> Logiout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              )}
             </NavItem>
           </Nav>
           <Modal
@@ -136,3 +174,7 @@ export default class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  user_data: PropTypes.object
+};
