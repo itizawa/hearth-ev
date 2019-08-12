@@ -105,14 +105,15 @@ export default class Header extends React.Component {
                 width="38px"
                 height="38px"
               />
-              <Button
-                onClick={this.toggle}
-                className="bg-primary border border-white rounded-pill py-1 px-5"
-                style={text_style}
-              >
-                
-                Login
-              </Button>
+              {!this.props.user_data && (
+                <Button
+                  onClick={this.toggle}
+                  className="bg-primary border border-white rounded-pill py-1 px-5"
+                  style={text_style}
+                >
+                  Login
+                </Button>
+              )}
             </NavItem>
           </Nav>
           <Modal
