@@ -61,17 +61,20 @@ export default class Header extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const name = user.displayName;
-        const photoURL = user.photoURL;
+        const photoURL = user.providerData[0].photoURL;
         const uid = user.uid;
         const db = firebase.firestore();
         var addComment = db
           .collection("Users")
           .doc(uid)
-          .set({
-            name: name,
-            photoURL: photoURL,
-            uid: uid
-          },{merge: true})
+          .set(
+            {
+              name: name,
+              photoURL: photoURL,
+              uid: uid
+            },
+            { merge: true }
+          )
           .then((ref) => {
             this.setState({ comment_text: "" });
           });
@@ -139,5 +142,5 @@ export default class Header extends React.Component {
 }
 
 Header.propTypes = {
-  user_data: PropTypes.object,
+  user_data: PropTypes.object
 };
