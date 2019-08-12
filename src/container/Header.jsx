@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -10,7 +13,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  UncontrolledDropdown
 } from "reactstrap";
 
 import Term from "../components/article/Term";
@@ -39,16 +43,23 @@ export default class Header extends React.Component {
       modal: !prevState.modal
     }));
   }
+
   /**
    * ログインイベントハンドラ
    */
-
   onLoginHandler() {
     console.log("login");
     firebase
       .auth()
       .signInWithRedirect(firestore.providerTwitter)
       .then(this.CreateUser());
+  }
+
+  /**
+   * ログアウトイベントハンドラ
+   */
+  onLogoutHandler() {
+    console.log("logout");
   }
 
   /**
@@ -98,14 +109,7 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <img
-                className="mr-2 rounded-pill border border-secondary"
-                src={this.props.user_data.photoURL}
-                alt=""
-                width="38px"
-                height="38px"
-              />
-              {!this.props.user_data && (
+              {!this.props.user_data ? (
                 <Button
                   onClick={this.toggle}
                   className="bg-primary border border-white rounded-pill py-1 px-5"
@@ -113,6 +117,27 @@ export default class Header extends React.Component {
                 >
                   Login
                 </Button>
+              ) : (
+                <UncontrolledDropdown direction="left">
+                  <DropdownToggle>
+                    <img
+                      className="mr-2 rounded-pill border border-secondary"
+                      src={this.props.user_data.photoURL}
+                      alt=""
+                      width="38px"
+                      height="38px"
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem disabled>
+                      {this.props.user_data.displayName}
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem onClick={()=>{this.onLogoutHandler()}}>
+                      <i className="material-icons">exit_to_app</i> Logiout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               )}
             </NavItem>
           </Nav>
