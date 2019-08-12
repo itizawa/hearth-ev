@@ -34,13 +34,11 @@ export default class Header extends React.Component {
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   toggle() {
     this.setState((prevState) => ({
       modal: !prevState.modal
     }));
   }
-
   /**
    * ログインイベントハンドラ
    */
@@ -56,7 +54,6 @@ export default class Header extends React.Component {
   /**
    * 初ログイン時のアカウント作成
    */
-
   CreateUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -113,6 +110,7 @@ export default class Header extends React.Component {
                 className="bg-primary border border-white rounded-pill py-1 px-5"
                 style={text_style}
               >
+                
                 Login
               </Button>
             </NavItem>
