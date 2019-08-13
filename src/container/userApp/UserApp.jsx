@@ -47,7 +47,7 @@ export default class UserApp extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Col md="7" className="px-0">
+          <Col md="7" className="px-0 mb-2">
             <CenterContainer
               {...this.props}
               focus_user={this.state.focus_user}

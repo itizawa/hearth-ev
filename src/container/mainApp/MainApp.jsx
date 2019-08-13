@@ -9,7 +9,7 @@ export default class MainApp extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Col md="7" className="px-0">
+          <Col md="7" className="px-0 mb-2">
             <CenterContainer user_data={this.props.user_data} />
           </Col>
           <Col md="5" className="px-1">

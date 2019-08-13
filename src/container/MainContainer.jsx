@@ -21,10 +21,12 @@ export default class MainContainer extends React.Component {
       <BrowserRouter>
         <div style={container_style}>
           <Row className="mx-0">
-            <Col xl="2" className="px-2">
-              <Sidebar user_data={this.props.user_data} />
-            </Col>
-            <Col xl="10" className="mt-2">
+            {window.innerWidth >= 768 && (
+              <Col xl="2" className="px-2">
+                <Sidebar user_data={this.props.user_data} />
+              </Col>
+            )}
+            <Col xl="10" className={window.innerWidth >= 768 && ("mt-2")}>
               <Route
                 exact
                 path="/"

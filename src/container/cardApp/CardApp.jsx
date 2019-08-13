@@ -47,7 +47,7 @@ export default class CardApp extends React.Component {
     return (
       <React.Fragment>
         <Row>
-          <Col md="7" className="px-0">
+          <Col md="7" className="px-0 mb-2">
             <CenterContainer
               user_data={this.props.user_data}
               focus_card={this.state.focus_card}
