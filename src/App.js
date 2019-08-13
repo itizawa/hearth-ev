@@ -28,8 +28,9 @@ export default class App extends React.Component {
   setUpUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user)
         this.user_data.displayName = user.displayName;
-        this.user_data.photoURL = user.photoURL;
+        this.user_data.photoURL = user.providerData[0].photoURL;
         this.user_data.uid = user.uid;
 
         this.setState({ user_data: this.user_data });
