@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import logo from "../asset/img/logo.png";
 import { Link } from "react-router-dom";
 
@@ -25,8 +27,22 @@ export default class Sidebar extends React.Component {
               </p>
             </Link>
           </ListGroupItem>
+          {this.props.user_data.uid && (
+            <ListGroupItem tag="button" action>
+              <Link to={"/user/" + this.props.user_data.uid}>
+                <p className="text-body mb-0 align-middle">
+                  <i className="material-icons mr-2">account_circle</i>
+                  マイページ
+                </p>
+              </Link>
+            </ListGroupItem>
+          )}
         </ListGroup>
       </div>
     );
   }
 }
+
+Sidebar.propTypes = {
+  user_data: PropTypes.object
+};
