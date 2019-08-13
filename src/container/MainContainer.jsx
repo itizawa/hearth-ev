@@ -26,7 +26,7 @@ export default class MainContainer extends React.Component {
                 <Sidebar user_data={this.props.user_data} />
               </Col>
             )}
-            <Col xl="10" className="mt-2">
+            <Col xl="10" className={window.innerWidth >= 768 && ("mt-2")}>
               <Route
                 exact
                 path="/"
