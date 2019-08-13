@@ -187,7 +187,8 @@ export default class Comment extends React.Component {
             {comment.card_id && (
               <Link to={"/card/" + comment.card_id}>
                 <span className="" href="#" id="TooltipExample">
-                  #{comment.card_name}
+                  <i className="material-icons">label</i>
+                  {comment.card_name}
                 </span>
               </Link>
             )}
