@@ -55,6 +55,8 @@ export default class Comment extends React.Component {
    * いいねボタンを押したときのイベントハンドラ
    */
   async pushFavorite() {
+    this.setState({ isLiked: true });
+    this.setState({ like_count: this.state.like_count + 1 });
     await firebase
       .firestore()
       .collection("Comments")
@@ -67,8 +69,6 @@ export default class Comment extends React.Component {
       .collection("Users")
       .doc(this.props.comment.creator_id)
       .update("acquired", firebase.firestore.FieldValue.increment(1));
-    this.setState({ isLiked: true });
-    this.setState({ like_count: this.state.like_count + 1 });
   }
 
   /**
@@ -86,6 +86,8 @@ export default class Comment extends React.Component {
    * いいねボタンを取り消したときのイベントハンドラ
    */
   async cancelFavorite() {
+    this.setState({ isLiked: false });
+    this.setState({ like_count: this.state.like_count - 1 });
     await firebase
       .firestore()
       .collection("Comments")
@@ -100,8 +102,6 @@ export default class Comment extends React.Component {
       .collection("Users")
       .doc(this.props.comment.creator_id)
       .update("acquired", firebase.firestore.FieldValue.increment(-1));
-    this.setState({ isLiked: false });
-    this.setState({ like_count: this.state.like_count - 1 });
   }
 
   render() {
