@@ -116,8 +116,8 @@ export default class CommentModal extends React.Component {
                 className="ml-2 my-auto rounded-pill"
                 src={this.props.user_data.photoURL}
                 alt={this.props.user_data.photoURL}
-                width="auto"
-                height="80%"
+                width="80%"
+                height="auto"
               />
             </Col>
             <Col xs="10" className="pl-0">
