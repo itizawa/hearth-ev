@@ -54,14 +54,17 @@ export default class Comment extends React.Component {
   /**
    * いいねボタンを押したときのイベントハンドラ
    */
-  pushFavorite() {
-    const db = firebase.firestore();
-    db.collection("Comments")
+  async pushFavorite() {
+    await firebase
+      .firestore()
+      .collection("Comments")
       .doc(this.props.comment.comment_id)
       .update({
         like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
       });
-    db.collection("Users")
+    await firebase
+      .firestore()
+      .collection("Users")
       .doc(this.props.comment.creator_id)
       .update("acquired", firebase.firestore.FieldValue.increment(1));
     this.setState({ isLiked: true });
@@ -82,16 +85,19 @@ export default class Comment extends React.Component {
   /**
    * いいねボタンを取り消したときのイベントハンドラ
    */
-  cancelFavorite() {
-    const db = firebase.firestore();
-    db.collection("Comments")
+  async cancelFavorite() {
+    await firebase
+      .firestore()
+      .collection("Comments")
       .doc(this.props.comment.comment_id)
       .update({
         like: firebase.firestore.FieldValue.arrayRemove(
           this.props.user_data.uid
         )
       });
-    db.collection("Users")
+    await firebase
+      .firestore()
+      .collection("Users")
       .doc(this.props.comment.creator_id)
       .update("acquired", firebase.firestore.FieldValue.increment(-1));
     this.setState({ isLiked: false });
