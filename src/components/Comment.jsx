@@ -14,13 +14,11 @@ export default class Comment extends React.Component {
     this.state = {
       show_delete_modal: false,
       comments: this.props.comments,
-      tooltipOpen: false,
       isLiked: this.fetchIsLiked(),
       like_count: this.props.comment.like.length,
       show_operation_button: false
     };
 
-    this.tooltip_toggle = this.tooltip_toggle.bind(this);
     this.reEdit_modal_toggle = this.reEdit_modal_toggle.bind(this);
     this.delete_modal_toggle = this.delete_modal_toggle.bind(this);
     this.fetchIsLiked = this.fetchIsLiked.bind(this);
@@ -31,7 +29,6 @@ export default class Comment extends React.Component {
   /**
    * 再編集モーダル開閉のためのイベントハンドラ
    */
-
   reEdit_modal_toggle() {
     this.setState((prevState) => ({
       reEdit_delete_modal: !prevState.reEdit_delete_modal
@@ -41,7 +38,6 @@ export default class Comment extends React.Component {
   /**
    * 削除モーダル開閉のためのイベントハンドラ
    */
-
   delete_modal_toggle() {
     this.setState((prevState) => ({
       show_delete_modal: !prevState.show_delete_modal
@@ -49,22 +45,8 @@ export default class Comment extends React.Component {
   }
 
   /**
-   * カード画像の取得
-   */
-
-  fetchCardImage() {
-    var storageRef = firebase.storage().ref();
-    var spaceRef = storageRef.child(`card/${this.props.comment.card_id}.png`); //imgとidは兼用
-
-    spaceRef.getDownloadURL().then((url) => {
-      this.setState({ card_image: url });
-    });
-  }
-
-  /**
    * Likeボタンを押しているかどうかの確認
    */
-
   fetchIsLiked() {
     return this.props.comment.like.includes(this.props.user_data.uid);
   }
@@ -72,7 +54,6 @@ export default class Comment extends React.Component {
   /**
    * いいねボタンを押したときのイベントハンドラ
    */
-
   pushFavorite() {
     const db = firebase.firestore();
     db.collection("Comments")
@@ -101,7 +82,6 @@ export default class Comment extends React.Component {
   /**
    * いいねボタンを取り消したときのイベントハンドラ
    */
-
   cancelFavorite() {
     const db = firebase.firestore();
     db.collection("Comments")
@@ -116,16 +96,6 @@ export default class Comment extends React.Component {
       .update("acquired", firebase.firestore.FieldValue.increment(-1));
     this.setState({ isLiked: false });
     this.setState({ like_count: this.state.like_count - 1 });
-  }
-
-  /**
-   * ツールチップ開閉のためのイベントハンドラ
-   */
-
-  tooltip_toggle() {
-    this.setState({
-      tooltipOpen: !this.state.tooltipOpen
-    });
   }
 
   render() {
@@ -186,7 +156,7 @@ export default class Comment extends React.Component {
             </h5>
             {comment.card_id && (
               <Link to={"/card/" + comment.card_id}>
-                <span className="" href="#" id="TooltipExample">
+                <span>
                   <i className="material-icons">label</i>
                   {comment.card_name}
                 </span>
