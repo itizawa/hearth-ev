@@ -173,23 +173,23 @@ export default class Comment extends React.Component {
           </Col>
           {this.state.isLiked ? (
             <Col xs="12" className="p-0">
-              <button
-                className="text-muted float-right"
+              <div
+                className="btn text-muted float-right"
                 onClick={this.cancelFavorite}
               >
                 <span>{this.state.like_count}</span>
                 <i className="material-icons p-0">star</i>
-              </button>
+              </div>
             </Col>
           ) : (
             <Col xs="12" className="p-0">
-              <button
-                className="text-muted float-right"
+              <div
+                className="btn text-muted float-right"
                 onClick={this.pushFavorite}
               >
                 <span>{this.state.like_count}</span>
                 <i className="material-icons p-0">star_border</i>
-              </button>
+              </div>
             </Col>
           )}
         </Row>
