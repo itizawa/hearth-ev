@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+  Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Navbar,
+  NavLink,
   NavbarToggler,
   NavbarBrand,
   Nav,
@@ -26,13 +28,24 @@ export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      collapsed: true,
       modal: false,
       user_data: {}
     };
 
     this.toggle = this.toggle.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.onLoginHandler = this.onLoginHandler.bind(this);
     this.CreateUser = this.CreateUser.bind(this);
+  }
+
+  /**
+   * navbar開閉のためのイベントハンドラ
+   */
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
   }
 
   /**
@@ -99,16 +112,26 @@ export default class Header extends React.Component {
 
   render() {
     const navbar_style = {
-      backgroundColor: "#00075d"
+      backgroundColor: "#00075d",
+      border: "0px"
     };
 
     const text_style = {
       color: "white"
     };
 
+    const dehaze_style = {
+      fontSize: "40px"
+    };
+
     return (
       <React.Fragment>
         <Navbar style={navbar_style} expand="md">
+          <NavbarToggler onClick={this.toggleNavbar} className="mr-2 p-0">
+            <i className="material-icons text-white" style={dehaze_style}>
+              dehaze
+            </i>
+          </NavbarToggler>
           <NavbarBrand href="/" style={text_style}>
             Hearth EV
           </NavbarBrand>
@@ -125,7 +148,7 @@ export default class Header extends React.Component {
                 </Button>
               ) : (
                 <UncontrolledDropdown direction="left">
-                  <DropdownToggle>
+                  <DropdownToggle style={navbar_style}>
                     <img
                       className="mr-2 rounded-pill border border-secondary"
                       src={this.props.user_data.photoURL}
@@ -169,6 +192,22 @@ export default class Header extends React.Component {
               </Button>
             </ModalFooter>
           </Modal>
+          {window.innerWidth < 768 && (
+            <Collapse isOpen={!this.state.collapsed} navbar>
+              <Nav navbar>
+                <NavItem>
+                  <NavLink href="/" style={text_style}>
+                    ホーム
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/card" style={text_style}>
+                    カード
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          )}
         </Navbar>
       </React.Fragment>
     );
