@@ -39,10 +39,18 @@ export default class ViewContainer extends React.Component {
     const header_style = {
       backgroundColor: "#00075d"
     };
+
+    const trending_style = {
+      fontSize: "40px"
+    };
+
     return (
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
+            <i className="material-icons mr-2" style={trending_style}>
+              trending_up
+            </i>
             TopUser
           </h3>
           {this.state.users.map((user, index) => {
