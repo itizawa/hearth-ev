@@ -54,9 +54,9 @@ export default class CommentModal extends React.Component {
    * コメント投稿のイベントハンドラ
    */
 
-  onPostComment() {
+  async onPostComment() {
     const db = firebase.firestore();
-    var addComment = db
+    await db
       .collection("Comments")
       .add({
         creator: this.props.user_data.displayName,
@@ -70,13 +70,15 @@ export default class CommentModal extends React.Component {
         card_name: this.props.card_name || "",
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
-      .then((ref) => {
+      .then(async (ref) => {
         console.log("Added document with ID: ", ref.id);
         // IDを保存する
-        db.collection("Comments")
+        await db
+          .collection("Comments")
           .doc(ref.id)
-          .set({comment_id:ref.id},{merge:true})
-        db.collection("Users")
+          .set({ comment_id: ref.id }, { merge: true });
+        await db
+          .collection("Users")
           .doc(this.props.user_data.uid)
           .update({
             comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
@@ -90,9 +92,8 @@ export default class CommentModal extends React.Component {
             });
         }
       });
-    this.props.modal_toggle();
-    this.props.fetchComment();
-    return Promise.all([addComment]);
+    await this.props.modal_toggle();
+    await this.props.fetchComment();
   }
 
   render() {
