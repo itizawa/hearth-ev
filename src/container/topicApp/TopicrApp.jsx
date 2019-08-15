@@ -16,8 +16,7 @@ export default class TopicApp extends React.Component {
       }
     };
 
-    // TODO トピックデータの作成後
-    // this.fetchTopicData();
+    this.fetchTopicData();
   }
 
   /**
