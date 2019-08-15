@@ -39,7 +39,6 @@ export default class CommentModal extends React.Component {
   /**
    * コメント取得ためのイベントハンドラ
    */
-
   onTextChange(e) {
     this.setState({
       comment_text: e.target.value
@@ -49,7 +48,6 @@ export default class CommentModal extends React.Component {
   /**
    * Toggle Switch のためのイベントハンドラ
    */
-
   switch_toggle() {
     this.setState((prevState) => ({
       tweet_permission: !prevState.tweet_permission
@@ -59,7 +57,6 @@ export default class CommentModal extends React.Component {
   /**
    * Topicの切り替えのためのイベントハンドラ
    */
-
   switchTopic() {
     console.log("push");
   }
@@ -67,7 +64,6 @@ export default class CommentModal extends React.Component {
   /**
    * コメント投稿のイベントハンドラ
    */
-
   onPostComment() {
     const db = firebase.firestore();
     var addComment = db
