@@ -28,7 +28,8 @@ export default class CommentModal extends React.Component {
     this.state = {
       tweet_permission: true,
       comment_text: "",
-      topic_name: this.props.topic || ""
+      topic_name: this.props.topic_name || "",
+      topic_id: this.props.topic_id || ""
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.switchTopic = this.switchTopic.bind(this);
@@ -50,6 +51,7 @@ export default class CommentModal extends React.Component {
    */
   switchTopic(e) {
     this.setState({ topic_name: e.target.textContent.trim() });
+    this.setState({ topic_id: e.target.id.trim() });
   }
 
   /**
@@ -58,6 +60,7 @@ export default class CommentModal extends React.Component {
   modal_toggle() {
     this.props.modal_toggle();
     this.setState({ topic_name: "" });
+    this.setState({ topic_id: "" });
   }
 
   /**
@@ -75,6 +78,7 @@ export default class CommentModal extends React.Component {
         like: [],
         create_at: getNow(),
         topic_name: this.state.topic_name,
+        topic_id: this.state.topic_id,
         card_id: this.props.card_id || "",
         card_name: this.props.card_name || "",
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -145,11 +149,20 @@ export default class CommentModal extends React.Component {
             <UncontrolledDropdown>
               <DropdownToggle caret />
               <DropdownMenu>
-                <DropdownItem onClick={this.switchTopic}>事前評価</DropdownItem>
+                <DropdownItem
+                  id="yxjFQW0FsqNHcRLjJTHx"
+                  onClick={this.switchTopic}
+                >
+                  事前評価
+                </DropdownItem>
                 <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <Input readOnly value={this.state.topic_name} placeholder="話題登録" />
+            <Input
+              readOnly
+              value={this.state.topic_name}
+              placeholder="話題登録"
+            />
           </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
