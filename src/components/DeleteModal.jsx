@@ -19,7 +19,7 @@ export default class DeleteModal extends React.Component {
     this.state = {
       tweet_permission: true
     };
-    this.onPostComment = this.onPostComment.bind(this);
+    this.onDeleteComment = this.onDeleteComment.bind(this);
   }
 
   /**
@@ -36,7 +36,7 @@ export default class DeleteModal extends React.Component {
    * コメント削除のイベントハンドラ
    */
 
-  async onPostComment() {
+  async onDeleteComment() {
     if (this.props.comment.creator_id === this.props.user_data.uid) {
       await firebase
         .firestore()
@@ -111,7 +111,7 @@ export default class DeleteModal extends React.Component {
           </Card>
         </ModalBody>
         <ModalFooter className="p-2">
-          <Button color="danger" onClick={this.onPostComment}>
+          <Button color="danger" onClick={this.onDeleteComment}>
             削除
           </Button>{" "}
           <Button color="secondary" onClick={this.props.modal_toggle}>
