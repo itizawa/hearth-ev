@@ -168,12 +168,12 @@ export default class Comment extends React.Component {
                 </span>
               </Link>
             )}
-            {comment.topic && (
+            {comment.topic_name && (
               // TODO トピックページの設定
               // <Link to={"/card/" + comment.card_id}>
               <span className="ml-2">
                 <i className="material-icons">question_answer</i>
-                {comment.topic}
+                {comment.topic_name}
               </span>
               // </Link>
             )}

@@ -28,7 +28,7 @@ export default class CommentModal extends React.Component {
     this.state = {
       tweet_permission: true,
       comment_text: "",
-      topic: this.props.topic || ""
+      topic_name: this.props.topic || ""
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.switchTopic = this.switchTopic.bind(this);
@@ -49,7 +49,7 @@ export default class CommentModal extends React.Component {
    * Topicの切り替えのためのイベントハンドラ
    */
   switchTopic(e) {
-    this.setState({ topic: e.target.textContent.trim() });
+    this.setState({ topic_name: e.target.textContent.trim() });
   }
 
   /**
@@ -57,7 +57,7 @@ export default class CommentModal extends React.Component {
    */
   modal_toggle() {
     this.props.modal_toggle();
-    this.setState({ topic: "" });
+    this.setState({ topic_name: "" });
   }
 
   /**
@@ -74,7 +74,7 @@ export default class CommentModal extends React.Component {
         text: this.state.comment_text,
         like: [],
         create_at: getNow(),
-        topic: this.state.topic,
+        topic_name: this.state.topic_name,
         card_id: this.props.card_id || "",
         card_name: this.props.card_name || "",
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -149,7 +149,7 @@ export default class CommentModal extends React.Component {
                 <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <Input readOnly value={this.state.topic} placeholder="話題登録" />
+            <Input readOnly value={this.state.topic_name} placeholder="話題登録" />
           </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
