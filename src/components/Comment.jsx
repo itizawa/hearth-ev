@@ -161,7 +161,7 @@ export default class Comment extends React.Component {
               </span>
             </h5>
             {comment.card_id && (
-              <Link to={"/card/" + comment.card_id}>
+              <Link to={"/card/" + comment.card_id} className="text-info mr-2">
                 <span>
                   <i className="material-icons">label</i>
                   {comment.card_name}
@@ -169,7 +169,7 @@ export default class Comment extends React.Component {
               </Link>
             )}
             {comment.topic_name && (
-              <Link to={"/topic/" + comment.topic_id}>
+              <Link to={"/topic/" + comment.topic_id} className="text-info">
                 <span>
                   <i className="material-icons">question_answer</i>
                   {comment.topic_name}
