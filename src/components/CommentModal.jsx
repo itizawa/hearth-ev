@@ -57,8 +57,8 @@ export default class CommentModal extends React.Component {
   /**
    * Topicの切り替えのためのイベントハンドラ
    */
-  switchTopic() {
-    console.log("push");
+  switchTopic(e) {
+    this.setState({ topic: e.target.textContent.trim() });
   }
 
   /**
@@ -149,12 +149,7 @@ export default class CommentModal extends React.Component {
                 <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-
-            <Input
-              readOnly
-              value={this.props.certDescription}
-              placeholder="話題登録"
-            />
+            <Input readOnly value={this.state.topic} placeholder="話題登録" />
           </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
