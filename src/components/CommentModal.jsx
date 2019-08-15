@@ -93,16 +93,12 @@ export default class CommentModal extends React.Component {
         await db
           .collection("Users")
           .doc(this.props.user_data.uid)
-          .update({
-            comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
-          });
+          .update("comments", firebase.firestore.FieldValue.increment(1));
         // カードについてのコメントはカード以下にcomment_idを保存
         if (this.props.card_id) {
           db.collection("Cards")
             .doc(this.props.card_id)
-            .update({
-              comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
-            });
+            .update("comments", firebase.firestore.FieldValue.increment(1));
         }
       });
     await this.props.modal_toggle();

@@ -98,8 +98,7 @@ export default class Header extends React.Component {
             {
               name: name,
               photoURL: photoURL,
-              uid: uid
-            },
+              uid: uid            },
             { merge: true }
           )
           .then((ref) => {

@@ -15,7 +15,7 @@ export default class Comment extends React.Component {
       show_delete_modal: false,
       comments: this.props.comments,
       isLiked: this.fetchIsLiked(),
-      like_count: this.props.comment.like.length,
+      like_count: this.props.comment.like.length　|| 0,
       show_operation_button: false
     };
 
