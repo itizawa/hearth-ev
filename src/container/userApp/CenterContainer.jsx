@@ -19,7 +19,6 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-
   fetchUserComment = (user_id = this.props.focus_user.uid) => {
     var comments = [];
     const db = firebase.firestore();

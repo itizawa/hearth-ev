@@ -22,7 +22,6 @@ export default class UserApp extends React.Component {
   /**
    * ユーザーデータを取得する
    */
-
   fetchUserData = async () => {
     await firebase
       .firestore()
