@@ -16,11 +16,12 @@ export default class TopicApp extends React.Component {
       }
     };
 
+    // TODO トピックデータの作成後
     // this.fetchTopicData();
   }
 
   /**
-   * ユーザーデータを取得する
+   * トピックデータを取得する
    */
   fetchTopicData = async () => {
     await firebase
