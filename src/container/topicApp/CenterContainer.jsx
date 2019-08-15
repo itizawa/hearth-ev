@@ -15,7 +15,7 @@ export default class CenterContainer extends React.Component {
       comments: []
     };
 
-    this.fetchCardComment(this.props.focus_card.id);
+    this.fetchTopicComment(this.props.focus_topic.id);
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -23,7 +23,6 @@ export default class CenterContainer extends React.Component {
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
@@ -33,12 +32,11 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-
-  fetchCardComment = (target = this.props.focus_card.card_id) => {
+  fetchTopicComment = (target = this.props.focus_topic.topic_id) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
-      .where("card_id", "==", target)
+      .where("topic_id", "==", target)
       .orderBy("timestamp", "desc")
       .get()
       .then((querySnapshot) => {
@@ -58,7 +56,7 @@ export default class CenterContainer extends React.Component {
       backgroundColor: "#00075d"
     };
 
-    const { focus_card, user_data } = this.props;
+    const { focus_topic, user_data } = this.props;
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -66,7 +64,7 @@ export default class CenterContainer extends React.Component {
           key={comment.comment_id}
           comment={comment}
           user_data={user_data}
-          fetchComment={this.fetchCardComment}
+          fetchComment={this.fetchTopicComment}
         />
       );
     });
@@ -75,7 +73,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            Card Page : {focus_card.card_name}
+            Topic Page : {focus_topic.topic_name}
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
@@ -98,10 +96,11 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={user_data}
-          card_id={focus_card.card_id}
-          card_name={focus_card.card_name}
+          topic_name={focus_topic.topic_name}
+          topic_id={focus_topic.topic_id}
+          card_name={focus_topic.card_name}
           pushCommentId={this.props.pushCommentId}
-          fetchComment={this.fetchCardComment}
+          fetchComment={this.fetchTopicComment}
         />
       </React.Fragment>
     );
@@ -110,5 +109,5 @@ export default class CenterContainer extends React.Component {
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object,
-  focus_card: PropTypes.object
+  focus_topic: PropTypes.object
 };

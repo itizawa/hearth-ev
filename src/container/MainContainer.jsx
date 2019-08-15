@@ -10,6 +10,7 @@ import UserApp from "./userApp/UserApp";
 import CardApp from "./cardApp/CardApp";
 import CardListApp from "./cardList/CardListApp";
 import TestApp from "./TestApp";
+import TopicApp from "./topicApp/TopicrApp";
 
 export default class MainContainer extends React.Component {
   render() {
@@ -43,6 +44,13 @@ export default class MainContainer extends React.Component {
                 path="/card/:card_id"
                 render={(props) => (
                   <CardApp {...this.props} match={props.match} />
+                )}
+              />
+              <Route
+                exact
+                path="/topic/:topic_id"
+                render={(props) => (
+                  <TopicApp {...this.props} match={props.match} />
                 )}
               />
               <Route

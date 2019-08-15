@@ -28,12 +28,23 @@ export default class CommentModal extends React.Component {
     this.state = {
       tweet_permission: true,
       comment_text: "",
-      topic: this.props.topic || ""
+      topic_name: this.props.topic_name || "",
+      topic_id: this.props.topic_id || ""
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.switchTopic = this.switchTopic.bind(this);
     this.modal_toggle = this.modal_toggle.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
+  }
+
+  /**
+   * Topicをセットする
+   */
+  componentDidUpdate(prevProps) {
+    if (this.props.topic_name !== prevProps.topic_name) {
+      this.setState({ topic_name: this.props.topic_name });
+      this.setState({ topic_id: this.props.topic_id });
+    }
   }
 
   /**
@@ -49,7 +60,8 @@ export default class CommentModal extends React.Component {
    * Topicの切り替えのためのイベントハンドラ
    */
   switchTopic(e) {
-    this.setState({ topic: e.target.textContent.trim() });
+    this.setState({ topic_name: e.target.textContent.trim() });
+    this.setState({ topic_id: e.target.id.trim() });
   }
 
   /**
@@ -57,7 +69,8 @@ export default class CommentModal extends React.Component {
    */
   modal_toggle() {
     this.props.modal_toggle();
-    this.setState({ topic: "" });
+    this.setState({ topic_name: "" });
+    this.setState({ topic_id: "" });
   }
 
   /**
@@ -74,7 +87,8 @@ export default class CommentModal extends React.Component {
         text: this.state.comment_text,
         like: [],
         create_at: getNow(),
-        topic: this.state.topic,
+        topic_name: this.state.topic_name,
+        topic_id: this.state.topic_id,
         card_id: this.props.card_id || "",
         card_name: this.props.card_name || "",
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -89,16 +103,18 @@ export default class CommentModal extends React.Component {
         await db
           .collection("Users")
           .doc(this.props.user_data.uid)
-          .update({
-            comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
-          });
-        // カードについてのコメントはカード以下にcomment_idを保存
+          .update("comments", firebase.firestore.FieldValue.increment(1));
+        // カードについてのコメントはカード以下にcommentのカウントを+1
         if (this.props.card_id) {
           db.collection("Cards")
             .doc(this.props.card_id)
-            .update({
-              comments: firebase.firestore.FieldValue.arrayUnion(ref.id)
-            });
+            .update("comments", firebase.firestore.FieldValue.increment(1));
+        }
+        // トピックについてのコメントはカード以下にcommentのカウントを+1
+        if (this.state.topic_id) {
+          db.collection("Topics")
+            .doc(this.state.topic_id)
+            .update("comments", firebase.firestore.FieldValue.increment(1));
         }
       });
     await this.props.modal_toggle();
@@ -145,11 +161,25 @@ export default class CommentModal extends React.Component {
             <UncontrolledDropdown>
               <DropdownToggle caret />
               <DropdownMenu>
-                <DropdownItem onClick={this.switchTopic}>事前評価</DropdownItem>
-                <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
+                <DropdownItem
+                  id="yxjFQW0FsqNHcRLjJTHx"
+                  onClick={this.switchTopic}
+                >
+                  事前評価
+                </DropdownItem>
+                <DropdownItem
+                  id="SZqeygxWgtrFoRMWuWUP"
+                  onClick={this.switchTopic}
+                >
+                  事後評価
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <Input readOnly value={this.state.topic} placeholder="話題登録" />
+            <Input
+              readOnly
+              value={this.state.topic_name}
+              placeholder="話題登録"
+            />
           </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton

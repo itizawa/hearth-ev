@@ -122,7 +122,7 @@ export default class ViewContainer extends React.Component {
                   <p className="mb-0">コメント</p>
                   <strong className="text-primary">
                     <i className="material-icons">mode_comment</i>
-                    {focus_user.comments.length}
+                    {focus_user.comments}
                   </strong>
                 </Card>
               </Col>

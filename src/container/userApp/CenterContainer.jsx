@@ -19,7 +19,6 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-
   fetchUserComment = (user_id = this.props.focus_user.uid) => {
     var comments = [];
     const db = firebase.firestore();
@@ -59,7 +58,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            User Page
+            User Page : {this.props.focus_user.name}
           </h3>
           {comment}
         </div>

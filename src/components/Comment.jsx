@@ -15,7 +15,7 @@ export default class Comment extends React.Component {
       show_delete_modal: false,
       comments: this.props.comments,
       isLiked: this.fetchIsLiked(),
-      like_count: this.props.comment.like.length,
+      like_count: this.props.comment.like.length || 0,
       show_operation_button: false
     };
 
@@ -161,21 +161,20 @@ export default class Comment extends React.Component {
               </span>
             </h5>
             {comment.card_id && (
-              <Link to={"/card/" + comment.card_id}>
+              <Link to={"/card/" + comment.card_id} className="text-info mr-2">
                 <span>
                   <i className="material-icons">label</i>
                   {comment.card_name}
                 </span>
               </Link>
             )}
-            {comment.topic && (
-              // TODO トピックページの設定
-              // <Link to={"/card/" + comment.card_id}>
-              <span className="ml-2">
-                <i className="material-icons">question_answer</i>
-                {comment.topic}
-              </span>
-              // </Link>
+            {comment.topic_name && (
+              <Link to={"/topic/" + comment.topic_id} className="text-info">
+                <span>
+                  <i className="material-icons">question_answer</i>
+                  {comment.topic_name}
+                </span>
+              </Link>
             )}
 
             <p className="mb-0">{comment.text}</p>
