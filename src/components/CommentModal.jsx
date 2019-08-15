@@ -57,6 +57,7 @@ export default class CommentModal extends React.Component {
    */
   modal_toggle() {
     this.props.modal_toggle();
+    this.setState({ topic: "" });
   }
 
   /**
