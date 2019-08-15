@@ -2,11 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Button,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Input,
+  InputGroup,
+  UncontrolledDropdown,
   Col,
   Row
 } from "reactstrap";
@@ -25,15 +30,15 @@ export default class CommentModal extends React.Component {
       comment_text: "",
       topic: this.props.topic || ""
     };
-    this.switch_toggle = this.switch_toggle.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
+    this.switchTopic = this.switchTopic.bind(this);
+    this.modal_toggle = this.modal_toggle.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
   }
 
   /**
    * コメント取得ためのイベントハンドラ
    */
-
   onTextChange(e) {
     this.setState({
       comment_text: e.target.value
@@ -41,19 +46,23 @@ export default class CommentModal extends React.Component {
   }
 
   /**
-   * Toggle Switch のためのイベントハンドラ
+   * Topicの切り替えのためのイベントハンドラ
    */
+  switchTopic(e) {
+    this.setState({ topic: e.target.textContent.trim() });
+  }
 
-  switch_toggle() {
-    this.setState((prevState) => ({
-      tweet_permission: !prevState.tweet_permission
-    }));
+  /**
+   * Modal開閉のためのイベントハンドラ
+   */
+  modal_toggle() {
+    this.props.modal_toggle();
+    this.setState({ topic: "" });
   }
 
   /**
    * コメント投稿のイベントハンドラ
    */
-
   async onPostComment() {
     const db = firebase.firestore();
     await db
@@ -100,10 +109,10 @@ export default class CommentModal extends React.Component {
     return (
       <Modal
         isOpen={this.props.modal}
-        toggle={this.props.modal_toggle}
+        toggle={this.modal_toggle}
         className={this.props.className}
       >
-        <ModalHeader toggle={this.props.modal_toggle}>
+        <ModalHeader toggle={this.modal_toggle}>
           コメントする
           <span hidden={!this.props.card_name} className="text-primary ml-3">
             #{this.props.card_name}
@@ -132,6 +141,16 @@ export default class CommentModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter className="p-2">
+          <InputGroup>
+            <UncontrolledDropdown>
+              <DropdownToggle caret />
+              <DropdownMenu>
+                <DropdownItem onClick={this.switchTopic}>事前評価</DropdownItem>
+                <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <Input readOnly value={this.state.topic} placeholder="話題登録" />
+          </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
               title={this.state.comment_text + "#" + this.props.card_name}
@@ -140,16 +159,6 @@ export default class CommentModal extends React.Component {
               <TwitterIcon size={32} round={true} />
             </TwitterShareButton>
           </div>
-          {/* TODO react-shareの設定後 */}
-          {/* <CustomInput
-            onClick={this.switch_toggle}
-            checked={this.state.tweet_permission}
-            className="mr-3"
-            type="switch"
-            id="exampleCustomSwitch"
-            name="customSwitch"
-            label="Tweetする"
-          /> */}
           <Button
             color="primary"
             onClick={this.onPostComment}
@@ -159,7 +168,7 @@ export default class CommentModal extends React.Component {
             }
           >
             Submit
-          </Button>{" "}
+          </Button>
         </ModalFooter>
       </Modal>
     );
