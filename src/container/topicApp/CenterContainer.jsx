@@ -96,7 +96,8 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={user_data}
-          card_id={focus_topic.card_id}
+          topic_name={focus_topic.topic_name}
+          topic_id={focus_topic.topic_id}
           card_name={focus_topic.card_name}
           pushCommentId={this.props.pushCommentId}
           fetchComment={this.fetchTopicComment}

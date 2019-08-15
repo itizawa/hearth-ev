@@ -38,6 +38,16 @@ export default class CommentModal extends React.Component {
   }
 
   /**
+   * トピックをセットする
+   */
+  componentDidUpdate(prevProps) {
+    if (this.props.topic_name !== prevProps.topic_name) {
+      this.setState({ topic_name: this.props.topic_name });
+      this.setState({ topic_id: this.props.topic_id });
+    }
+  }
+
+  /**
    * コメント取得ためのイベントハンドラ
    */
   onTextChange(e) {
