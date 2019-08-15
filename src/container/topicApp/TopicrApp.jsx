@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import ViewContainer from "./ViewContainer";
 import CenterContainer from "./CenterContainer";
 
 import firebase from "firebase/app";
@@ -53,12 +52,6 @@ export default class TopicApp extends React.Component {
               match={this.props.match.params.topic_id}
             />
           </Col>
-          {/* <Col md="5" className="px-1">
-            <ViewContainer
-              user_data={this.props.user_data}
-              focus_user={this.state.focus_user}
-            />
-          </Col> */}
         </Row>
       </React.Fragment>
     );
