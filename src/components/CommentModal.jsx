@@ -2,11 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Button,
+  DropdownToggle,
+  DropdownMenu,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Input,
+  InputGroup,
+  UncontrolledDropdown,
   Col,
   Row
 } from "reactstrap";
@@ -75,7 +79,7 @@ export default class CommentModal extends React.Component {
         // IDを保存する
         db.collection("Comments")
           .doc(ref.id)
-          .set({comment_id:ref.id},{merge:true})
+          .set({ comment_id: ref.id }, { merge: true });
         db.collection("Users")
           .doc(this.props.user_data.uid)
           .update({
@@ -131,6 +135,20 @@ export default class CommentModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter className="p-2">
+          <InputGroup>
+            <UncontrolledDropdown>
+              <DropdownToggle caret />
+              <DropdownMenu menufor={`own${this.props.target}DomainCert`}>
+                あああ
+              </DropdownMenu>
+            </UncontrolledDropdown>
+
+            <Input
+              readOnly
+              value={this.props.certDescription}
+              placeholder="話題登録"
+            />
+          </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
               title={this.state.comment_text + "#" + this.props.card_name}
