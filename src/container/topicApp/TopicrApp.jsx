@@ -10,7 +10,7 @@ export default class TopicApp extends React.Component {
     this.state = {
       focus_topic: {
         id: this.props.match.params.topic_id,
-        name: "TopicPage",
+        name: "",
         comments: []
       }
     };
