@@ -158,7 +158,7 @@ export default class CommentModal extends React.Component {
             }
           >
             Submit
-          </Button>{" "}
+          </Button>
         </ModalFooter>
       </Modal>
     );
