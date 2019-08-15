@@ -94,10 +94,16 @@ export default class CommentModal extends React.Component {
           .collection("Users")
           .doc(this.props.user_data.uid)
           .update("comments", firebase.firestore.FieldValue.increment(1));
-        // カードについてのコメントはカード以下にcomment_idを保存
+        // カードについてのコメントはカード以下にcommentのカウントを+1
         if (this.props.card_id) {
           db.collection("Cards")
             .doc(this.props.card_id)
+            .update("comments", firebase.firestore.FieldValue.increment(1));
+        }
+        // トピックについてのコメントはカード以下にcommentのカウントを+1
+        if (this.state.topic_id) {
+          db.collection("Topics")
+            .doc(this.state.topic_id)
             .update("comments", firebase.firestore.FieldValue.increment(1));
         }
       });
@@ -151,7 +157,12 @@ export default class CommentModal extends React.Component {
                 >
                   事前評価
                 </DropdownItem>
-                <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
+                <DropdownItem
+                  id="SZqeygxWgtrFoRMWuWUP"
+                  onClick={this.switchTopic}
+                >
+                  事後評価
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
             <Input

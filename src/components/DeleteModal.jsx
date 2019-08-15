@@ -56,11 +56,20 @@ export default class DeleteModal extends React.Component {
         .doc(this.props.user_data.uid)
         .update("comments", firebase.firestore.FieldValue.increment(-1));
 
+      // カードについてのコメントはカード以下にcommentのカウントを-1
       if (this.props.comment.card_id) {
         await firebase
           .firestore()
           .collection("Cards")
           .doc(this.props.comment.card_id)
+          .update("comments", firebase.firestore.FieldValue.increment(-1));
+      }
+      // トピックについてのコメントはカード以下にcommentのカウントを-1
+      if (this.props.comment.topic_id) {
+        await firebase
+          .firestore()
+          .collection("Topics")
+          .doc(this.props.comment.topic_id)
           .update("comments", firebase.firestore.FieldValue.increment(-1));
       }
     } else {
