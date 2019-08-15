@@ -4,6 +4,7 @@ import {
   Button,
   DropdownToggle,
   DropdownMenu,
+  DropdownItem,
   Modal,
   ModalHeader,
   ModalBody,
@@ -30,6 +31,7 @@ export default class CommentModal extends React.Component {
       topic: this.props.topic || ""
     };
     this.switch_toggle = this.switch_toggle.bind(this);
+    this.switchTopic = this.switchTopic.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.onPostComment = this.onPostComment.bind(this);
   }
@@ -52,6 +54,14 @@ export default class CommentModal extends React.Component {
     this.setState((prevState) => ({
       tweet_permission: !prevState.tweet_permission
     }));
+  }
+
+  /**
+   * Topicの切り替えのためのイベントハンドラ
+   */
+
+  switchTopic() {
+    console.log("push");
   }
 
   /**
@@ -138,8 +148,9 @@ export default class CommentModal extends React.Component {
           <InputGroup>
             <UncontrolledDropdown>
               <DropdownToggle caret />
-              <DropdownMenu menufor={`own${this.props.target}DomainCert`}>
-                あああ
+              <DropdownMenu>
+                <DropdownItem onClick={this.switchTopic}>事前評価</DropdownItem>
+                <DropdownItem onClick={this.switchTopic}>事後評価</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
 
