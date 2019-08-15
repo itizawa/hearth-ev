@@ -9,8 +9,8 @@ export default class TopicApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus_user: {
-        id: this.props.match.params.user_id,
+      focus_topic: {
+        id: this.props.match.params.topic_id,
         name: "TopicPage",
         comments: []
       }
@@ -26,15 +26,15 @@ export default class TopicApp extends React.Component {
   fetchTopicData = async () => {
     await firebase
       .firestore()
-      .collection("Users")
-      .doc(this.state.focus_user.id)
+      .collection("Topics")
+      .doc(this.state.focus_topic.id)
       .get()
       .then((doc) => {
         if (!doc.exists) {
           console.log("No such document!");
         } else {
           this.setState({
-            focus_user: doc.data()
+            focus_topic: doc.data()
           });
         }
       })
@@ -46,22 +46,21 @@ export default class TopicApp extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div>this is topic page</div>
-        {/* <Row>
+        <Row>
           <Col md="7" className="px-0 mb-2">
             <CenterContainer
               {...this.props}
-              focus_user={this.state.focus_user}
-              match={this.props.match.params.user_id}
+              focus_topic={this.state.focus_topic}
+              match={this.props.match.params.topic_id}
             />
           </Col>
-          <Col md="5" className="px-1">
+          {/* <Col md="5" className="px-1">
             <ViewContainer
               user_data={this.props.user_data}
               focus_user={this.state.focus_user}
             />
-          </Col>
-        </Row> */}
+          </Col> */}
+        </Row>
       </React.Fragment>
     );
   }
