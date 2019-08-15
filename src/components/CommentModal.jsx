@@ -38,7 +38,7 @@ export default class CommentModal extends React.Component {
   }
 
   /**
-   * トピックをセットする
+   * Topicをセットする
    */
   componentDidUpdate(prevProps) {
     if (this.props.topic_name !== prevProps.topic_name) {
