@@ -19,7 +19,7 @@ export default class DeleteModal extends React.Component {
     this.state = {
       tweet_permission: true
     };
-    this.onPostComment = this.onPostComment.bind(this);
+    this.onDeleteComment = this.onDeleteComment.bind(this);
   }
 
   /**
