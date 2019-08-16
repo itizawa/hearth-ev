@@ -1,6 +1,6 @@
 import React from "react";
-
 import firebase from "firebase/app";
+
 import TopicListItem from "../TopicListItem";
 
 export default class HotTopicBox extends React.Component {
@@ -52,8 +52,8 @@ export default class HotTopicBox extends React.Component {
           </i>
           HotTopic
         </h3>
-        {this.state.topics.map((user, index) => {
-          return <TopicListItem key={index} user_data={user} />;
+        {this.state.topics.map((topic, index) => {
+          return <TopicListItem key={index} topic_data={topic} />;
         })}
       </div>
     );
