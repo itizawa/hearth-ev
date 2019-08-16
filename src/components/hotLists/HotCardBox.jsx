@@ -2,6 +2,7 @@ import React from "react";
 // import UserListItem from "../UserListItem";
 
 import firebase from "firebase/app";
+import CardListItem from "../CardListItem";
 
 export default class HotUserBox extends React.Component {
   constructor(props) {
@@ -19,8 +20,8 @@ export default class HotUserBox extends React.Component {
     var cards = [];
     const db = firebase.firestore();
     db.collection("Cards")
-      .orderBy("comments", "desc")
-      .limit(3)
+      .orderBy("update_at", "asc")
+      .limit(5)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
@@ -51,9 +52,9 @@ export default class HotUserBox extends React.Component {
           </i>
           TopCard
         </h3>
-        {/* {this.state.users.map((user, index) => {
-          return <UserListItem key={index} user_data={user} />;
-        })} */}
+        {this.state.cards.map((card, index) => {
+          return <CardListItem key={index} card_data={card} />;
+        })}
       </div>
     );
   }
