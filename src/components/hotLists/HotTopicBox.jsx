@@ -1,7 +1,7 @@
 import React from "react";
 import firebase from "firebase/app";
 
-import TopicListItem from "../TopicListItem";
+import TopicListItem from "../listItems/TopicListItem";
 
 export default class HotTopicBox extends React.Component {
   constructor(props) {

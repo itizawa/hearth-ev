@@ -1,7 +1,7 @@
 import React from "react";
-import UserListItem from "../UserListItem";
-
 import firebase from "firebase/app";
+
+import UserListItem from "../listItems/UserListItem";
 
 export default class HotUserBox extends React.Component {
   constructor(props) {
