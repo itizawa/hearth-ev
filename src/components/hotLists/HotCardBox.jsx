@@ -1,5 +1,4 @@
 import React from "react";
-// import UserListItem from "../UserListItem";
 
 import firebase from "firebase/app";
 import CardListItem from "../CardListItem";
