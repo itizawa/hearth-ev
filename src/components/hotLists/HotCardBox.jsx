@@ -1,33 +1,32 @@
 import React from "react";
+
 import firebase from "firebase/app";
+import CardListItem from "../CardListItem";
 
-import TopicListItem from "../TopicListItem";
-
-export default class HotTopicBox extends React.Component {
+export default class HotUserBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      topics: []
+      cards: []
     };
-    this.fetchTopicData();
-
+    this.fetchCardData();
   }
 
   /**
-   * トピックデータを取得するイベントハンドラ
+   * カードデータを取得するイベントハンドラ
    */
-  fetchTopicData = () => {
-    var topics = [];
+  fetchCardData = () => {
+    var cards = [];
     const db = firebase.firestore();
-    db.collection("Topics")
-      .orderBy("comments", "desc")
-      .limit(3)
+    db.collection("Cards")
+      .orderBy("update_at", "asc")
+      .limit(5)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          topics.push(doc.data());
+          cards.push(doc.data());
         });
-        this.setState({ topics: topics });
+        this.setState({ cards: cards });
       })
       .catch((err) => {
         console.log("Error getting documents", err);
@@ -50,10 +49,10 @@ export default class HotTopicBox extends React.Component {
           <i className="material-icons mr-2" style={trending_style}>
             trending_up
           </i>
-          HotTopic
+          HotCard
         </h3>
-        {this.state.topics.map((topic, index) => {
-          return <TopicListItem key={index} topic_data={topic} />;
+        {this.state.cards.map((card, index) => {
+          return <CardListItem key={index} card_data={card} />;
         })}
       </div>
     );
