@@ -50,7 +50,7 @@ export default class HotUserBox extends React.Component {
           <i className="material-icons mr-2" style={trending_style}>
             trending_up
           </i>
-          TopCard
+          HotCard
         </h3>
         {this.state.cards.map((card, index) => {
           return <CardListItem key={index} card_data={card} />;

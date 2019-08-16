@@ -1,25 +1,8 @@
 import React from "react";
-import { Row, Col, Tooltip } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default class TopicListItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      tooltipOpen: false
-    };
-  }
-  /**
-   * ツールチップのイベントハンドラ
-   */
-  toggle() {
-    this.setState({
-      tooltipOpen: !this.state.tooltipOpen
-    });
-  }
-
   render() {
     const chat_style = {
       fontSize: "24px"
@@ -45,17 +28,6 @@ export default class TopicListItem extends React.Component {
                 {topic_data.update_at}
               </small>
             </Link>
-            <p className="my-1">
-              <Tooltip
-                placement="bottom"
-                isOpen={this.state.tooltipOpen}
-                autohide={false}
-                target={topic_data.topic_id}
-                toggle={this.toggle}
-              >
-                コメント総数
-              </Tooltip>
-            </p>
           </h5>
         </Col>
       </Row>
