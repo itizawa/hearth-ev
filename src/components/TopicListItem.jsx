@@ -38,6 +38,12 @@ export default class TopicListItem extends React.Component {
                 </i>
                 {topic_data.comments}
               </span>
+              <small href="#" className="text-muted">
+                <i className="material-icons ml-1" style={chat_style}>
+                  schedule
+                </i>
+                {topic_data.update_at}
+              </small>
             </Link>
             <p className="my-1">
               <Tooltip
