@@ -109,12 +109,18 @@ export default class CommentModal extends React.Component {
           db.collection("Cards")
             .doc(this.props.card_id)
             .update("comments", firebase.firestore.FieldValue.increment(1));
+          db.collection("Cards")
+            .doc(this.props.card_id)
+            .set({ update_at: getNow() }, { merge: true });
         }
         // トピックについてのコメントはカード以下にcommentのカウントを+1
         if (this.state.topic_id) {
           db.collection("Topics")
             .doc(this.state.topic_id)
             .update("comments", firebase.firestore.FieldValue.increment(1));
+          db.collection("Topics")
+            .doc(this.state.topic_id)
+            .set({ update_at: getNow() }, { merge: true });
         }
       });
     await this.props.modal_toggle();
