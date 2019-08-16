@@ -1,25 +1,8 @@
 import React from "react";
-import { Row, Col, Tooltip } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default class UserListItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      tooltipOpen: false
-    };
-  }
-  /**
-   * ツールチップのイベントハンドラ
-   */
-  toggle() {
-    this.setState({
-      tooltipOpen: !this.state.tooltipOpen
-    });
-  }
-
   render() {
     const { user_data } = this.props;
     return (
@@ -49,15 +32,6 @@ export default class UserListItem extends React.Component {
                 <i className="material-icons align-middle">mode_comment</i>
                 {user_data.comments}
               </span>
-              <Tooltip
-                placement="bottom"
-                isOpen={this.state.tooltipOpen}
-                autohide={false}
-                target={user_data.uid}
-                toggle={this.toggle}
-              >
-                いいね獲得数
-              </Tooltip>
             </p>
           </h5>
         </Col>
