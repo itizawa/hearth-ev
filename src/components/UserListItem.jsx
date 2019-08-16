@@ -41,9 +41,13 @@ export default class UserListItem extends React.Component {
               <strong className="text-body">{user_data.name}</strong>
             </Link>
             <p className="my-1">
-              <span className="text-primary" href="#" id={user_data.uid}>
-                <i className="material-icons">grade</i>
+              <span className="text-primary mr-2" href="#" id={user_data.uid}>
+                <i className="material-icons align-middle">grade</i>
                 {user_data.acquired}
+              </span>
+              <span className="text-primary">
+                <i className="material-icons align-middle">mode_comment</i>
+                {user_data.comments}
               </span>
               <Tooltip
                 placement="bottom"
