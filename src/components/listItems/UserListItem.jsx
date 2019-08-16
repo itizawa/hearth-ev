@@ -13,13 +13,13 @@ export default class UserListItem extends React.Component {
               className="rounded-pill border"
               src={user_data.photoURL}
               alt={user_data.photoURL}
-              width="80%"
-              height="auto"
+              width="auto"
+              height="100%"
             />
           </Link>
         </Col>
         <Col xs="10" className="px-0">
-          <h5 className="mb-0">
+          <h6 className="mb-0">
             <Link to={"/user/" + user_data.uid + "/timestamp"}>
               <strong className="text-body">{user_data.name}</strong>
             </Link>
@@ -33,7 +33,7 @@ export default class UserListItem extends React.Component {
                 {user_data.comments}
               </span>
             </p>
-          </h5>
+          </h6>
         </Col>
       </Row>
     );

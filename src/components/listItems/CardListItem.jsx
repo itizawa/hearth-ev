@@ -12,7 +12,7 @@ export default class CardListItem extends React.Component {
     return (
       <Row className="mx-0 py-2 px-2 border-top">
         <Col xs="10" className="px-0">
-          <h5 className="mb-0">
+          <h6 className="mb-0">
             <Link to={"/card/" + card_data.card_id}>
               <strong className="text-body">{card_data.card_name}</strong>
               <span>
@@ -21,14 +21,14 @@ export default class CardListItem extends React.Component {
                 </i>
                 {card_data.comments}
               </span>
-              <small className="text-muted">
+              <span className="text-muted">
                 <i className="material-icons ml-1" style={chat_style}>
                   schedule
                 </i>
                 {card_data.update_at}
-              </small>
+              </span>
             </Link>
-          </h5>
+          </h6>
         </Col>
       </Row>
     );
