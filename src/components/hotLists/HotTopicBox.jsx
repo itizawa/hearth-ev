@@ -45,7 +45,7 @@ export default class HotTopicBox extends React.Component {
     };
 
     return (
-      <div className="bg-white border 2px shadow-sm">
+      <div className="bg-white border 2px shadow-sm mb-2">
         <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
           <i className="material-icons mr-2" style={trending_style}>
             trending_up
