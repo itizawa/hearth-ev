@@ -104,6 +104,13 @@ export default class CommentModal extends React.Component {
           .collection("Users")
           .doc(this.props.user_data.uid)
           .update("comments", firebase.firestore.FieldValue.increment(1));
+
+        // timestampを事前に取得
+        const time_data = {
+          update_at: await getNow(),
+          timestamp: await firebase.firestore.FieldValue.serverTimestamp()
+        };
+
         // カードについてのコメントはカード以下にcommentのカウントを+1
         if (this.props.card_id) {
           db.collection("Cards")
@@ -111,7 +118,7 @@ export default class CommentModal extends React.Component {
             .update("comments", firebase.firestore.FieldValue.increment(1));
           db.collection("Cards")
             .doc(this.props.card_id)
-            .set({ update_at: getNow() }, { merge: true });
+            .set(time_data, { merge: true });
         }
         // トピックについてのコメントはカード以下にcommentのカウントを+1
         if (this.state.topic_id) {
@@ -120,7 +127,7 @@ export default class CommentModal extends React.Component {
             .update("comments", firebase.firestore.FieldValue.increment(1));
           db.collection("Topics")
             .doc(this.state.topic_id)
-            .set({ update_at: getNow() }, { merge: true });
+            .set(time_data, { merge: true });
         }
       });
     await this.props.modal_toggle();
