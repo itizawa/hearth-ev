@@ -1,6 +1,8 @@
-# Hearth-ev
+# Hearth-EV
 
-Hearth-ev はDCG　「HearthStone」　のカードを評価し、コメントをするサイトです。
+Hearth-EV はDCG　「HearthStone」　のカードを評価し、コメントをするサイトです。
+
+Twitterログインをすることですぐに試すことができます。
 
 ## 使用している技術
 
