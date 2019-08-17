@@ -20,7 +20,7 @@ export default class HotTopicBox extends React.Component {
     var topics = [];
     const db = firebase.firestore();
     db.collection("Topics")
-      .orderBy("comments", "desc")
+      .orderBy("timestamp", "desc")
       .limit(3)
       .get()
       .then((snapshot) => {
