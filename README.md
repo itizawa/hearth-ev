@@ -1,3 +1,9 @@
-# hearth-ev
+# Hearth-ev
 
-hearth-evはDCG　「HearthStone」　のカードを評価し、コメントをするサイトです。
+Hearth-ev はDCG　「HearthStone」　のカードを評価し、コメントをするサイトです。
+
+## 使用している技術
+
+- React
+- Reactstrap
+- Firebase
