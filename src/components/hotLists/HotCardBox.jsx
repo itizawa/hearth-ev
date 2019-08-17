@@ -19,8 +19,8 @@ export default class HotUserBox extends React.Component {
     var cards = [];
     const db = firebase.firestore();
     db.collection("Cards")
-      .orderBy("update_at", "asc")
-      .limit(5)
+      .orderBy("timestamp", "desc")
+      .limit(15)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {

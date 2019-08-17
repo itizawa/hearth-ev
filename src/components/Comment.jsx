@@ -177,7 +177,7 @@ export default class Comment extends React.Component {
               </Link>
             )}
 
-            <p className="mb-0">{comment.text}</p>
+            <p className="mt-1 text-justify mb-0 pr-3">{comment.text}</p>
           </Col>
           {this.state.isLiked ? (
             <Col xs="12" className="p-0">
