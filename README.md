@@ -4,6 +4,8 @@ Hearth-EV はDCG　「HearthStone」　のカードを評価し、コメント�
 
 Twitterログインをすることですぐに試すことができます。
 
+https://hearth-ev.com/
+
 ## 使用している技術
 
 - React
