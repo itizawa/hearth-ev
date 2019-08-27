@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   DropdownToggle,
@@ -14,72 +14,72 @@ import {
   UncontrolledDropdown,
   Col,
   Row
-} from "reactstrap";
-import { TwitterShareButton, TwitterIcon } from "react-share";
+} from 'reactstrap'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
 
-import firebase from "firebase/app";
+import firebase from 'firebase/app'
 
 // functionのインポート
-import getNow from "../function/getNow";
+import getNow from '../function/getNow'
 
 export default class CommentModal extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       tweet_permission: true,
-      comment_text: "",
-      topic_name: this.props.topic_name || "",
-      topic_id: this.props.topic_id || ""
-    };
-    this.onTextChange = this.onTextChange.bind(this);
-    this.switchTopic = this.switchTopic.bind(this);
-    this.modal_toggle = this.modal_toggle.bind(this);
-    this.onPostComment = this.onPostComment.bind(this);
+      comment_text: '',
+      topic_name: this.props.topic_name || '',
+      topic_id: this.props.topic_id || ''
+    }
+    this.onTextChange = this.onTextChange.bind(this)
+    this.switchTopic = this.switchTopic.bind(this)
+    this.modal_toggle = this.modal_toggle.bind(this)
+    this.onPostComment = this.onPostComment.bind(this)
   }
 
   /**
    * Topicをセットする
    */
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (this.props.topic_name !== prevProps.topic_name) {
-      this.setState({ topic_name: this.props.topic_name });
-      this.setState({ topic_id: this.props.topic_id });
+      this.setState({ topic_name: this.props.topic_name })
+      this.setState({ topic_id: this.props.topic_id })
     }
   }
 
   /**
    * コメント取得ためのイベントハンドラ
    */
-  onTextChange(e) {
+  onTextChange (e) {
     this.setState({
       comment_text: e.target.value
-    });
+    })
   }
 
   /**
    * Topicの切り替えのためのイベントハンドラ
    */
-  switchTopic(e) {
-    this.setState({ topic_name: e.target.textContent.trim() });
-    this.setState({ topic_id: e.target.id.trim() });
+  switchTopic (e) {
+    this.setState({ topic_name: e.target.textContent.trim() })
+    this.setState({ topic_id: e.target.id.trim() })
   }
 
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  modal_toggle() {
-    this.props.modal_toggle();
-    this.setState({ topic_name: "" });
-    this.setState({ topic_id: "" });
+  modal_toggle () {
+    this.props.modal_toggle()
+    this.setState({ topic_name: '' })
+    this.setState({ topic_id: '' })
   }
 
   /**
    * コメント投稿のイベントハンドラ
    */
-  async onPostComment() {
-    const db = firebase.firestore();
+  async onPostComment () {
+    const db = firebase.firestore()
     await db
-      .collection("Comments")
+      .collection('Comments')
       .add({
         creator: this.props.user_data.displayName,
         creator_id: this.props.user_data.uid,
@@ -89,52 +89,52 @@ export default class CommentModal extends React.Component {
         create_at: getNow(),
         topic_name: this.state.topic_name,
         topic_id: this.state.topic_id,
-        card_id: this.props.card_id || "",
-        card_name: this.props.card_name || "",
+        card_id: this.props.card_id || '',
+        card_name: this.props.card_name || '',
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(async (ref) => {
-        console.log("Added document with ID: ", ref.id);
+        console.log('Added document with ID: ', ref.id)
         // IDを保存する
         await db
-          .collection("Comments")
+          .collection('Comments')
           .doc(ref.id)
-          .set({ comment_id: ref.id }, { merge: true });
+          .set({ comment_id: ref.id }, { merge: true })
         await db
-          .collection("Users")
+          .collection('Users')
           .doc(this.props.user_data.uid)
-          .update("comments", firebase.firestore.FieldValue.increment(1));
+          .update('comments', firebase.firestore.FieldValue.increment(1))
 
         // timestampを事前に取得
         const time_data = {
           update_at: await getNow(),
           timestamp: await firebase.firestore.FieldValue.serverTimestamp()
-        };
+        }
 
         // カードについてのコメントはカード以下にcommentのカウントを+1
         if (this.props.card_id) {
-          db.collection("Cards")
+          db.collection('Cards')
             .doc(this.props.card_id)
-            .update("comments", firebase.firestore.FieldValue.increment(1));
-          db.collection("Cards")
+            .update('comments', firebase.firestore.FieldValue.increment(1))
+          db.collection('Cards')
             .doc(this.props.card_id)
-            .set(time_data, { merge: true });
+            .set(time_data, { merge: true })
         }
         // トピックについてのコメントはカード以下にcommentのカウントを+1
         if (this.state.topic_id) {
-          db.collection("Topics")
+          db.collection('Topics')
             .doc(this.state.topic_id)
-            .update("comments", firebase.firestore.FieldValue.increment(1));
-          db.collection("Topics")
+            .update('comments', firebase.firestore.FieldValue.increment(1))
+          db.collection('Topics')
             .doc(this.state.topic_id)
-            .set(time_data, { merge: true });
+            .set(time_data, { merge: true })
         }
-      });
-    await this.props.modal_toggle();
-    await this.props.fetchComment();
+      })
+    await this.props.modal_toggle()
+    await this.props.fetchComment()
   }
 
-  render() {
+  render () {
     return (
       <Modal
         isOpen={this.props.modal}
@@ -143,45 +143,45 @@ export default class CommentModal extends React.Component {
       >
         <ModalHeader toggle={this.modal_toggle}>
           コメントする
-          <span hidden={!this.props.card_name} className="text-primary ml-3">
+          <span hidden={!this.props.card_name} className='text-primary ml-3'>
             #{this.props.card_name}
           </span>
         </ModalHeader>
 
         <ModalBody>
           <Row>
-            <Col xs="2" className="pr-0">
+            <Col xs='2' className='pr-0'>
               <img
-                className="ml-2 my-auto rounded-pill"
+                className='ml-2 my-auto rounded-pill'
                 src={this.props.user_data.photoURL}
                 alt={this.props.user_data.photoURL}
-                width="80%"
-                height="auto"
+                width='80%'
+                height='auto'
               />
             </Col>
-            <Col xs="10" className="pl-0">
+            <Col xs='10' className='pl-0'>
               <Input
                 onChange={this.onTextChange}
-                type="textarea"
-                name="text"
-                id="exampleText"
+                type='textarea'
+                name='text'
+                id='exampleText'
               />
             </Col>
           </Row>
         </ModalBody>
-        <ModalFooter className="p-2">
+        <ModalFooter className='p-2'>
           <InputGroup>
             <UncontrolledDropdown>
               <DropdownToggle caret />
               <DropdownMenu>
                 <DropdownItem
-                  id="yxjFQW0FsqNHcRLjJTHx"
+                  id='yxjFQW0FsqNHcRLjJTHx'
                   onClick={this.switchTopic}
                 >
                   事前評価
                 </DropdownItem>
                 <DropdownItem
-                  id="SZqeygxWgtrFoRMWuWUP"
+                  id='SZqeygxWgtrFoRMWuWUP'
                   onClick={this.switchTopic}
                 >
                   事後評価
@@ -191,19 +191,19 @@ export default class CommentModal extends React.Component {
             <Input
               readOnly
               value={this.state.topic_name}
-              placeholder="話題登録"
+              placeholder='話題登録'
             />
           </InputGroup>
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
-              title={this.state.comment_text + "#" + this.props.card_name}
-              url="https://hearth-ev.com/"
+              title={this.state.comment_text + '#' + this.props.card_name}
+              url='https://hearth-ev.com/'
             >
-              <TwitterIcon size={32} round={true} />
+              <TwitterIcon size={32} round />
             </TwitterShareButton>
           </div>
           <Button
-            color="primary"
+            color='primary'
             onClick={this.onPostComment}
             disabled={
               this.state.comment_text.length < 1 ||
@@ -214,7 +214,7 @@ export default class CommentModal extends React.Component {
           </Button>
         </ModalFooter>
       </Modal>
-    );
+    )
   }
 }
 
@@ -225,4 +225,4 @@ CommentModal.propTypes = {
   user_data: PropTypes.object.isRequired,
   card_id: PropTypes.string,
   card_name: PropTypes.string
-};
+}

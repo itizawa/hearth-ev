@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
-export default function Term() {
+export default function Term () {
   const scrol_style = {
-    height: "200px"
-  };
+    height: '200px'
+  }
   return (
-    <div className="overflow-auto mt-2" style={scrol_style}>
-      <h2 className="my-3 ml-3">利用規約</h2>
-      <div className="w-75 mx-auto">
+    <div className='overflow-auto mt-2' style={scrol_style}>
+      <h2 className='my-3 ml-3'>利用規約</h2>
+      <div className='w-75 mx-auto'>
         <h3>第1条(はじめに)</h3>
         <ol>
           <li>
@@ -25,14 +25,14 @@ export default function Term() {
           </li>
         </ol>
         <h3>第2条(プライバシーポリシー)</h3>
-        <p className="text-justify">
+        <p className='text-justify'>
           運営チームのプライバシーポリシーは、本サービスをご使用いただく際に運営チームに提供された情報が、どのように取り扱われるかについて説明しています。ユーザーは、本サービスを利用することによって、運営チームおよびその関係者がこれら情報を保管、処理、使用するために、これら情報の収集および使用（プライバシーポリシーの定めに従って）に同意することを理解しているものとします。
         </p>
         <ol>
           <li>
             公開されたHearth
             EVの投票情報の閲覧は、アカウントを作成することなく利用できます。ユーザーがアカウントを作成する場合には、本サービスがユーザーにサービスを提供できるように、一定の個人情報を提供する必要があります。それらの個人情報には、HearthEV
-            のユーザー名、メールアドレスまたは電話番号が含まれます。ユーザー名は常に公開されますが、実名または仮名のいずれも使用することができます。ユーザーは、例えば、異なる自分を表現するために、複数のHearthEVアカウントを管理することもできます。{" "}
+            のユーザー名、メールアドレスまたは電話番号が含まれます。ユーザー名は常に公開されますが、実名または仮名のいずれも使用することができます。ユーザーは、例えば、異なる自分を表現するために、複数のHearthEVアカウントを管理することもできます。{' '}
           </li>
           <li>
             本サービスは、ユーザーのメールアドレスや電話番号などの連絡先情報を、ユーザーのアカウントを認証し、ユーザーのアカウントと本サービスを安全に保護し、スパム、詐欺行為および不正使用を防ぐために使用します。
@@ -67,5 +67,5 @@ export default function Term() {
         </p>
       </div>
     </div>
-  );
+  )
 }
