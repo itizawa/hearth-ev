@@ -9,6 +9,7 @@ import MainApp from './mainApp/MainApp'
 import UserApp from './userApp/UserApp'
 import CardApp from './cardApp/CardApp'
 import CardListApp from './cardList/CardListApp'
+import TopicListApp from './topicList/TopicListApp'
 import TestApp from './TestApp'
 import TopicApp from './topicApp/TopicrApp'
 
@@ -57,6 +58,11 @@ export default class MainContainer extends React.Component {
                 exact
                 path='/card'
                 render={(props) => <CardListApp {...this.props} />}
+              />
+              <Route
+                exact
+                path='/topic'
+                render={(props) => <TopicListApp {...this.props} />}
               />
               <Route
                 exact

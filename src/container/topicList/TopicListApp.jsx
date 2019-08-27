@@ -16,3 +16,4 @@ export default class TopicListApp extends React.Component {
       </>
     )
   }
+}
