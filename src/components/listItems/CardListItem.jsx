@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default class CardListItem extends React.Component {
   render () {
     const chat_style = {
-      fontSize: '24px'
+      fontSize: '18px'
     }
 
     const { card_data } = this.props
@@ -17,7 +17,7 @@ export default class CardListItem extends React.Component {
               <strong className='text-body'>{card_data.card_name}</strong>
               <span>
                 <i className='material-icons ml-1' style={chat_style}>
-                  chat
+                  mode_comment
                 </i>
                 {card_data.comments}
               </span>
