@@ -7,6 +7,11 @@ import firebase from "firebase/app";
 
 /**
  * likeボタンを押した時の処理
+ * コメントにuser_idの追加
+ * user獲得数を+1
+ * @param [String] comment_id コメントのid
+ * @param [String] user_id 現在のユーザーのid
+ * @param [String] creator_id コメント作成者のid
  */
 const addToLikeList = (comment_id, user_id, creator_id) => {
   firebase
