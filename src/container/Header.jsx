@@ -158,8 +158,10 @@ export default class Header extends React.Component {
                     />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem disabled>
+                    <DropdownItem>
+                      <a href={'/user/' + this.props.user_data.uid}>
                       {this.props.user_data.displayName}
+                      </a>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem
