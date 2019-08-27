@@ -27,6 +27,13 @@ export default class Sidebar extends React.Component {
               </p>
             </Link>
           </ListGroupItem>
+          <ListGroupItem tag='button' action>
+            <Link to='/topic'>
+              <p className='text-body mb-0 align-middle'>
+                <i className='material-icons mr-2'>question_answer</i>トピック
+              </p>
+            </Link>
+          </ListGroupItem>
           {this.props.user_data.uid && (
             <ListGroupItem tag='button' action>
               <Link to={'/user/' + this.props.user_data.uid}>
