@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'reactstrap'
 
 import CenterContainer from './CenterContainer'
-import ViewContainer from '../topicApp/ViewContainer';
+import ViewContainer from '../topicApp/ViewContainer'
 
 export default class TopicListApp extends React.Component {
   render () {
@@ -14,7 +14,7 @@ export default class TopicListApp extends React.Component {
           </Col>
           <Col md='5' className='px-0'>
             <ViewContainer />
-          </Col> 
+          </Col>
         </Row>
       </>
     )
