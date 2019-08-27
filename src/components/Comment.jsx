@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import ReEditModal from "./ReEditModal";
 
+// functionのインポート
+import test from "../function/comment"
+
 import firebase from "firebase/app";
 
 export default class Comment extends React.Component {
@@ -55,20 +58,21 @@ export default class Comment extends React.Component {
    * いいねボタンを押したときのイベントハンドラ
    */
   async pushFavorite() {
-    this.setState({ isLiked: true });
-    this.setState({ like_count: this.state.like_count + 1 });
-    await firebase
-      .firestore()
-      .collection("Comments")
-      .doc(this.props.comment.comment_id)
-      .update({
-        like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
-      });
-    await firebase
-      .firestore()
-      .collection("Users")
-      .doc(this.props.comment.creator_id)
-      .update("acquired", firebase.firestore.FieldValue.increment(1));
+    test()
+    // this.setState({ isLiked: true });
+    // this.setState({ like_count: this.state.like_count + 1 });
+    // await firebase
+    //   .firestore()
+    //   .collection("Comments")
+    //   .doc(this.props.comment.comment_id)
+    //   .update({
+    //     like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
+    //   });
+    // await firebase
+    //   .firestore()
+    //   .collection("Users")
+    //   .doc(this.props.comment.creator_id)
+    //   .update("acquired", firebase.firestore.FieldValue.increment(1));
   }
 
   /**
