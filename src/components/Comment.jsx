@@ -7,9 +7,7 @@ import DeleteModal from "./DeleteModal";
 import ReEditModal from "./ReEditModal";
 
 // functionのインポート
-import addToLikeList from "../function/comment"
-
-import firebase from "firebase/app";
+import {addToLikeList,removeFromLikeList} from "../function/comment"
 
 export default class Comment extends React.Component {
   constructor(props) {
@@ -80,20 +78,7 @@ export default class Comment extends React.Component {
   async cancelFavorite() {
     this.setState({ isLiked: false });
     this.setState({ like_count: this.state.like_count - 1 });
-    await firebase
-      .firestore()
-      .collection("Comments")
-      .doc(this.props.comment.comment_id)
-      .update({
-        like: firebase.firestore.FieldValue.arrayRemove(
-          this.props.user_data.uid
-        )
-      });
-    await firebase
-      .firestore()
-      .collection("Users")
-      .doc(this.props.comment.creator_id)
-      .update("acquired", firebase.firestore.FieldValue.increment(-1));
+    await removeFromLikeList(this.props.comment.comment_id,this.props.user_data.uid,this.props.comment.creator_id)
   }
 
   render() {

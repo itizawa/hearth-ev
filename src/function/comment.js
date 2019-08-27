@@ -13,7 +13,7 @@ import firebase from "firebase/app";
  * @param [String] user_id 現在のユーザーのid
  * @param [String] creator_id コメント作成者のid
  */
-const addToLikeList = (comment_id, user_id, creator_id) => {
+export const addToLikeList = (comment_id, user_id, creator_id) => {
   firebase
     .firestore()
     .collection("Comments")
@@ -28,4 +28,27 @@ const addToLikeList = (comment_id, user_id, creator_id) => {
     .update("acquired", firebase.firestore.FieldValue.increment(1));
 };
 
-export default addToLikeList;
+/**
+ * likeボタンを取り消した時の処理
+ * コメントからuser_idを削除する
+ * user獲得数を-1
+ * @param [String] comment_id コメントのid
+ * @param [String] user_id 現在のユーザーのid
+ * @param [String] creator_id コメント作成者のid
+ */
+export const removeFromLikeList = (comment_id, user_id, creator_id) => {
+  firebase
+  .firestore()
+  .collection("Comments")
+  .doc(comment_id)
+  .update({
+    like: firebase.firestore.FieldValue.arrayRemove(
+      user_id
+    )
+  });
+ firebase
+  .firestore()
+  .collection("Users")
+  .doc(creator_id)
+  .update("acquired", firebase.firestore.FieldValue.increment(-1));
+}
