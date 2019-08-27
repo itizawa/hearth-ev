@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from 'firebase/app'
 
 /**
  * コメントに関するfunction
@@ -15,17 +15,17 @@ import firebase from "firebase/app";
 export const addToLikeList = (comment_id, user_id, creator_id) => {
   firebase
     .firestore()
-    .collection("Comments")
+    .collection('Comments')
     .doc(comment_id)
     .update({
       like: firebase.firestore.FieldValue.arrayUnion(user_id)
-    });
+    })
   firebase
     .firestore()
-    .collection("Users")
+    .collection('Users')
     .doc(creator_id)
-    .update("acquired", firebase.firestore.FieldValue.increment(1));
-};
+    .update('acquired', firebase.firestore.FieldValue.increment(1))
+}
 
 /**
  * likeボタンを取り消した時の処理
@@ -38,14 +38,14 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
 export const removeFromLikeList = (comment_id, user_id, creator_id) => {
   firebase
     .firestore()
-    .collection("Comments")
+    .collection('Comments')
     .doc(comment_id)
     .update({
       like: firebase.firestore.FieldValue.arrayRemove(user_id)
-    });
+    })
   firebase
     .firestore()
-    .collection("Users")
+    .collection('Users')
     .doc(creator_id)
-    .update("acquired", firebase.firestore.FieldValue.increment(-1));
-};
+    .update('acquired', firebase.firestore.FieldValue.increment(-1))
+}
