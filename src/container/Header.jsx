@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Collapse,
   DropdownToggle,
@@ -17,143 +17,144 @@ import {
   ModalBody,
   ModalFooter,
   UncontrolledDropdown
-} from "reactstrap";
+} from 'reactstrap'
 
-import Term from "../components/article/Term";
+import Term from '../components/article/Term'
 
-import firebase from "../firebase/firestore";
-import * as firestore from "../firebase/firestore";
+import firebase from '../firebase/firestore'
+import * as firestore from '../firebase/firestore'
 
 export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       collapsed: true,
       modal: false,
       user_data: {}
-    };
+    }
 
-    this.toggle = this.toggle.bind(this);
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.onLoginHandler = this.onLoginHandler.bind(this);
-    this.CreateUser = this.CreateUser.bind(this);
+    this.toggle = this.toggle.bind(this)
+    this.toggleNavbar = this.toggleNavbar.bind(this)
+    this.onLoginHandler = this.onLoginHandler.bind(this)
+    this.CreateUser = this.CreateUser.bind(this)
   }
 
   /**
    * navbar開閉のためのイベントハンドラ
    */
-  toggleNavbar() {
+  toggleNavbar () {
     this.setState({
       collapsed: !this.state.collapsed
-    });
+    })
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-  toggle() {
+  toggle () {
     this.setState((prevState) => ({
       modal: !prevState.modal
-    }));
+    }))
   }
 
   /**
    * ログインイベントハンドラ
    */
-  onLoginHandler() {
-    console.log("login");
+  onLoginHandler () {
+    console.log('login')
     firebase
       .auth()
       .signInWithRedirect(firestore.providerTwitter)
-      .then(this.CreateUser());
+      .then(this.CreateUser())
   }
 
   /**
    * ログアウトイベントハンドラ
    */
-  onLogoutHandler() {
+  onLogoutHandler () {
     firebase
       .auth()
       .signOut()
-      .then(function() {
-        window.location.reload();
+      .then(function () {
+        window.location.reload()
       })
-      .catch(function(error) {});
+      .catch(function (error) {})
   }
 
   /**
    * 初ログイン時のアカウント作成
    */
-  CreateUser() {
+  CreateUser () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        const name = user.displayName;
-        const photoURL = user.providerData[0].photoURL;
-        const uid = user.uid;
-        const db = firebase.firestore();
+        const name = user.displayName
+        const photoURL = user.providerData[0].photoURL
+        const uid = user.uid
+        const db = firebase.firestore()
         var addComment = db
-          .collection("Users")
+          .collection('Users')
           .doc(uid)
           .set(
             {
               name: name,
               photoURL: photoURL,
-              uid: uid            },
+              uid: uid
+            },
             { merge: true }
           )
           .then((ref) => {
-            this.setState({ comment_text: "" });
-          });
-        return Promise.all([addComment]);
+            this.setState({ comment_text: '' })
+          })
+        return Promise.all([addComment])
       }
-    });
+    })
   }
 
-  render() {
+  render () {
     const navbar_style = {
-      backgroundColor: "#00075d",
-      border: "0px"
-    };
+      backgroundColor: '#00075d',
+      border: '0px'
+    }
 
     const text_style = {
-      color: "white"
-    };
+      color: 'white'
+    }
 
     const dehaze_style = {
-      fontSize: "40px"
-    };
+      fontSize: '40px'
+    }
 
     return (
-      <React.Fragment>
-        <Navbar style={navbar_style} expand="md">
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2 p-0">
-            <i className="material-icons text-white" style={dehaze_style}>
+      <>
+        <Navbar style={navbar_style} expand='md'>
+          <NavbarToggler onClick={this.toggleNavbar} className='mr-2 p-0'>
+            <i className='material-icons text-white' style={dehaze_style}>
               dehaze
             </i>
           </NavbarToggler>
-          <NavbarBrand href="/" style={text_style}>
+          <NavbarBrand href='/' style={text_style}>
             Hearth EV
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Nav className="ml-auto" navbar>
+          <Nav className='ml-auto' navbar>
             <NavItem>
               {!this.props.user_data.uid ? (
                 <Button
                   onClick={this.toggle}
-                  className="bg-primary border border-white rounded-pill py-1 px-5"
+                  className='bg-primary border border-white rounded-pill py-1 px-5'
                   style={text_style}
                 >
                   Login
                 </Button>
               ) : (
-                <UncontrolledDropdown direction="left">
+                <UncontrolledDropdown direction='left'>
                   <DropdownToggle style={navbar_style}>
                     <img
-                      className="mr-2 rounded-pill border border-secondary"
+                      className='mr-2 rounded-pill border border-secondary'
                       src={this.props.user_data.photoURL}
-                      alt=""
-                      width="38px"
-                      height="38px"
+                      alt=''
+                      width='38px'
+                      height='38px'
                     />
                   </DropdownToggle>
                   <DropdownMenu>
@@ -163,10 +164,10 @@ export default class Header extends React.Component {
                     <DropdownItem divider />
                     <DropdownItem
                       onClick={() => {
-                        this.onLogoutHandler();
+                        this.onLogoutHandler()
                       }}
                     >
-                      <i className="material-icons">exit_to_app</i> Logiout
+                      <i className='material-icons'>exit_to_app</i> Logiout
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -183,10 +184,10 @@ export default class Header extends React.Component {
               <Term />
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.onLoginHandler}>
+              <Button color='primary' onClick={this.onLoginHandler}>
                 ログインする
-              </Button>{" "}
-              <Button color="secondary" onClick={this.toggle}>
+              </Button>{' '}
+              <Button color='secondary' onClick={this.toggle}>
                 Cancel
               </Button>
             </ModalFooter>
@@ -195,12 +196,12 @@ export default class Header extends React.Component {
             <Collapse isOpen={!this.state.collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="/" style={text_style}>
+                  <NavLink href='/' style={text_style}>
                     ホーム
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/card" style={text_style}>
+                  <NavLink href='/card' style={text_style}>
                     カード
                   </NavLink>
                 </NavItem>
@@ -208,11 +209,11 @@ export default class Header extends React.Component {
             </Collapse>
           )}
         </Navbar>
-      </React.Fragment>
-    );
+      </>
+    )
   }
 }
 
 Header.propTypes = {
   user_data: PropTypes.object
-};
+}
