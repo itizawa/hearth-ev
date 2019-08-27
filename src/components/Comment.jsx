@@ -7,7 +7,7 @@ import DeleteModal from "./DeleteModal";
 import ReEditModal from "./ReEditModal";
 
 // functionのインポート
-import test from "../function/comment"
+import addToLikeList from "../function/comment"
 
 import firebase from "firebase/app";
 
@@ -58,9 +58,9 @@ export default class Comment extends React.Component {
    * いいねボタンを押したときのイベントハンドラ
    */
   async pushFavorite() {
-    test()
-    // this.setState({ isLiked: true });
-    // this.setState({ like_count: this.state.like_count + 1 });
+    this.setState({ isLiked: true });
+    this.setState({ like_count: this.state.like_count + 1 });
+    addToLikeList()
     // await firebase
     //   .firestore()
     //   .collection("Comments")

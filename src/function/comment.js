@@ -4,8 +4,11 @@
  */
 
 
-const test =()=>{
+/**
+ * likeボタンを押した時の処理
+ */
+const addToLikeList =()=>{
   console.log("hello")
 }
 
-export default test
+export default addToLikeList
