@@ -60,19 +60,7 @@ export default class Comment extends React.Component {
   async pushFavorite() {
     this.setState({ isLiked: true });
     this.setState({ like_count: this.state.like_count + 1 });
-    addToLikeList()
-    // await firebase
-    //   .firestore()
-    //   .collection("Comments")
-    //   .doc(this.props.comment.comment_id)
-    //   .update({
-    //     like: firebase.firestore.FieldValue.arrayUnion(this.props.user_data.uid)
-    //   });
-    // await firebase
-    //   .firestore()
-    //   .collection("Users")
-    //   .doc(this.props.comment.creator_id)
-    //   .update("acquired", firebase.firestore.FieldValue.increment(1));
+    await addToLikeList(this.props.comment.comment_id,this.props.user_data.uid,this.props.comment.creator_id)
   }
 
   /**
