@@ -4,7 +4,6 @@ import firebase from "firebase/app";
  * コメントに関するfunction
  */
 
-
 /**
  * likeボタンを押した時の処理
  * コメントにuser_idの追加
@@ -38,17 +37,15 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
  */
 export const removeFromLikeList = (comment_id, user_id, creator_id) => {
   firebase
-  .firestore()
-  .collection("Comments")
-  .doc(comment_id)
-  .update({
-    like: firebase.firestore.FieldValue.arrayRemove(
-      user_id
-    )
-  });
- firebase
-  .firestore()
-  .collection("Users")
-  .doc(creator_id)
-  .update("acquired", firebase.firestore.FieldValue.increment(-1));
-}
+    .firestore()
+    .collection("Comments")
+    .doc(comment_id)
+    .update({
+      like: firebase.firestore.FieldValue.arrayRemove(user_id)
+    });
+  firebase
+    .firestore()
+    .collection("Users")
+    .doc(creator_id)
+    .update("acquired", firebase.firestore.FieldValue.increment(-1));
+};

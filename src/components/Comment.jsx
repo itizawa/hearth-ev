@@ -7,7 +7,7 @@ import DeleteModal from "./DeleteModal";
 import ReEditModal from "./ReEditModal";
 
 // functionのインポート
-import {addToLikeList,removeFromLikeList} from "../function/comment"
+import { addToLikeList, removeFromLikeList } from "../function/comment";
 
 export default class Comment extends React.Component {
   constructor(props) {
@@ -58,7 +58,11 @@ export default class Comment extends React.Component {
   async pushFavorite() {
     this.setState({ isLiked: true });
     this.setState({ like_count: this.state.like_count + 1 });
-    await addToLikeList(this.props.comment.comment_id,this.props.user_data.uid,this.props.comment.creator_id)
+    await addToLikeList(
+      this.props.comment.comment_id,
+      this.props.user_data.uid,
+      this.props.comment.creator_id
+    );
   }
 
   /**
@@ -78,7 +82,11 @@ export default class Comment extends React.Component {
   async cancelFavorite() {
     this.setState({ isLiked: false });
     this.setState({ like_count: this.state.like_count - 1 });
-    await removeFromLikeList(this.props.comment.comment_id,this.props.user_data.uid,this.props.comment.creator_id)
+    await removeFromLikeList(
+      this.props.comment.comment_id,
+      this.props.user_data.uid,
+      this.props.comment.creator_id
+    );
   }
 
   render() {
