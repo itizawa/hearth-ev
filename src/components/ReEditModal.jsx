@@ -65,6 +65,9 @@ export default class ReEditModal extends React.Component {
       >
         <ModalHeader toggle={this.props.modal_toggle}>
           コメントを編集する
+          <span hidden={!comment.card_name} className='text-primary ml-3'>
+            #{comment.card_name}
+          </span>
         </ModalHeader>
         <ModalBody>
           <Row className='mx-0 py-2 px-2'>
