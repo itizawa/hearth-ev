@@ -39,8 +39,8 @@ export default class HotTopicBox extends React.Component {
           </i>
           HotTopic
         </h3>
-        {this.state.topics.map((topic, index) => {
-          return <TopicListItem key={index} topic_data={topic} />
+        {this.state.topics.map((topic) => {
+          return <TopicListItem key={topic.topic_id} topic_data={topic} />
         })}
       </div>
     )
