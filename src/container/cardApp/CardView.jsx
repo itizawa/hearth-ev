@@ -37,8 +37,8 @@ export default class CardView extends React.Component {
             </Col>
           </Row>
           <img
-            src={this.props.focus_card.card_img}
-            alt={this.props.focus_card.card_id}
+            src={focus_card.card_img}
+            alt={focus_card.card_id}
             width='100%'
             height='auto'
           />
