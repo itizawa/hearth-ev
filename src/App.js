@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "reactstrap"
 
 //共通 css
 import "./App.css";
@@ -15,7 +16,8 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user_data: {}
+      user_data: {},
+      isDataFetch: true
     };
 
     this.setUpUser();
@@ -39,9 +41,19 @@ export default class App extends React.Component {
   }
 
   render() {
+    const spinner_style = {
+      height: '200px',
+      width: '200px',
+      marginLeft: '40%',
+    }
     return (
       <React.Fragment>
         <Header user_data={this.state.user_data} />
+        {this.state.isDataFetch && (
+          <div className='mt-2'>
+            <Spinner style={spinner_style} color='primary' type='grow' />
+          </div>
+        )}
         <MainContainer user_data={this.state.user_data} />
       </React.Fragment>
     );
