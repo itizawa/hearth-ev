@@ -10,7 +10,7 @@ export default class CardListItem extends React.Component {
 
     const { card_data } = this.props
     return (
-      <Row className='mx-0 py-2 px-2 border-top'>
+      <Row className='mx-0 p-2 border-top'>
         <Col xs='10' className='px-0'>
           <h6 className='mb-0'>
             <Link to={'/card/' + card_data.card_id}>
