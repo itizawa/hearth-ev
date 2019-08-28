@@ -20,10 +20,10 @@ export default class UserListItem extends React.Component {
         </Col>
         <Col xs='10' className='px-0'>
           <h6 className='mb-0'>
-            <Link to={'/user/' + user_data.uid + '/timestamp'}>
-              <strong className='text-body'>{user_data.name}</strong>
-            </Link>
             <p className='my-1'>
+              <Link to={'/user/' + user_data.uid + '/timestamp'}>
+                <strong className='text-body'>{user_data.name}</strong>
+              </Link>
               <span className='text-primary mr-2' href='#' id={user_data.uid}>
                 <i className='material-icons align-middle'>grade</i>
                 {user_data.acquired}
