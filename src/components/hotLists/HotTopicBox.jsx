@@ -3,6 +3,9 @@ import firebase from "firebase/app";
 
 import TopicListItem from "../listItems/TopicListItem";
 
+// functionのインポート
+import { fetchAllTopicData } from '../../function/topic'
+
 export default class HotTopicBox extends React.Component {
   constructor(props) {
     super(props);
@@ -16,23 +19,24 @@ export default class HotTopicBox extends React.Component {
   /**
    * トピックデータを取得するイベントハンドラ
    */
-  fetchTopicData = () => {
-    var topics = [];
-    const db = firebase.firestore();
-    db.collection("Topics")
-      .orderBy("timestamp", "desc")
-      .limit(3)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          topics.push(doc.data());
-        });
-        this.setState({ topics: topics });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
+  async fetchTopicData () {
+    // var topics = [];
+    // const db = firebase.firestore();
+    // db.collection("Topics")
+    //   .orderBy("timestamp", "desc")
+    //   .limit(3)
+    //   .get()
+    //   .then((snapshot) => {
+    //     snapshot.forEach((doc) => {
+    //       topics.push(doc.data());
+    //     });
+    //     this.setState({ topics: topics });
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error getting documents", err);
+    //   });
+    // return Promise.all([db]);
+    await fetchAllTopicData()
   };
 
   render() {
