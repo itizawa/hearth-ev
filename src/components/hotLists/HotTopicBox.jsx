@@ -18,8 +18,8 @@ export default class HotTopicBox extends React.Component {
    * トピックデータを取得するイベントハンドラ
    */
   async fetchTopicData () {
-    const data = await fetchHotTopicData()
-    console.log(data)
+    const HotTopicData = await fetchHotTopicData()
+    this.setState({ topics:HotTopicData})
   };
 
   render () {
