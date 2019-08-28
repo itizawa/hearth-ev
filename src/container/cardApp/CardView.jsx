@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import BgImage from '../../asset/img/bg.jpg'
+import bgImage from '../../asset/img/bg.jpg'
 
 export default class CardView extends React.Component {
   constructor (props) {
@@ -14,7 +14,7 @@ export default class CardView extends React.Component {
   render () {
     const img_frame = {
       padding: '5%',
-      backgroundImage: `url(${BgImage})`
+      backgroundImage: `url(${bgImage})`
     }
     return (
       <React.Fragment>
