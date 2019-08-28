@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Collapse,
@@ -159,9 +160,9 @@ export default class Header extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <a href={'/user/' + this.props.user_data.uid} className='text-body'>
+                      <Link to={'/user/' + this.props.user_data.uid} className='text-body'>
                         {this.props.user_data.displayName}
-                      </a>
+                      </Link>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem
