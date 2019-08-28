@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import bgImage from '../../asset/img/bg.jpg'
 
-import { Row, Col, Card } from "reactstrap";
+import { Row, Col, Card } from 'reactstrap'
 
 export default class CardView extends React.Component {
   constructor (props) {
@@ -14,8 +14,7 @@ export default class CardView extends React.Component {
   }
 
   render () {
-
-    const {focus_card} = this.props
+    const { focus_card } = this.props
 
     const img_frame = {
       padding: '5%',
