@@ -5,8 +5,8 @@ import firebase from 'firebase/app'
  */
 
 /**
- * トピックデータを全て取得するためのfunction
+ * ホットトピックデータを取得するためのfunction
  */
-export const fetchAllTopicData = () =>{
+export const fetchHotTopicData = () =>{
   console.log("hello")
 }

@@ -1,10 +1,9 @@
 import React from "react";
-import firebase from "firebase/app";
 
 import TopicListItem from "../listItems/TopicListItem";
 
 // functionのインポート
-import { fetchAllTopicData } from '../../function/topic'
+import { fetchHotTopicData } from '../../function/topic'
 
 export default class HotTopicBox extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ export default class HotTopicBox extends React.Component {
     //     console.log("Error getting documents", err);
     //   });
     // return Promise.all([db]);
-    await fetchAllTopicData()
+    await fetchHotTopicData()
   };
 
   render() {
