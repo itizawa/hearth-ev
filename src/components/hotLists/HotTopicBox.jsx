@@ -19,23 +19,8 @@ export default class HotTopicBox extends React.Component {
    * トピックデータを取得するイベントハンドラ
    */
   async fetchTopicData () {
-    // var topics = [];
-    // const db = firebase.firestore();
-    // db.collection("Topics")
-    //   .orderBy("timestamp", "desc")
-    //   .limit(3)
-    //   .get()
-    //   .then((snapshot) => {
-    //     snapshot.forEach((doc) => {
-    //       topics.push(doc.data());
-    //     });
-    //     this.setState({ topics: topics });
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error getting documents", err);
-    //   });
-    // return Promise.all([db]);
-    await fetchHotTopicData()
+    const data = await fetchHotTopicData()
+    console.log(data)
   };
 
   render() {
