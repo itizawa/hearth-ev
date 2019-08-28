@@ -17,7 +17,7 @@ export default class CardView extends React.Component {
       backgroundImage: `url(${BgImage})`
     }
     return (
-      <>
+      <React.Fragment>
         <div style={img_frame}>
           <img
             src={this.props.focus_card.card_img}
@@ -26,7 +26,7 @@ export default class CardView extends React.Component {
             height='auto'
           />
         </div>
-      </>
+      </React.Fragment>
     )
   }
 }
