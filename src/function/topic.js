@@ -6,6 +6,7 @@ import firebase from 'firebase/app'
 
 /**
  * ホットトピックデータを取得するためのfunction
+ * @return {topics} 新しい順に3つのトピックを返す 
  */
 export const fetchHotTopicData = () => {
   var topics = []
