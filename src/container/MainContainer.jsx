@@ -14,18 +14,21 @@ import TestApp from './TestApp'
 import TopicApp from './topicApp/TopicrApp'
 
 export default class MainContainer extends React.Component {
-  constructor(){
+  constructor () {
     super()
-    this.state={
-      ifDataFetch:true
+    this.state = {
+      ifDataFetch: true
     }
   }
+
   render () {
     const container_style = {
       maxWidth: '1440px',
       margin: '0 auto'
     }
     const spinner_style = {
+      height: '200px',
+      width: '200px'
     }
     return (
       <BrowserRouter>
@@ -37,11 +40,10 @@ export default class MainContainer extends React.Component {
               </Col>
             )}
             {this.state.ifDataFetch && (
-              <div>
-              <Spinner style={spinner_style} color="primary" />
+              <div className='mt-2 mx-auto'>
+                <Spinner style={spinner_style} color='primary' type='grow' />
               </div>
-            )
-            }
+            )}
             <Col xl='10' className='mt-2'>
               <Route
                 exact
