@@ -55,7 +55,7 @@ export default class Comment extends React.Component {
   /**
    * いいねボタンを押したときのイベントハンドラ
    */
-  async pushFavorite () {
+  pushFavorite() => {
     this.setState({ isLiked: true })
     this.setState({ like_count: this.state.like_count + 1 })
     await addToLikeList(
