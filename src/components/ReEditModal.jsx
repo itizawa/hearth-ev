@@ -2,23 +2,33 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
   Input,
+  InputGroup,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Row,
+  UncontrolledDropdown,
   Col
 } from 'reactstrap'
 
 import firebase from 'firebase/app'
 
 export default class ReEditModal extends React.Component {
+
+  MIN_WORD_COUNT = 1;
+  MAX_WORD_COUNT = 150
+
   constructor (props) {
     super(props)
     this.state = {
       comment_text: this.props.comment.text
     }
+
     this.reEditComment = this.reEditComment.bind(this)
     this.onTextChange = this.onTextChange.bind(this)
   }
@@ -26,7 +36,6 @@ export default class ReEditModal extends React.Component {
   /**
    * コメント取得ためのイベントハンドラ
    */
-
   onTextChange (e) {
     this.setState({
       comment_text: e.target.value
@@ -36,7 +45,6 @@ export default class ReEditModal extends React.Component {
   /**
    * コメント再編集のイベントハンドラ
    */
-
   async reEditComment () {
     if (this.props.comment.creator_id === this.props.user_data.uid) {
       await firebase
@@ -62,6 +70,9 @@ export default class ReEditModal extends React.Component {
       >
         <ModalHeader toggle={this.props.modal_toggle}>
           コメントを編集する
+          <span hidden={!comment.card_name} className='text-primary ml-3'>
+            #{comment.card_name}
+          </span>
         </ModalHeader>
         <ModalBody>
           <Row className='mx-0 py-2 px-2'>
@@ -93,8 +104,8 @@ export default class ReEditModal extends React.Component {
             color='primary'
             onClick={this.reEditComment}
             disabled={
-              this.state.comment_text.length < 1 ||
-              this.state.comment_text.length > 150
+              this.state.comment_text.length < this.MIN_WORD_COUNT ||
+              this.state.comment_text.length > this.MAX_WORD_COUNT
             }
           >
             更新
