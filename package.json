@@ -5,6 +5,9 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "eslint": "^6.2.2",
+    "eslint-config-google": "^0.13.0",
+    "eslint-plugin-react": "^7.14.3",
     "firebase": "^6.3.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -20,7 +23,9 @@
     "build": "react-scripts build",
     "deploy": "react-scripts build && firebase deploy",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src/**/*.js **/*.jsx",
+    "lint --fix": "eslint --fix **/*.jsx"
   },
   "eslintConfig": {
     "extends": "react-app"

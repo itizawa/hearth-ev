@@ -23,6 +23,10 @@ import firebase from 'firebase/app'
 import getNow from '../function/getNow'
 
 export default class CommentModal extends React.Component {
+
+  MIN_WORD_COUNT = 1
+  MAX_WORD_COUNT = 150
+
   constructor (props) {
     super(props)
     this.state = {
@@ -206,8 +210,8 @@ export default class CommentModal extends React.Component {
             color='primary'
             onClick={this.onPostComment}
             disabled={
-              this.state.comment_text.length < 1 ||
-              this.state.comment_text.length > 500
+              this.state.comment_text.length < this.MIN_WORD_COUNT ||
+              this.state.comment_text.length > this.MAX_WORD_COUNT
             }
           >
             Submit
