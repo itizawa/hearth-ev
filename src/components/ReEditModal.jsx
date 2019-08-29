@@ -98,30 +98,6 @@ export default class ReEditModal extends React.Component {
               onChange={this.onTextChange}
             />
           </Row>
-          <InputGroup>
-            <UncontrolledDropdown>
-              <DropdownToggle caret />
-              <DropdownMenu>
-                <DropdownItem
-                  id='yxjFQW0FsqNHcRLjJTHx'
-                  onClick={this.switchTopic}
-                >
-                  事前評価
-                </DropdownItem>
-                <DropdownItem
-                  id='SZqeygxWgtrFoRMWuWUP'
-                  onClick={this.switchTopic}
-                >
-                  事後評価
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            <Input
-              readOnly
-              value={this.state.topic_name}
-              placeholder='話題登録'
-            />
-          </InputGroup>
         </ModalBody>
         <ModalFooter className='p-2'>
           <Button
