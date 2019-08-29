@@ -31,7 +31,7 @@ export default class MainContainer extends React.Component {
             <Route
               exact
               path='/'
-              render={(props) => <MainApp {...this.props} />}
+              render={() => <MainApp {...this.props} />}
             />
             <Route
               path='/user/:user_id'
@@ -56,17 +56,17 @@ export default class MainContainer extends React.Component {
             <Route
               exact
               path='/card'
-              render={(props) => <CardListApp {...this.props} />}
+              render={() => <CardListApp {...this.props} />}
             />
             <Route
               exact
               path='/topic'
-              render={(props) => <TopicListApp {...this.props} />}
+              render={() => <TopicListApp {...this.props} />}
             />
             <Route
               exact
               path='/test'
-              render={(props) => <TestApp {...this.props} />}
+              render={() => <TestApp {...this.props} />}
             />
           </Col>
         </Row>

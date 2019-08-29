@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 export default class CardListItem extends React.Component {
@@ -33,4 +34,8 @@ export default class CardListItem extends React.Component {
       </Row>
     )
   }
+}
+
+CardListItem.propTypes = {
+  card_data: PropTypes.object
 }

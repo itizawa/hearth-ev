@@ -79,7 +79,6 @@ export default class Header extends React.Component {
       .then(function () {
         window.location.reload()
       })
-      .catch(function (error) {})
   }
 
   /**
@@ -103,7 +102,7 @@ export default class Header extends React.Component {
             },
             { merge: true }
           )
-          .then((ref) => {
+          .then(() => {
             this.setState({ comment_text: '' })
           })
         return Promise.all([addComment])
@@ -180,7 +179,6 @@ export default class Header extends React.Component {
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
-            className={this.props.className}
           >
             <ModalHeader toggle={this.toggle}>Twitterログイン</ModalHeader>
             <ModalBody>
