@@ -23,5 +23,5 @@ export default class ViewContainer extends React.Component {
 
 ViewContainer.propTypes = {
   user_data: PropTypes.object,
-  focus_user: PropTypes.object
+  focus_card: PropTypes.object
 }
