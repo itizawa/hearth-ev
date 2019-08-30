@@ -4,5 +4,5 @@ export const firebaseConfig = {
   databaseURL: 'https://card-ev.firebaseio.com',
   projectId: 'card-ev',
   storageBucket: 'card-ev.appspot.com',
-  messagingSenderId: '370530578074',
+  messagingSenderId: '370530578074'
 }

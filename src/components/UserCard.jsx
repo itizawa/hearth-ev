@@ -24,5 +24,5 @@ export default class UserCard extends React.Component {
 }
 
 UserCard.propTypes = {
-  user_data : PropTypes.object,
+  user_data: PropTypes.object
 }

@@ -18,7 +18,7 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
     .collection('Comments')
     .doc(comment_id)
     .update({
-      like: firebase.firestore.FieldValue.arrayUnion(user_id),
+      like: firebase.firestore.FieldValue.arrayUnion(user_id)
     })
   firebase
     .firestore()
@@ -41,7 +41,7 @@ export const removeFromLikeList = (comment_id, user_id, creator_id) => {
     .collection('Comments')
     .doc(comment_id)
     .update({
-      like: firebase.firestore.FieldValue.arrayRemove(user_id),
+      like: firebase.firestore.FieldValue.arrayRemove(user_id)
     })
   firebase
     .firestore()

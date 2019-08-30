@@ -1,6 +1,6 @@
 import firebase from 'firebase/app' // 必須
 import 'firebase/firestore'
-import {firebaseConfig} from './config'
+import { firebaseConfig } from './config'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/storage'

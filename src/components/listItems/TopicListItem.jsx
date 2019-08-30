@@ -36,6 +36,6 @@ export default class TopicListItem extends React.Component {
   }
 }
 
-TopicListItem.propTypes={
+TopicListItem.propTypes = {
   topic_data: PropTypes.object
 }
