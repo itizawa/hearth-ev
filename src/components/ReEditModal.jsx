@@ -2,17 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
   Input,
-  InputGroup,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Row,
-  UncontrolledDropdown,
   Col
 } from 'reactstrap'
 
