@@ -9,13 +9,13 @@ import getNow from './getNow'
 
 /**
  * ホットトピックデータを取得するためのfunction
- * @return {topics} 新しい順に3つのトピックを返す
+ * @return {topics} 新しい順に10トピックを返す
  */
 export const fetchHotTopicData = async () => {
-  var topics = []
-  const snapshot = await firebase.firestore().collection('Topics').orderBy('timestamp', 'desc').limit(3).get()
+  let topics = []
+  const snapshot = await firebase.firestore().collection('Topics').orderBy('timestamp', 'desc').limit(10).get()
 
-  await snapshot.forEach((doc) => {
+  snapshot.forEach((doc) => {
     topics.push(doc.data())
   })
 
