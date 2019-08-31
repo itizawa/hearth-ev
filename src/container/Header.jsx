@@ -7,9 +7,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Navbar,
-  NavLink,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   Button,
@@ -26,7 +24,7 @@ import firebase from '../firebase/firestore'
 import * as firestore from '../firebase/firestore'
 
 export default class Header extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       collapsed: true,
@@ -43,7 +41,7 @@ export default class Header extends React.Component {
   /**
    * navbar開閉のためのイベントハンドラ
    */
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     })
@@ -52,7 +50,7 @@ export default class Header extends React.Component {
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-  toggle () {
+  toggle() {
     this.setState((prevState) => ({
       modal: !prevState.modal
     }))
@@ -61,7 +59,7 @@ export default class Header extends React.Component {
   /**
    * ログインイベントハンドラ
    */
-  onLoginHandler () {
+  onLoginHandler() {
     console.log('login')
     firebase
       .auth()
@@ -72,7 +70,7 @@ export default class Header extends React.Component {
   /**
    * ログアウトイベントハンドラ
    */
-  onLogoutHandler () {
+  onLogoutHandler() {
     firebase
       .auth()
       .signOut()
@@ -84,7 +82,7 @@ export default class Header extends React.Component {
   /**
    * 初ログイン時のアカウント作成
    */
-  CreateUser () {
+  CreateUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const name = user.displayName
@@ -110,7 +108,7 @@ export default class Header extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const navbar_style = {
       backgroundColor: '#00075d',
       border: '0px'
@@ -132,9 +130,9 @@ export default class Header extends React.Component {
               dehaze
             </i>
           </NavbarToggler>
-          <NavbarBrand href='/' style={text_style}>
+          <Link to="/" style={text_style}>
             Hearth EV
-          </NavbarBrand>
+            </Link>
           <NavbarToggler onClick={this.toggle} />
           <Nav className='ml-auto' navbar>
             <NavItem>
@@ -147,33 +145,33 @@ export default class Header extends React.Component {
                   Login
                 </Button>
               ) : (
-                <UncontrolledDropdown direction='left'>
-                  <DropdownToggle style={navbar_style}>
-                    <img
-                      className='mr-2 rounded-pill border border-secondary'
-                      src={this.props.user_data.photoURL}
-                      alt=''
-                      width='38px'
-                      height='38px'
-                    />
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>
-                      <Link to={'/user/' + this.props.user_data.uid} className='text-body'>
-                        {this.props.user_data.displayName}
-                      </Link>
+                  <UncontrolledDropdown direction='left'>
+                    <DropdownToggle style={navbar_style}>
+                      <img
+                        className='mr-2 rounded-pill border border-secondary'
+                        src={this.props.user_data.photoURL}
+                        alt=''
+                        width='38px'
+                        height='38px'
+                      />
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem>
+                        <Link to={'/user/' + this.props.user_data.uid} className='text-body'>
+                          {this.props.user_data.displayName}
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem
+                        onClick={() => {
+                          this.onLogoutHandler()
+                        }}
+                      >
+                        <i className='material-icons'>exit_to_app</i> Logiout
                     </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem
-                      onClick={() => {
-                        this.onLogoutHandler()
-                      }}
-                    >
-                      <i className='material-icons'>exit_to_app</i> Logiout
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              )}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                )}
             </NavItem>
           </Nav>
           <Modal
@@ -197,14 +195,14 @@ export default class Header extends React.Component {
             <Collapse isOpen={!this.state.collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink href='/' style={text_style}>
+                  <Link to='/' style={text_style}>
                     ホーム
-                  </NavLink>
+                  </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href='/card' style={text_style}>
+                  <Link to='/card' style={text_style}>
                     カード
-                  </NavLink>
+                  </Link>
                 </NavItem>
               </Nav>
             </Collapse>

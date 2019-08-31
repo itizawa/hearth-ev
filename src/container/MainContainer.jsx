@@ -14,7 +14,7 @@ import TestApp from './TestApp'
 import TopicApp from './topicApp/TopicrApp'
 
 export default class MainContainer extends React.Component {
-  render () {
+  render() {
     const container_style = {
       maxWidth: '1440px',
       margin: '0 auto'
