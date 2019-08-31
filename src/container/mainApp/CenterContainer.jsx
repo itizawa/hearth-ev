@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
 
-import CommentModal from "../../components/CommentModal";
+import CommentModal from "../../components/Modals/CommentModal";
 import Comment from "../../components/Comment";
 
 import firebase from "firebase/app";

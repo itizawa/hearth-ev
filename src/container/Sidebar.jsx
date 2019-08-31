@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { CardImg, ListGroup, ListGroupItem } from 'reactstrap'
 
 export default class Sidebar extends React.Component {
-  render () {
+  render() {
     return (
       <div className='shadow-sm pt-2 sticky-top'>
         <CardImg top width='100%' src={logo} alt='Card logo' />

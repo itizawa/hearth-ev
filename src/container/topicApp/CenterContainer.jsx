@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Input, Col, Row } from "reactstrap";
 
-import CommentModal from "../../components/CommentModal";
+import CommentModal from "../../components/Modals/CommentModal";
 import Comment from "../../components/Comment";
 
 import firebase from "firebase/app";
@@ -45,7 +45,7 @@ export default class CenterContainer extends React.Component {
         });
         this.setState({ comments: comments });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
     return Promise.all([db]);

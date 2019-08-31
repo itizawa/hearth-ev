@@ -6,7 +6,7 @@ import { Button, Input } from 'reactstrap'
 import firebase from 'firebase/app'
 
 export default class TestApp extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       name: '',
@@ -22,7 +22,7 @@ export default class TestApp extends React.Component {
    * カード取得ためのイベントハンドラ
    */
 
-  onCardChange (e) {
+  onCardChange(e) {
     this.setState({
       name: e.target.value
     })
@@ -32,7 +32,7 @@ export default class TestApp extends React.Component {
    * image取得ためのイベントハンドラ
    */
 
-  onImageChange (e) {
+  onImageChange(e) {
     this.setState({
       image: e.target.value
     })
@@ -42,7 +42,7 @@ export default class TestApp extends React.Component {
    * hero取得ためのイベントハンドラ
    */
 
-  onHeroChange (e) {
+  onHeroChange(e) {
     this.setState({
       hero: e.target.value
     })
@@ -52,7 +52,7 @@ export default class TestApp extends React.Component {
    * コメント投稿のイベントハンドラ
    */
 
-  onPostComment () {
+  onPostComment() {
     const db = firebase.firestore()
     var addComment = db
       .collection('Cards')
@@ -73,7 +73,7 @@ export default class TestApp extends React.Component {
     return Promise.all([addComment])
   }
 
-  render () {
+  render() {
     return (
       <>
         <Input
