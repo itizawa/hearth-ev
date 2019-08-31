@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Col, Row } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
-import DeleteModal from './DeleteModal'
+import DeleteModal from '../components/Modals/DeleteModal'
 import ReEditModal from '../components/Modals/ReEditModal'
 
 // functionのインポート
