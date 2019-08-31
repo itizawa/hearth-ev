@@ -16,6 +16,7 @@ export default class CenterContainer extends React.Component {
     this.fetchTopicData()
 
     this.toggleModal = this.toggleModal.bind(this)
+    this.fetchTopicData = this.fetchTopicData.bind(this)
   }
 
   /**
@@ -51,7 +52,7 @@ export default class CenterContainer extends React.Component {
 
     return (
       <>
-        <CreateTopicModal show={this.state.showCreateTopicModal} toggleModal={this.toggleModal} />
+        <CreateTopicModal show={this.state.showCreateTopicModal} toggleModal={this.toggleModal} fetchTopicData={this.fetchTopicData} />
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             <span className='mr-3'>Topic List</span>

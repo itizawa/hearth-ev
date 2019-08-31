@@ -51,6 +51,7 @@ export default class CreateTopicModal extends React.Component {
   async onPostTopic() {
     await createNewTopic(this.state.topicText)
     await this.toggleModal()
+    await this.props.fetchTopicData()
   }
 
   render() {
