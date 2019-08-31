@@ -179,12 +179,6 @@ export default class CommentModal extends React.Component {
               <DropdownToggle caret />
               <DropdownMenu>
                 <DropdownItem
-                  id='yxjFQW0FsqNHcRLjJTHx'
-                  onClick={this.switchTopic}
-                >
-                  事前評価
-                </DropdownItem>
-                <DropdownItem
                   id='SZqeygxWgtrFoRMWuWUP'
                   onClick={this.switchTopic}
                 >
