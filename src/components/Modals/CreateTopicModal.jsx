@@ -83,7 +83,7 @@ export default class CreateTopicModal extends React.Component {
               this.state.topicText.length > this.MAX_WORD_COUNT
             }
           >
-            Submit
+            作成
           </Button>
         </ModalFooter>
       </Modal>
