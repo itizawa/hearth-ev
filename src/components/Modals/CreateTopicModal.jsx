@@ -39,6 +39,7 @@ export default class CreateTopicModal extends React.Component {
    * Modal開閉のためのイベントハンドラ
    */
   toggleModal() {
+    this.setState({ topicText: '' })
     this.props.toggleModal()
   }
 
@@ -47,7 +48,6 @@ export default class CreateTopicModal extends React.Component {
    */
   async onPostTopic() {
     console.log('ここにトピック作成のイベント')
-    this.setState({ topicText: '' })
     await this.toggleModal()
   }
 
