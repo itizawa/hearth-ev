@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button} from 'reactstrap'
 
 import TopicListItem from '../../components/listItems/TopicListItem';
 
@@ -44,7 +45,12 @@ export default class CenterContainer extends React.Component {
       <>
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
-            Topic List
+            <span className="mr-3">Topic List</span>
+            <Button color="secondary">
+              <i class="material-icons mr-1">
+                library_add
+              </i>新しいトピックを追加する
+            </Button>
           </h3>
           {this.state.topics.map((topic, index) => {
           return <TopicListItem key={index} topic_data={topic} />
