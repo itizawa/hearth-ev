@@ -64,10 +64,10 @@ export default class CreateTopicModal extends React.Component {
 
         <ModalBody>
           <Row>
-            <Col xs='10' className='pl-0'>
+            <Col xs='12'>
               <Input
                 onChange={this.onTextChange}
-                type='textarea'
+                type='textinput'
                 name='text'
                 id='exampleText'
               />
