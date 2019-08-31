@@ -23,7 +23,7 @@ export default class CreateTopicModal extends React.Component {
       topic_text: '',
     }
     this.onTextChange = this.onTextChange.bind(this)
-    this.modal_toggle = this.modal_toggle.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
     this.onPostTopic = this.onPostTopic.bind(this)
   }
 
@@ -39,9 +39,8 @@ export default class CreateTopicModal extends React.Component {
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  modal_toggle () {
-    console.log('モーダル開閉')
-    // this.props.modal_toggle()
+  toggleModal () {
+    this.props.toggleModal()
   }
 
   /**
@@ -49,14 +48,14 @@ export default class CreateTopicModal extends React.Component {
    */
   async onPostTopic () {
     console.log('ここにトピック作成のイベント')
-    // await this.props.modal_toggle()
+    await this.toggleModal()
   }
 
   render () {
     return (
       <Modal
         isOpen={this.props.show}
-        toggle={this.modal_toggle}
+        toggle={this.toggleModal}
         className={this.props.className}
       >
         <ModalHeader toggle={this.modal_toggle}>

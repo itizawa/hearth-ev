@@ -53,9 +53,7 @@ export default class CenterContainer extends React.Component {
 
     return (
       <>
-        {this.state.showCreateTopicModal && (
-          <CreateTopicModal show={this.state.showCreateTopicModal} />
-        )}
+        <CreateTopicModal show={this.state.showCreateTopicModal} toggleModal={this.toggleModal} />
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             <span className="mr-3">Topic List</span>
