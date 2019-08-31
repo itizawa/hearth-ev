@@ -19,8 +19,7 @@ export default class CreateTopicModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tweet_permission: true,
-      topic_text: '',
+      topicText: '',
     }
     this.onTextChange = this.onTextChange.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
@@ -32,7 +31,7 @@ export default class CreateTopicModal extends React.Component {
    */
   onTextChange (e) {
     this.setState({
-      topic_text: e.target.value
+      topicText: e.target.value
     })
   }
 
@@ -48,6 +47,7 @@ export default class CreateTopicModal extends React.Component {
    */
   async onPostTopic () {
     console.log('ここにトピック作成のイベント')
+    this.setState({ topicText: '' })
     await this.toggleModal()
   }
 
@@ -79,8 +79,8 @@ export default class CreateTopicModal extends React.Component {
             color='primary'
             onClick={this.onPostTopic}
             disabled={
-              this.state.topic_text.length < this.MIN_WORD_COUNT ||
-              this.state.topic_text.length > this.MAX_WORD_COUNT
+              this.state.topicText.length < this.MIN_WORD_COUNT ||
+              this.state.topicText.length > this.MAX_WORD_COUNT
             }
           >
             Submit
