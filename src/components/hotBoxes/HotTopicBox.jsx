@@ -23,18 +23,18 @@ export default class HotTopicBox extends React.Component {
   };
 
   render () {
-    const header_style = {
+    const headerStyle = {
       backgroundColor: '#00075d'
     }
 
-    const trending_style = {
+    const trendingStyle = {
       fontSize: '33px'
     }
 
     return (
       <div className='bg-white border 2px shadow-sm mb-2'>
-        <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
-          <i className='material-icons mr-2' style={trending_style}>
+        <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
+          <i className='material-icons mr-2' style={trendingStyle}>
             trending_up
           </i>
           HotTopic
