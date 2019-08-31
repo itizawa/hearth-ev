@@ -16,7 +16,7 @@ export default class CreateTopicModal extends React.Component {
   MIN_WORD_COUNT = 1
   MAX_WORD_COUNT = 50
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       topicText: '',
@@ -29,7 +29,7 @@ export default class CreateTopicModal extends React.Component {
   /**
    * コメント取得ためのイベントハンドラ
    */
-  onTextChange (e) {
+  onTextChange(e) {
     this.setState({
       topicText: e.target.value
     })
@@ -38,20 +38,20 @@ export default class CreateTopicModal extends React.Component {
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  toggleModal () {
+  toggleModal() {
     this.props.toggleModal()
   }
 
   /**
    * トピック作成のイベントハンドラ
    */
-  async onPostTopic () {
+  async onPostTopic() {
     console.log('ここにトピック作成のイベント')
     this.setState({ topicText: '' })
     await this.toggleModal()
   }
 
-  render () {
+  render() {
     return (
       <Modal
         isOpen={this.props.show}
