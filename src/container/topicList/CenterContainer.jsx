@@ -9,10 +9,19 @@ export default class CenterContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      topics: []
+      topics: [],
+      showCreateTopicModal: false
     };
     this.fetchTopicData();
 
+  }
+
+  /**
+   * モーダル開閉のためのイベントハンドラ
+   */
+  toggleModal(){
+    // this.setState({ showCreateTopicModal: !showCreateTopicModal})
+    console.log(1)
   }
   
   /**
@@ -43,11 +52,14 @@ export default class CenterContainer extends React.Component {
 
     return (
       <>
+        {this.state.showCreateTopicModal && (
+          <p>ここにモーダル</p>
+        )}
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             <span className="mr-3">Topic List</span>
-            <Button color="secondary">
-              <i class="material-icons mr-1">
+            <Button color="secondary" onClick={this.toggleModal}>
+              <i className="material-icons mr-1">
                 library_add
               </i>新しいトピックを追加する
             </Button>
