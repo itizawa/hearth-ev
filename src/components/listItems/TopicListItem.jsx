@@ -16,7 +16,7 @@ export default class TopicListItem extends React.Component {
           <h6 className='mb-0'>
             <Link to={'/topic/' + topic_data.topic_id}>
               <strong className='text-body'>{topic_data.topic_name}</strong>
-              <span href='#' id={topic_data.topic_id}>
+              <span href='#' className='text-info' id={topic_data.topic_id}>
                 <i className='material-icons ml-1' style={chat_style}>
                   mode_comment
                 </i>
