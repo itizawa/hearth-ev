@@ -10,6 +10,8 @@ import {
   Row
 } from 'reactstrap'
 
+// functionのインポート
+import { createNewTopic } from '../../function/topic'
 
 export default class CreateTopicModal extends React.Component {
 
@@ -47,7 +49,7 @@ export default class CreateTopicModal extends React.Component {
    * トピック作成のイベントハンドラ
    */
   async onPostTopic() {
-    console.log('ここにトピック作成のイベント')
+    await createNewTopic(this.state.topicText)
     await this.toggleModal()
   }
 
