@@ -7,7 +7,7 @@ import firebase from 'firebase/app'
 import CreateTopicModal from '../../components/Modals/CreateTopicModal'
 
 export default class CenterContainer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       topics: [],
@@ -15,20 +15,20 @@ export default class CenterContainer extends React.Component {
     }
     this.fetchTopicData()
 
-    this.handleToggleModal = this.handleToggleModal.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-  handleToggleModal () {
+  toggleModal() {
     this.setState({ showCreateTopicModal: !this.state.showCreateTopicModal })
   }
 
   /**
    * トピックデータを取得するイベントハンドラ
    */
-  async fetchTopicData () {
+  async fetchTopicData() {
     var topics = []
     await firebase.firestore().collection('Topics')
       .orderBy('comments', 'desc')
@@ -44,7 +44,7 @@ export default class CenterContainer extends React.Component {
       })
   }
 
-  render () {
+  render() {
     const headerStyle = {
       backgroundColor: '#00075d'
     }
@@ -55,7 +55,7 @@ export default class CenterContainer extends React.Component {
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             <span className='mr-3'>Topic List</span>
-            <Button color='secondary' onClick={this.handleToggleModal}>
+            <Button color='secondary' onClick={this.toggleModal}>
               <i className='material-icons mr-1'>
                 library_add
               </i>新しいトピックを追加する
