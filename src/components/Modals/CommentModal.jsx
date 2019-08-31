@@ -20,7 +20,7 @@ import { TwitterShareButton, TwitterIcon } from 'react-share'
 import firebase from 'firebase/app'
 
 // functionのインポート
-import getNow from '../function/getNow'
+import getNow from '../../function/getNow'
 
 export default class CommentModal extends React.Component {
 
@@ -195,7 +195,7 @@ export default class CommentModal extends React.Component {
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
               title={this.state.comment_text + '#' + this.props.card_name}
-              url='https://hearth-ev.com/'
+              url={'https://hearth-ev.com/card/' + this.props.card_id}
             >
               <TwitterIcon size={32} round />
             </TwitterShareButton>

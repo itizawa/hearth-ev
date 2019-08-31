@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { Col, Row } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
-import DeleteModal from './DeleteModal'
-import ReEditModal from './ReEditModal'
+import DeleteModal from '../components/Modals/DeleteModal'
+import ReEditModal from '../components/Modals/ReEditModal'
 
 // functionのインポート
 import { addToLikeList, removeFromLikeList } from '../function/comment'
 
 export default class Comment extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       show_delete_modal: false,
@@ -30,7 +30,7 @@ export default class Comment extends React.Component {
   /**
    * 再編集モーダル開閉のためのイベントハンドラ
    */
-  reEdit_modal_toggle () {
+  reEdit_modal_toggle() {
     this.setState((prevState) => ({
       reEdit_delete_modal: !prevState.reEdit_delete_modal
     }))
@@ -39,7 +39,7 @@ export default class Comment extends React.Component {
   /**
    * 削除モーダル開閉のためのイベントハンドラ
    */
-  delete_modal_toggle () {
+  delete_modal_toggle() {
     this.setState((prevState) => ({
       show_delete_modal: !prevState.show_delete_modal
     }))
@@ -48,14 +48,14 @@ export default class Comment extends React.Component {
   /**
    * Likeボタンを押しているかどうかの確認
    */
-  fetchIsLiked () {
+  fetchIsLiked() {
     return this.props.comment.like.includes(this.props.user_data.uid)
   }
 
   /**
    * いいねボタンを押したときのイベントハンドラ
    */
-  async pushFavorite () {
+  async pushFavorite() {
     this.setState({ isLiked: true })
     this.setState({ like_count: this.state.like_count + 1 })
     await addToLikeList(
@@ -68,18 +68,18 @@ export default class Comment extends React.Component {
   /**
    * マウスオーバーした時のイベントハンドラ
    */
-  onMouseOver () {
+  onMouseOver() {
     this.setState({ show_operation_button: true })
   }
 
-  onMouseLeave () {
+  onMouseLeave() {
     this.setState({ show_operation_button: false })
   }
 
   /**
    * いいねボタンを取り消したときのイベントハンドラ
    */
-  async cancelFavorite () {
+  async cancelFavorite() {
     this.setState({ isLiked: false })
     this.setState({ like_count: this.state.like_count - 1 })
     await removeFromLikeList(
@@ -89,7 +89,7 @@ export default class Comment extends React.Component {
     )
   }
 
-  render () {
+  render() {
     const { comment, user_data } = this.props
 
     return (
@@ -175,16 +175,16 @@ export default class Comment extends React.Component {
               </div>
             </Col>
           ) : (
-            <Col xs='12' className='p-0'>
-              <div
-                className='btn text-muted float-right'
-                onClick={this.pushFavorite}
-              >
-                <span>{this.state.like_count}</span>
-                <i className='material-icons p-0'>star_border</i>
-              </div>
-            </Col>
-          )}
+              <Col xs='12' className='p-0'>
+                <div
+                  className='btn text-muted float-right'
+                  onClick={this.pushFavorite}
+                >
+                  <span>{this.state.like_count}</span>
+                  <i className='material-icons p-0'>star_border</i>
+                </div>
+              </Col>
+            )}
         </Row>
         <DeleteModal
           modal={this.state.show_delete_modal}
