@@ -6,7 +6,7 @@ import TopicListItem from '../listItems/TopicListItem'
 import { fetchHotTopicData } from '../../function/topic'
 
 export default class HotTopicBox extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       topics: []
@@ -17,12 +17,12 @@ export default class HotTopicBox extends React.Component {
   /**
    * トピックデータを取得するイベントハンドラ
    */
-  async fetchTopicData () {
+  async fetchTopicData() {
     const HotTopicData = await fetchHotTopicData()
-    this.setState({ topics:HotTopicData})
+    this.setState({ topics: HotTopicData })
   };
 
-  render () {
+  render() {
     const headerStyle = {
       backgroundColor: '#00075d'
     }

@@ -11,20 +11,14 @@ import getNow from './getNow'
  * ホットトピックデータを取得するためのfunction
  * @return {topics} 新しい順に3つのトピックを返す
  */
-export const fetchHotTopicData = () => {
+export const fetchHotTopicData = async () => {
   var topics = []
-  firebase.firestore().collection('Topics')
-    .orderBy('timestamp', 'desc')
-    .limit(3)
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        topics.push(doc.data())
-      })
-    })
-    .catch((err) => {
-      console.log('Error getting documents', err)
-    })
+  const snapshot = await firebase.firestore().collection('Topics').orderBy('timestamp', 'desc').limit(3).get()
+
+  await snapshot.forEach((doc) => {
+    topics.push(doc.data())
+  })
+
   return topics
 }
 
