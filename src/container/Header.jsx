@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Collapse,
@@ -78,7 +79,6 @@ export default class Header extends React.Component {
       .then(function () {
         window.location.reload()
       })
-      .catch(function (error) {})
   }
 
   /**
@@ -102,7 +102,7 @@ export default class Header extends React.Component {
             },
             { merge: true }
           )
-          .then((ref) => {
+          .then(() => {
             this.setState({ comment_text: '' })
           })
         return Promise.all([addComment])
@@ -159,9 +159,9 @@ export default class Header extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <a href={'/user/' + this.props.user_data.uid} className='text-body'>
+                      <Link to={'/user/' + this.props.user_data.uid} className='text-body'>
                         {this.props.user_data.displayName}
-                      </a>
+                      </Link>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem
@@ -179,7 +179,6 @@ export default class Header extends React.Component {
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
-            className={this.props.className}
           >
             <ModalHeader toggle={this.toggle}>Twitterログイン</ModalHeader>
             <ModalBody>

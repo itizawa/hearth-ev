@@ -23,7 +23,11 @@ import firebase from 'firebase/app'
 import getNow from '../function/getNow'
 
 export default class CommentModal extends React.Component {
-  constructor (props) {
+
+  MIN_WORD_COUNT = 1
+  MAX_WORD_COUNT = 150
+
+  constructor(props) {
     super(props)
     this.state = {
       tweet_permission: true,
@@ -40,7 +44,7 @@ export default class CommentModal extends React.Component {
   /**
    * Topicをセットする
    */
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.topic_name !== prevProps.topic_name) {
       this.setState({ topic_name: this.props.topic_name })
       this.setState({ topic_id: this.props.topic_id })
@@ -50,7 +54,7 @@ export default class CommentModal extends React.Component {
   /**
    * コメント取得ためのイベントハンドラ
    */
-  onTextChange (e) {
+  onTextChange(e) {
     this.setState({
       comment_text: e.target.value
     })
@@ -59,7 +63,7 @@ export default class CommentModal extends React.Component {
   /**
    * Topicの切り替えのためのイベントハンドラ
    */
-  switchTopic (e) {
+  switchTopic(e) {
     this.setState({ topic_name: e.target.textContent.trim() })
     this.setState({ topic_id: e.target.id.trim() })
   }
@@ -67,7 +71,7 @@ export default class CommentModal extends React.Component {
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  modal_toggle () {
+  modal_toggle() {
     this.props.modal_toggle()
     this.setState({ topic_name: '' })
     this.setState({ topic_id: '' })
@@ -76,7 +80,7 @@ export default class CommentModal extends React.Component {
   /**
    * コメント投稿のイベントハンドラ
    */
-  async onPostComment () {
+  async onPostComment() {
     const db = firebase.firestore()
     await db
       .collection('Comments')
@@ -134,7 +138,7 @@ export default class CommentModal extends React.Component {
     await this.props.fetchComment()
   }
 
-  render () {
+  render() {
     return (
       <Modal
         isOpen={this.props.modal}
@@ -175,12 +179,6 @@ export default class CommentModal extends React.Component {
               <DropdownToggle caret />
               <DropdownMenu>
                 <DropdownItem
-                  id='yxjFQW0FsqNHcRLjJTHx'
-                  onClick={this.switchTopic}
-                >
-                  事前評価
-                </DropdownItem>
-                <DropdownItem
                   id='SZqeygxWgtrFoRMWuWUP'
                   onClick={this.switchTopic}
                 >
@@ -197,7 +195,7 @@ export default class CommentModal extends React.Component {
           <div hidden={!this.props.card_name}>
             <TwitterShareButton
               title={this.state.comment_text + '#' + this.props.card_name}
-              url='https://hearth-ev.com/'
+              url={'https://hearth-ev.com/card/' + this.props.card_id}
             >
               <TwitterIcon size={32} round />
             </TwitterShareButton>
@@ -206,8 +204,8 @@ export default class CommentModal extends React.Component {
             color='primary'
             onClick={this.onPostComment}
             disabled={
-              this.state.comment_text.length < 1 ||
-              this.state.comment_text.length > 500
+              this.state.comment_text.length < this.MIN_WORD_COUNT ||
+              this.state.comment_text.length > this.MAX_WORD_COUNT
             }
           >
             Submit

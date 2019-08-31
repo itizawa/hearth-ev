@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner } from "reactstrap";
+import { BrowserRouter } from 'react-router-dom'
 
 //共通 css
 import "./App.css";
@@ -49,6 +50,7 @@ export default class App extends React.Component {
       marginLeft: "40%"
     };
     return (
+      <BrowserRouter>
       <React.Fragment>
         <Header user_data={this.state.user_data} />
         {this.state.isDataFetch ? (
@@ -59,6 +61,8 @@ export default class App extends React.Component {
           <MainContainer user_data={this.state.user_data} />
         )}
       </React.Fragment>
+      </BrowserRouter>
+
     );
   }
 }

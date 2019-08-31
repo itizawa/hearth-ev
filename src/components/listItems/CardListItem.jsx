@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 export default class CardListItem extends React.Component {
@@ -10,7 +11,7 @@ export default class CardListItem extends React.Component {
 
     const { card_data } = this.props
     return (
-      <Row className='mx-0 py-2 px-2 border-top'>
+      <Row className='mx-0 p-2 border-top'>
         <Col xs='10' className='px-0'>
           <h6 className='mb-0'>
             <Link to={'/card/' + card_data.card_id}>
@@ -33,4 +34,8 @@ export default class CardListItem extends React.Component {
       </Row>
     )
   }
+}
+
+CardListItem.propTypes = {
+  card_data: PropTypes.object
 }

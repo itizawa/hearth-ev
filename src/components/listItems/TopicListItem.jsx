@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 export default class TopicListItem extends React.Component {
@@ -10,12 +11,12 @@ export default class TopicListItem extends React.Component {
 
     const { topic_data } = this.props
     return (
-      <Row className='mx-0 py-2 px-2 border-top'>
+      <Row className='mx-0 p-2 border-top'>
         <Col xs='10' className='px-0'>
           <h6 className='mb-0'>
             <Link to={'/topic/' + topic_data.topic_id}>
               <strong className='text-body'>{topic_data.topic_name}</strong>
-              <span href='#' id={topic_data.topic_id}>
+              <span href='#' className='text-info' id={topic_data.topic_id}>
                 <i className='material-icons ml-1' style={chat_style}>
                   mode_comment
                 </i>
@@ -33,4 +34,8 @@ export default class TopicListItem extends React.Component {
       </Row>
     )
   }
+}
+
+TopicListItem.propTypes = {
+  topic_data: PropTypes.object
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'reactstrap'
 
 import CenterContainer from './CenterContainer'
-import ViewContainer from '../topicApp/ViewContainer'
+import ViewContainer from './ViewContainer'
 
 export default class TopicListApp extends React.Component {
   render () {

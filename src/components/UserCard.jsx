@@ -1,8 +1,9 @@
 import React from 'react'
 import logo from '../asset/img/logo.png'
+import PropTypes from 'prop-types'
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap'
 
-export default class Sidebar extends React.Component {
+export default class UserCard extends React.Component {
   render () {
     const photo_style = {
       float: 'right',
@@ -20,4 +21,8 @@ export default class Sidebar extends React.Component {
       </Card>
     )
   }
+}
+
+UserCard.propTypes = {
+  user_data: PropTypes.object
 }
