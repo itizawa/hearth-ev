@@ -37,14 +37,14 @@ export default class CenterContainer extends React.Component {
   };
 
   render () {
-    const header_style = {
+    const headerStyle = {
       backgroundColor: '#00075d'
     }
 
     return (
       <>
         <div className='bg-white border 2px shadow-sm'>
-          <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
+          <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             <span className="mr-3">Topic List</span>
             <Button color="secondary">
               <i class="material-icons mr-1">
