@@ -14,14 +14,14 @@ export default class CenterContainer extends React.Component {
     };
     this.fetchTopicData();
 
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
   toggleModal(){
-    // this.setState({ showCreateTopicModal: !showCreateTopicModal})
-    console.log(1)
+    this.setState({ showCreateTopicModal: !this.state.showCreateTopicModal})
   }
   
   /**
