@@ -4,6 +4,7 @@ import {Button} from 'reactstrap'
 import TopicListItem from '../../components/listItems/TopicListItem';
 
 import firebase from "firebase/app";
+import CreateTopicModal from '../../components/Modals/CreateTopicModal';
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class CenterContainer extends React.Component {
     return (
       <>
         {this.state.showCreateTopicModal && (
-          <p>ここにモーダル</p>
+          <CreateTopicModal show={this.state.showCreateTopicModal} />
         )}
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
