@@ -4,7 +4,7 @@ import HotUserBox from '../../components/hotBoxes/HotUserBox'
 import HotCardBox from '../../components/hotBoxes/HotCardBox'
 
 export default class ViewContainer extends React.Component {
-  render () {
+  render() {
     return (
       <>
         <HotUserBox />
