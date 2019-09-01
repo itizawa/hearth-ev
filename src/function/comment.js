@@ -5,6 +5,16 @@ import firebase from 'firebase/app'
  */
 
 /**
+ * コメントを投稿したときの処理
+ * @param {*} comment_id 
+ * @param {*} user_id 
+ * @param {*} creator_id 
+ */
+export const createNewComment = () => {
+  console.log('here is function')
+}
+
+/**
  * likeボタンを押した時の処理
  * コメントにuser_idの追加
  * user獲得数を+1

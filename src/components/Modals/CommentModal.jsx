@@ -17,10 +17,8 @@ import {
 } from 'reactstrap'
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 
-import firebase from 'firebase/app'
-
 // functionのインポート
-import getNow from '../../function/getNow'
+import { createNewComment } from '../../function/comment'
 
 export default class CommentModal extends React.Component {
 
@@ -81,61 +79,62 @@ export default class CommentModal extends React.Component {
    * コメント投稿のイベントハンドラ
    */
   async onPostComment() {
-    const db = firebase.firestore()
-    await db
-      .collection('Comments')
-      .add({
-        creator: this.props.user_data.displayName,
-        creator_id: this.props.user_data.uid,
-        creator_img: this.props.user_data.photoURL,
-        text: this.state.comment_text,
-        like: [],
-        create_at: getNow(),
-        topic_name: this.state.topic_name,
-        topic_id: this.state.topic_id,
-        card_id: this.props.card_id || '',
-        card_name: this.props.card_name || '',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      })
-      .then(async (ref) => {
-        console.log('Added document with ID: ', ref.id)
-        // IDを保存する
-        await db
-          .collection('Comments')
-          .doc(ref.id)
-          .set({ comment_id: ref.id }, { merge: true })
-        await db
-          .collection('Users')
-          .doc(this.props.user_data.uid)
-          .update('comments', firebase.firestore.FieldValue.increment(1))
+    createNewComment()
+    // const db = firebase.firestore()
+    // await db
+    //   .collection('Comments')
+    //   .add({
+    //     creator: this.props.user_data.displayName,
+    //     creator_id: this.props.user_data.uid,
+    //     creator_img: this.props.user_data.photoURL,
+    //     text: this.state.comment_text,
+    //     like: [],
+    //     create_at: getNow(),
+    //     topic_name: this.state.topic_name,
+    //     topic_id: this.state.topic_id,
+    //     card_id: this.props.card_id || '',
+    //     card_name: this.props.card_name || '',
+    //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    //   })
+    //   .then(async (ref) => {
+    //     console.log('Added document with ID: ', ref.id)
+    //     // IDを保存する
+    //     await db
+    //       .collection('Comments')
+    //       .doc(ref.id)
+    //       .set({ comment_id: ref.id }, { merge: true })
+    //     await db
+    //       .collection('Users')
+    //       .doc(this.props.user_data.uid)
+    //       .update('comments', firebase.firestore.FieldValue.increment(1))
 
-        // timestampを事前に取得
-        const time_data = {
-          update_at: await getNow(),
-          timestamp: await firebase.firestore.FieldValue.serverTimestamp()
-        }
+    //     // timestampを事前に取得
+    //     const time_data = {
+    //       update_at: await getNow(),
+    //       timestamp: await firebase.firestore.FieldValue.serverTimestamp()
+    //     }
 
-        // カードについてのコメントはカード以下にcommentのカウントを+1
-        if (this.props.card_id) {
-          db.collection('Cards')
-            .doc(this.props.card_id)
-            .update('comments', firebase.firestore.FieldValue.increment(1))
-          db.collection('Cards')
-            .doc(this.props.card_id)
-            .set(time_data, { merge: true })
-        }
-        // トピックについてのコメントはカード以下にcommentのカウントを+1
-        if (this.state.topic_id) {
-          db.collection('Topics')
-            .doc(this.state.topic_id)
-            .update('comments', firebase.firestore.FieldValue.increment(1))
-          db.collection('Topics')
-            .doc(this.state.topic_id)
-            .set(time_data, { merge: true })
-        }
-      })
-    await this.props.modal_toggle()
-    await this.props.fetchComment()
+    //     // カードについてのコメントはカード以下にcommentのカウントを+1
+    //     if (this.props.card_id) {
+    //       db.collection('Cards')
+    //         .doc(this.props.card_id)
+    //         .update('comments', firebase.firestore.FieldValue.increment(1))
+    //       db.collection('Cards')
+    //         .doc(this.props.card_id)
+    //         .set(time_data, { merge: true })
+    //     }
+    //     // トピックについてのコメントはカード以下にcommentのカウントを+1
+    //     if (this.state.topic_id) {
+    //       db.collection('Topics')
+    //         .doc(this.state.topic_id)
+    //         .update('comments', firebase.firestore.FieldValue.increment(1))
+    //       db.collection('Topics')
+    //         .doc(this.state.topic_id)
+    //         .set(time_data, { merge: true })
+    //     }
+    //   })
+    // await this.props.modal_toggle()
+    // await this.props.fetchComment()
   }
 
   render() {
