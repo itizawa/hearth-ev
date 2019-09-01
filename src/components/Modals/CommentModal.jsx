@@ -32,7 +32,8 @@ export default class CommentModal extends React.Component {
       topicData: {
         topic_name: '',
         topic_id: ''
-      }
+      },
+      userData:this.props.user_data
     }
     this.onTextChange = this.onTextChange.bind(this)
     this.switchTopic = this.switchTopic.bind(this)
