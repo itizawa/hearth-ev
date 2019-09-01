@@ -28,10 +28,11 @@ export default class CommentModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tweet_permission: true,
       comment_text: '',
-      topic_name: this.props.topic_name || '',
-      topic_id: this.props.topic_id || ''
+      topicData: {
+        name: this.props.topic_name || '',
+        id: this.props.topic_id || ''
+      }
     }
     this.onTextChange = this.onTextChange.bind(this)
     this.switchTopic = this.switchTopic.bind(this)
@@ -60,10 +61,11 @@ export default class CommentModal extends React.Component {
 
   /**
    * Topicの切り替えのためのイベントハンドラ
+   * topicDataをオブジェクトで保存
    */
   switchTopic(e) {
-    this.setState({ topic_name: e.target.textContent.trim() })
-    this.setState({ topic_id: e.target.id.trim() })
+    const topicData = { name: e.target.textContent.trim(), id: e.target.id.trim() }
+    this.setState({ topicData: topicData })
   }
 
   /**
@@ -79,7 +81,7 @@ export default class CommentModal extends React.Component {
    * コメント投稿のイベントハンドラ
    */
   async onPostComment() {
-    createNewComment()
+    await createNewComment(this.state)
     // const db = firebase.firestore()
     // await db
     //   .collection('Comments')
@@ -187,7 +189,7 @@ export default class CommentModal extends React.Component {
             </UncontrolledDropdown>
             <Input
               readOnly
-              value={this.state.topic_name}
+              value={this.state.topicData.name}
               placeholder='話題登録'
             />
           </InputGroup>

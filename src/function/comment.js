@@ -10,8 +10,9 @@ import firebase from 'firebase/app'
  * @param {*} user_id 
  * @param {*} creator_id 
  */
-export const createNewComment = () => {
+export const createNewComment = (state) => {
   console.log('here is function')
+  console.log(state)
 }
 
 /**
