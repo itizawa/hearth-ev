@@ -51,16 +51,16 @@ export default class App extends React.Component {
     };
     return (
       <BrowserRouter>
-      <React.Fragment>
-        <Header user_data={this.state.user_data} />
-        {this.state.isDataFetch ? (
-          <div className="mt-2">
-            <Spinner style={spinner_style} color="primary" type="grow" />
-          </div>
-        ) : (
-          <MainContainer user_data={this.state.user_data} />
-        )}
-      </React.Fragment>
+        <React.Fragment>
+          <Header user_data={this.state.user_data} />
+          {this.state.isDataFetch ? (
+            <div className="mt-2">
+              <Spinner style={spinner_style} color="primary" type="grow" />
+            </div>
+          ) : (
+              <MainContainer user_data={this.state.user_data} />
+            )}
+        </React.Fragment>
       </BrowserRouter>
 
     );
