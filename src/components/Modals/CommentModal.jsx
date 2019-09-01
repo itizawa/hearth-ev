@@ -28,13 +28,15 @@ export default class CommentModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      comment_text: '',
+      userData: this.props.user_data,
       topicData: {
         topic_name: '',
         topic_id: ''
       },
-      userData:this.props.user_data
+      commentText: ''
+
     }
+
     this.onTextChange = this.onTextChange.bind(this)
     this.switchTopic = this.switchTopic.bind(this)
     this.modal_toggle = this.modal_toggle.bind(this)
@@ -46,8 +48,11 @@ export default class CommentModal extends React.Component {
    */
   componentDidUpdate(prevProps) {
     if (this.props.focusTopic !== prevProps.focusTopic) {
-      const topicData = { topic_name: this.props.focusTopic.topic_name, topic_id: this.props.focusTopic.topic_id }
-      this.setState({ topicData: topicData })
+      this.setState({ topicData: this.props.focusTopic })
+    }
+
+    if (this.props.focusCard !== prevProps.focusCard) {
+      this.setState({ cardData: this.props.focusCard })
     }
   }
 
@@ -55,9 +60,7 @@ export default class CommentModal extends React.Component {
    * コメント取得ためのイベントハンドラ
    */
   onTextChange(e) {
-    this.setState({
-      comment_text: e.target.value
-    })
+    this.setState({ commentText: e.target.value })
   }
 
   /**
@@ -82,61 +85,11 @@ export default class CommentModal extends React.Component {
    * コメント投稿のイベントハンドラ
    */
   async onPostComment() {
-    await createNewComment(this.state)
-    // const db = firebase.firestore()
-    // await db
-    //   .collection('Comments')
-    //   .add({
-    //     creator: this.props.user_data.displayName,
-    //     creator_id: this.props.user_data.uid,
-    //     creator_img: this.props.user_data.photoURL,
-    //     text: this.state.comment_text,
-    //     like: [],
-    //     create_at: getNow(),
-    //     topic_name: this.state.topic_name,
-    //     topic_id: this.state.topic_id,
-    //     card_id: this.props.card_id || '',
-    //     card_name: this.props.card_name || '',
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    //   })
-    //   .then(async (ref) => {
-    //     console.log('Added document with ID: ', ref.id)
-    //     // IDを保存する
-    //     await db
-    //       .collection('Comments')
-    //       .doc(ref.id)
-    //       .set({ comment_id: ref.id }, { merge: true })
-    //     await db
-    //       .collection('Users')
-    //       .doc(this.props.user_data.uid)
-    //       .update('comments', firebase.firestore.FieldValue.increment(1))
+    const { userData, topicData, cardData, commentText } = this.state
 
-    //     // timestampを事前に取得
-    //     const time_data = {
-    //       update_at: await getNow(),
-    //       timestamp: await firebase.firestore.FieldValue.serverTimestamp()
-    //     }
+    await createNewComment(userData, topicData, cardData, commentText)
 
-    //     // カードについてのコメントはカード以下にcommentのカウントを+1
-    //     if (this.props.card_id) {
-    //       db.collection('Cards')
-    //         .doc(this.props.card_id)
-    //         .update('comments', firebase.firestore.FieldValue.increment(1))
-    //       db.collection('Cards')
-    //         .doc(this.props.card_id)
-    //         .set(time_data, { merge: true })
-    //     }
-    //     // トピックについてのコメントはカード以下にcommentのカウントを+1
-    //     if (this.state.topic_id) {
-    //       db.collection('Topics')
-    //         .doc(this.state.topic_id)
-    //         .update('comments', firebase.firestore.FieldValue.increment(1))
-    //       db.collection('Topics')
-    //         .doc(this.state.topic_id)
-    //         .set(time_data, { merge: true })
-    //     }
-    //   })
-    // await this.props.modal_toggle()
+    await this.props.modal_toggle()
     // await this.props.fetchComment()
   }
 
@@ -206,8 +159,8 @@ export default class CommentModal extends React.Component {
             color='primary'
             onClick={this.onPostComment}
             disabled={
-              this.state.comment_text.length < this.MIN_WORD_COUNT ||
-              this.state.comment_text.length > this.MAX_WORD_COUNT
+              this.state.commentText.length < this.MIN_WORD_COUNT ||
+              this.state.commentText.length > this.MAX_WORD_COUNT
             }
           >
             Submit

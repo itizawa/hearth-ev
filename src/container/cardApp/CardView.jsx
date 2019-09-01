@@ -6,15 +6,15 @@ import bgImage from '../../asset/img/bg.jpg'
 import { Row, Col, Card } from 'reactstrap'
 
 export default class CardView extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-      card_id: this.props.focus_card.id || ''
+      card_id: this.props.focusCard.id || ''
     }
   }
 
-  render () {
-    const { focus_card } = this.props
+  render() {
+    const { focusCard } = this.props
 
     const img_frame = {
       padding: '5%',
@@ -30,14 +30,14 @@ export default class CardView extends React.Component {
                 <p className='mb-0'>コメント</p>
                 <strong className='text-primary'>
                   <i className='material-icons'>mode_comment</i>
-                  {focus_card.comments}
+                  {focusCard.comments}
                 </strong>
               </Card>
             </Col>
           </Row>
           <img
-            src={focus_card.card_img}
-            alt={focus_card.card_id}
+            src={focusCard.card_img}
+            alt={focusCard.card_id}
             width='100%'
             height='auto'
           />
@@ -48,5 +48,5 @@ export default class CardView extends React.Component {
 }
 
 CardView.propTypes = {
-  focus_card: PropTypes.object
+  focusCard: PropTypes.object
 }
