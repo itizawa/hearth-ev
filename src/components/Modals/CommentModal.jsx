@@ -30,8 +30,8 @@ export default class CommentModal extends React.Component {
     this.state = {
       comment_text: '',
       topicData: {
-        name: this.props.topic_name || '',
-        id: this.props.topic_id || ''
+        topic_name: '',
+        topic_id: ''
       }
     }
     this.onTextChange = this.onTextChange.bind(this)
@@ -44,9 +44,9 @@ export default class CommentModal extends React.Component {
    * Topicをセットする
    */
   componentDidUpdate(prevProps) {
-    if (this.props.topic_name !== prevProps.topic_name) {
-      this.setState({ topic_name: this.props.topic_name })
-      this.setState({ topic_id: this.props.topic_id })
+    if (this.props.focusTopic !== prevProps.focusTopic) {
+      const topicData = { topic_name: this.props.focusTopic.topic_name, topic_id: this.props.focusTopic.topic_id }
+      this.setState({ topicData: topicData })
     }
   }
 
@@ -64,7 +64,7 @@ export default class CommentModal extends React.Component {
    * topicDataをオブジェクトで保存
    */
   switchTopic(e) {
-    const topicData = { name: e.target.textContent.trim(), id: e.target.id.trim() }
+    const topicData = { topic_name: e.target.textContent.trim(), topic_id: e.target.id.trim() }
     this.setState({ topicData: topicData })
   }
 
@@ -73,8 +73,8 @@ export default class CommentModal extends React.Component {
    */
   modal_toggle() {
     this.props.modal_toggle()
-    this.setState({ topic_name: '' })
-    this.setState({ topic_id: '' })
+    const topicData = { topic_name: '', topic_id: '' }
+    this.setState({ topicData: topicData })
   }
 
   /**
@@ -189,7 +189,7 @@ export default class CommentModal extends React.Component {
             </UncontrolledDropdown>
             <Input
               readOnly
-              value={this.state.topicData.name}
+              value={this.state.topicData.topic_name}
               placeholder='話題登録'
             />
           </InputGroup>
