@@ -24,18 +24,14 @@ export const createNewComment = (state) => {
  * @param [String] creator_id コメント作成者のid
  */
 export const addToLikeList = (comment_id, user_id, creator_id) => {
-  firebase
-    .firestore()
-    .collection('Comments')
-    .doc(comment_id)
-    .update({
-      like: firebase.firestore.FieldValue.arrayUnion(user_id)
-    })
-  firebase
-    .firestore()
-    .collection('Users')
-    .doc(creator_id)
-    .update('acquired', firebase.firestore.FieldValue.increment(1))
+
+  firebase.firestore().collection('Comments').doc(comment_id).update({
+    like: firebase.firestore.FieldValue.arrayUnion(user_id)
+  })
+
+  firebase.firestore().collection('Users').doc(creator_id).update(
+    'acquired', firebase.firestore.FieldValue.increment(1)
+  )
 }
 
 /**
@@ -47,16 +43,12 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
  * @param [String] creator_id コメント作成者のid
  */
 export const removeFromLikeList = (comment_id, user_id, creator_id) => {
-  firebase
-    .firestore()
-    .collection('Comments')
-    .doc(comment_id)
-    .update({
-      like: firebase.firestore.FieldValue.arrayRemove(user_id)
-    })
-  firebase
-    .firestore()
-    .collection('Users')
-    .doc(creator_id)
-    .update('acquired', firebase.firestore.FieldValue.increment(-1))
+
+  firebase.firestore().collection('Comments').doc(comment_id).update({
+    like: firebase.firestore.FieldValue.arrayRemove(user_id)
+  })
+
+  firebase.firestore().collection('Users').doc(creator_id).update(
+    'acquired', firebase.firestore.FieldValue.increment(-1)
+  )
 }
