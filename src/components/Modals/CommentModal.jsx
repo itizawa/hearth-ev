@@ -17,10 +17,8 @@ import {
 } from 'reactstrap'
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 
-import firebase from 'firebase/app'
-
 // functionのインポート
-import getNow from '../../function/getNow'
+import { createNewComment } from '../../function/comment'
 
 export default class CommentModal extends React.Component {
 
@@ -30,14 +28,22 @@ export default class CommentModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tweet_permission: true,
-      comment_text: '',
-      topic_name: this.props.topic_name || '',
-      topic_id: this.props.topic_id || ''
+      userData: this.props.user_data,
+      topicData: {
+        topic_name: '',
+        topic_id: ''
+      },
+      cardData: {
+        card_name: '',
+        card_id: ''
+      },
+      commentText: ''
+
     }
+
     this.onTextChange = this.onTextChange.bind(this)
     this.switchTopic = this.switchTopic.bind(this)
-    this.modal_toggle = this.modal_toggle.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
     this.onPostComment = this.onPostComment.bind(this)
   }
 
@@ -45,9 +51,12 @@ export default class CommentModal extends React.Component {
    * Topicをセットする
    */
   componentDidUpdate(prevProps) {
-    if (this.props.topic_name !== prevProps.topic_name) {
-      this.setState({ topic_name: this.props.topic_name })
-      this.setState({ topic_id: this.props.topic_id })
+    if (this.props.focusTopic !== prevProps.focusTopic) {
+      this.setState({ topicData: this.props.focusTopic })
+    }
+
+    if (this.props.focusCard !== prevProps.focusCard) {
+      this.setState({ cardData: this.props.focusCard })
     }
   }
 
@@ -55,86 +64,35 @@ export default class CommentModal extends React.Component {
    * コメント取得ためのイベントハンドラ
    */
   onTextChange(e) {
-    this.setState({
-      comment_text: e.target.value
-    })
+    this.setState({ commentText: e.target.value })
   }
 
   /**
    * Topicの切り替えのためのイベントハンドラ
+   * topicDataをオブジェクトで保存
    */
   switchTopic(e) {
-    this.setState({ topic_name: e.target.textContent.trim() })
-    this.setState({ topic_id: e.target.id.trim() })
+    const topicData = { topic_name: e.target.textContent.trim(), topic_id: e.target.id.trim() }
+    this.setState({ topicData: topicData })
   }
 
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  modal_toggle() {
+  toggleModal() {
     this.props.modal_toggle()
-    this.setState({ topic_name: '' })
-    this.setState({ topic_id: '' })
+    const topicData = { topic_name: '', topic_id: '' }
+    this.setState({ topicData: topicData })
   }
 
   /**
    * コメント投稿のイベントハンドラ
    */
   async onPostComment() {
-    const db = firebase.firestore()
-    await db
-      .collection('Comments')
-      .add({
-        creator: this.props.user_data.displayName,
-        creator_id: this.props.user_data.uid,
-        creator_img: this.props.user_data.photoURL,
-        text: this.state.comment_text,
-        like: [],
-        create_at: getNow(),
-        topic_name: this.state.topic_name,
-        topic_id: this.state.topic_id,
-        card_id: this.props.card_id || '',
-        card_name: this.props.card_name || '',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      })
-      .then(async (ref) => {
-        console.log('Added document with ID: ', ref.id)
-        // IDを保存する
-        await db
-          .collection('Comments')
-          .doc(ref.id)
-          .set({ comment_id: ref.id }, { merge: true })
-        await db
-          .collection('Users')
-          .doc(this.props.user_data.uid)
-          .update('comments', firebase.firestore.FieldValue.increment(1))
+    const { userData, topicData, cardData, commentText } = this.state
 
-        // timestampを事前に取得
-        const time_data = {
-          update_at: await getNow(),
-          timestamp: await firebase.firestore.FieldValue.serverTimestamp()
-        }
-
-        // カードについてのコメントはカード以下にcommentのカウントを+1
-        if (this.props.card_id) {
-          db.collection('Cards')
-            .doc(this.props.card_id)
-            .update('comments', firebase.firestore.FieldValue.increment(1))
-          db.collection('Cards')
-            .doc(this.props.card_id)
-            .set(time_data, { merge: true })
-        }
-        // トピックについてのコメントはカード以下にcommentのカウントを+1
-        if (this.state.topic_id) {
-          db.collection('Topics')
-            .doc(this.state.topic_id)
-            .update('comments', firebase.firestore.FieldValue.increment(1))
-          db.collection('Topics')
-            .doc(this.state.topic_id)
-            .set(time_data, { merge: true })
-        }
-      })
-    await this.props.modal_toggle()
+    await createNewComment(userData, topicData, cardData, commentText)
+    await this.toggleModal()
     await this.props.fetchComment()
   }
 
@@ -142,10 +100,10 @@ export default class CommentModal extends React.Component {
     return (
       <Modal
         isOpen={this.props.modal}
-        toggle={this.modal_toggle}
+        toggle={this.toggleModal}
         className={this.props.className}
       >
-        <ModalHeader toggle={this.modal_toggle}>
+        <ModalHeader toggle={this.toggleModal}>
           コメントする
           <span hidden={!this.props.card_name} className='text-primary ml-3'>
             #{this.props.card_name}
@@ -188,7 +146,7 @@ export default class CommentModal extends React.Component {
             </UncontrolledDropdown>
             <Input
               readOnly
-              value={this.state.topic_name}
+              value={this.state.topicData.topic_name}
               placeholder='話題登録'
             />
           </InputGroup>
@@ -204,8 +162,8 @@ export default class CommentModal extends React.Component {
             color='primary'
             onClick={this.onPostComment}
             disabled={
-              this.state.comment_text.length < this.MIN_WORD_COUNT ||
-              this.state.comment_text.length > this.MAX_WORD_COUNT
+              this.state.commentText.length < this.MIN_WORD_COUNT ||
+              this.state.commentText.length > this.MAX_WORD_COUNT
             }
           >
             Submit

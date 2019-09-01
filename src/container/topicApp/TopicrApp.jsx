@@ -9,8 +9,8 @@ export default class TopicApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus_topic: {
-        id: this.props.match.params.topic_id,
+      focusTopic: {
+        id: this.props.match.params.id,
         name: "",
         comments: []
       }
@@ -26,14 +26,14 @@ export default class TopicApp extends React.Component {
     await firebase
       .firestore()
       .collection("Topics")
-      .doc(this.state.focus_topic.id)
+      .doc(this.state.focusTopic.id)
       .get()
       .then((doc) => {
         if (!doc.exists) {
           console.log("No such document!");
         } else {
           this.setState({
-            focus_topic: doc.data()
+            focusTopic: doc.data()
           });
         }
       })
@@ -49,8 +49,8 @@ export default class TopicApp extends React.Component {
           <Col md="7" className="px-0 mb-2">
             <CenterContainer
               {...this.props}
-              focus_topic={this.state.focus_topic}
-              match={this.props.match.params.topic_id}
+              focusTopic={this.state.focusTopic}
+              match={this.props.match.params.id}
             />
           </Col>
           <Col md="5" className="px-1">
