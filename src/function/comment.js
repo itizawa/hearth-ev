@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 
+import getNow from './getNow'
+
 /**
  * コメントに関するfunction
  */
@@ -17,54 +19,40 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
   console.log(cardData)
   console.log(commentText)
 
-  // const ref = await firebase.firestore().collection('Comments').add({
-  //   creator: userData.displayName,
-  //   creator_id: userData.uid,
-  //   creator_img: this.props.user_data.photoURL,
-  //   text: this.state.comment_text,
-  //   like: [],
-  //   create_at: getNow(),
-  //   topic_name: this.state.topic_name,
-  //   topic_id: this.state.topic_id,
-  //   card_id: this.props.card_id || '',
-  //   card_name: this.props.card_name || '',
-  //   timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  // })
+  const db = firebase.firestore()
 
-  //     await db
-  //       .collection('Comments')
-  //       .doc(ref.id)
-  //       .set({ comment_id: ref.id }, { merge: true })
-  //     await db
-  //       .collection('Users')
-  //       .doc(this.props.user_data.uid)
-  //       .update('comments', firebase.firestore.FieldValue.increment(1))
+  const ref = await db.collection('Comments').add({
+    creator: userData.displayName,
+    creator_id: userData.uid,
+    creator_img: userData.photoURL,
+    text: commentText,
+    like: [],
+    create_at: getNow(),
+    topic_name: topicData.topic_name,
+    topic_id: topicData.topic_id,
+    card_id: cardData.card_id || '',
+    card_name: cardData.card_name || '',
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })
 
-  //     // timestampを事前に取得
-  //     const time_data = {
-  //       update_at: await getNow(),
-  //       timestamp: await firebase.firestore.FieldValue.serverTimestamp()
-  //     }
+  await db.collection('Comments').doc(ref.id).set({ comment_id: ref.id }, { merge: true })
+  await db.collection('Users').doc(userData.uid).update('comments', firebase.firestore.FieldValue.increment(1))
 
-  //     // カードについてのコメントはカード以下にcommentのカウントを+1
-  //     if (this.props.card_id) {
-  //       db.collection('Cards')
-  //         .doc(this.props.card_id)
-  //         .update('comments', firebase.firestore.FieldValue.increment(1))
-  //       db.collection('Cards')
-  //         .doc(this.props.card_id)
-  //         .set(time_data, { merge: true })
-  //     }
-  //     // トピックについてのコメントはカード以下にcommentのカウントを+1
-  //     if (this.state.topic_id) {
-  //       db.collection('Topics')
-  //         .doc(this.state.topic_id)
-  //         .update('comments', firebase.firestore.FieldValue.increment(1))
-  //       db.collection('Topics')
-  //         .doc(this.state.topic_id)
-  //         .set(time_data, { merge: true })
-  //     }
-  //   })
+  // timestampを事前に取得
+  const time_data = { update_at: await getNow(), timestamp: await firebase.firestore.FieldValue.serverTimestamp() }
+
+  // カードについてのコメントはカード以下にcommentのカウントを+1
+  if (cardData) {
+    db.collection('Cards').doc(cardData.card_id).update('comments', firebase.firestore.FieldValue.increment(1))
+    db.collection('Cards').doc(cardData.card_id).set(time_data, { merge: true })
+  }
+
+  // トピックについてのコメントはカード以下にcommentのカウントを+1
+  if (topicData) {
+    db.collection('Topics').doc(topicData.topic_id).update('comments', firebase.firestore.FieldValue.increment(1))
+    db.collection('Topics').doc(topicData.topic_id).set(time_data, { merge: true })
+  }
+
 }
 
 /**
