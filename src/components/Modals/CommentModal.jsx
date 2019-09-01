@@ -33,6 +33,10 @@ export default class CommentModal extends React.Component {
         topic_name: '',
         topic_id: ''
       },
+      cardData: {
+        card_name: '',
+        card_id: ''
+      },
       commentText: ''
 
     }

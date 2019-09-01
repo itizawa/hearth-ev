@@ -14,10 +14,6 @@ import getNow from './getNow'
  * @param [String] commentText コメント
  */
 export const createNewComment = async (userData, topicData, cardData, commentText) => {
-  console.log(userData)
-  console.log(topicData)
-  console.log(cardData)
-  console.log(commentText)
 
   const db = firebase.firestore()
 
@@ -42,13 +38,13 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
   const time_data = { update_at: await getNow(), timestamp: await firebase.firestore.FieldValue.serverTimestamp() }
 
   // カードについてのコメントはカード以下にcommentのカウントを+1
-  if (cardData) {
+  if (cardData.card_id) {
     db.collection('Cards').doc(cardData.card_id).update('comments', firebase.firestore.FieldValue.increment(1))
     db.collection('Cards').doc(cardData.card_id).set(time_data, { merge: true })
   }
 
   // トピックについてのコメントはカード以下にcommentのカウントを+1
-  if (topicData) {
+  if (topicData.topic_id) {
     db.collection('Topics').doc(topicData.topic_id).update('comments', firebase.firestore.FieldValue.increment(1))
     db.collection('Topics').doc(topicData.topic_id).set(time_data, { merge: true })
   }
