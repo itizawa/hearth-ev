@@ -43,7 +43,7 @@ export default class CommentModal extends React.Component {
 
     this.onTextChange = this.onTextChange.bind(this)
     this.switchTopic = this.switchTopic.bind(this)
-    this.modal_toggle = this.modal_toggle.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
     this.onPostComment = this.onPostComment.bind(this)
   }
 
@@ -79,7 +79,7 @@ export default class CommentModal extends React.Component {
   /**
    * Modal開閉のためのイベントハンドラ
    */
-  modal_toggle() {
+  toggleModal() {
     this.props.modal_toggle()
     const topicData = { topic_name: '', topic_id: '' }
     this.setState({ topicData: topicData })
@@ -92,19 +92,18 @@ export default class CommentModal extends React.Component {
     const { userData, topicData, cardData, commentText } = this.state
 
     await createNewComment(userData, topicData, cardData, commentText)
-
-    await this.props.modal_toggle()
-    // await this.props.fetchComment()
+    await this.toggleModal()
+    await this.props.fetchComment()
   }
 
   render() {
     return (
       <Modal
         isOpen={this.props.modal}
-        toggle={this.modal_toggle}
+        toggle={this.toggleModal}
         className={this.props.className}
       >
-        <ModalHeader toggle={this.modal_toggle}>
+        <ModalHeader toggle={this.toggleModal}>
           コメントする
           <span hidden={!this.props.card_name} className='text-primary ml-3'>
             #{this.props.card_name}
