@@ -8,13 +8,14 @@ import getNow from './getNow'
 
 /**
  * コメントデータを取得するためのfunction
+ * @param [Number] count データをいくつ返すかを指定する
  * @return {comments} コメントデータを返す
  */
-export const fetchCommentData = async () => {
+export const fetchCommentData = async (count = 50) => {
 
-  console.log('here is function')
+  console.log(count)
 
-  return topics
+  return count
 }
 
 /**

@@ -5,7 +5,7 @@ import { Input, Col, Row } from "reactstrap";
 import CommentModal from "../../components/Modals/CommentModal";
 import Comment from "../../components/Comment";
 
-import firebase from "firebase/app";
+import { fetchCommentData } from "../../function/comment";
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -33,24 +33,24 @@ export default class CenterContainer extends React.Component {
   /**
    * データを取得するイベントハンドラ
    */
-
   fetchHomeComment = () => {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .orderBy("timestamp", "desc")
-      .limit(50)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
+    fetchCommentData(50);
+    // var comments = [];
+    // const db = firebase.firestore();
+    // db.collection("Comments")
+    //   .orderBy("timestamp", "desc")
+    //   .limit(50)
+    //   .get()
+    //   .then((snapshot) => {
+    //     snapshot.forEach((doc) => {
+    //       comments.push(doc.data());
+    //     });
+    //     this.setState({ comments: comments });
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error getting documents", err);
+    //   });
+    // return Promise.all([db]);
   };
 
   render() {
