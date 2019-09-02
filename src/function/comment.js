@@ -7,6 +7,17 @@ import getNow from './getNow'
  */
 
 /**
+ * コメントデータを取得するためのfunction
+ * @return {comments} コメントデータを返す
+ */
+export const fetchCommentData = async () => {
+
+  console.log('here is function')
+
+  return topics
+}
+
+/**
  * コメントを投稿したときの処理
  * @param [Object] userData 現在のユーザーデータ
  * @param [Object] topicData トピック
