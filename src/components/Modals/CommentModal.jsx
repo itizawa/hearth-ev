@@ -91,8 +91,8 @@ export default class CommentModal extends React.Component {
   async onPostComment() {
     const { userData, topicData, cardData, commentText } = this.state
 
+    this.toggleModal()
     await createNewComment(userData, topicData, cardData, commentText)
-    await this.toggleModal()
     await this.props.fetchComment()
   }
 
