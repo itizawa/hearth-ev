@@ -7,6 +7,38 @@ import getNow from './getNow'
  */
 
 /**
+ * コメントデータを取得するためのfunction
+ * @param [Number] count データをいくつ返すかを指定する
+ * @return {comments} コメントデータを返す
+ */
+export const fetchCommentData = async (count = 50) => {
+  const comments = []
+  const snapshot = await firebase.firestore().collection('Comments').orderBy('timestamp', 'desc').limit(count).get()
+
+  snapshot.forEach((doc) => {
+    comments.push(doc.data())
+  })
+
+  return comments
+}
+
+/**
+ * 特定のデータを取得する
+ * @param [String] targetId 特定のデータを取得するためのId
+ * @return {comments} コメントデータを返す 
+ */
+export const fetchTargetCommentData = async (target,id) => {
+  let comments = []
+  const snapshot = await firebase.firestore().collection('Comments').where(target, "==", id).orderBy('timestamp', 'desc').get()
+
+  snapshot.forEach((doc) => {
+    comments.push(doc.data())
+  })
+
+  return comments
+}
+
+/**
  * コメントを投稿したときの処理
  * @param [Object] userData 現在のユーザーデータ
  * @param [Object] topicData トピック
@@ -14,7 +46,6 @@ import getNow from './getNow'
  * @param [String] commentText コメント
  */
 export const createNewComment = async (userData, topicData, cardData, commentText) => {
-
   const db = firebase.firestore()
 
   const ref = await db.collection('Comments').add({
@@ -48,7 +79,6 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
     db.collection('Topics').doc(topicData.topic_id).update('comments', firebase.firestore.FieldValue.increment(1))
     db.collection('Topics').doc(topicData.topic_id).set(time_data, { merge: true })
   }
-
 }
 
 /**
@@ -60,7 +90,6 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
  * @param [String] creator_id コメント作成者のid
  */
 export const addToLikeList = (comment_id, user_id, creator_id) => {
-
   firebase.firestore().collection('Comments').doc(comment_id).update({
     like: firebase.firestore.FieldValue.arrayUnion(user_id)
   })
@@ -79,7 +108,6 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
  * @param [String] creator_id コメント作成者のid
  */
 export const removeFromLikeList = (comment_id, user_id, creator_id) => {
-
   firebase.firestore().collection('Comments').doc(comment_id).update({
     like: firebase.firestore.FieldValue.arrayRemove(user_id)
   })

@@ -1,26 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import React from "react"
+import PropTypes from "prop-types"
+import { Col } from "reactstrap"
+import { Link } from "react-router-dom"
 
-import firebase from "firebase/app";
+import firebase from "firebase/app"
 
 export default class CardList extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       cards: []
-    };
+    }
 
-    this.fetchHeroComment();
+    this.fetchHeroComment()
   }
 
   /**
    * データを取得するイベントハンドラ
    */
-
-  fetchHeroComment = function() {
-    var cards = [];
+  fetchHeroComment = function () {
+    var cards = []
     const db = firebase.firestore();
     db.collection("Cards")
       .where("hero", "==", this.props.hero)
@@ -28,10 +27,10 @@ export default class CardList extends React.Component {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           cards.push(doc.data());
-        });
+        })
         this.setState({ cards: cards });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
 
@@ -42,7 +41,7 @@ export default class CardList extends React.Component {
     return (
       <React.Fragment>
         {this.state.cards.map((card, index) => {
-          return <CardView key={index} card_img={card.card_img} card_id={card.card_id}/>; // imgとidは兼用
+          return <CardView key={index} card_img={card.card_img} card_id={card.card_id} />; // imgとidは兼用
         })}
       </React.Fragment>
     );

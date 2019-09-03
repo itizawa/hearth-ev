@@ -1,4 +1,4 @@
-import firebase from "firebase/app"
+import firebase from 'firebase/app'
 
 import getNow from './getNow'
 
@@ -6,13 +6,12 @@ import getNow from './getNow'
  * トピックに関するfunction
  */
 
-
 /**
  * ホットトピックデータを取得するためのfunction
  * @return {topics} 新しい順に10トピックを返す
  */
 export const fetchHotTopicData = async () => {
-  let topics = []
+  const topics = []
   const snapshot = await firebase.firestore().collection('Topics').orderBy('timestamp', 'desc').limit(10).get()
 
   snapshot.forEach((doc) => {
@@ -26,7 +25,6 @@ export const fetchHotTopicData = async () => {
  * topic作成ボタンを押した時の処理
  */
 export const createNewTopic = async (topicText) => {
-
   const ref = await firebase.firestore().collection('Topics').add({
     topic_name: topicText,
     comments: 0,
@@ -38,5 +36,4 @@ export const createNewTopic = async (topicText) => {
   await firebase.firestore().collection('Topics')
     .doc(ref.id)
     .set({ topic_id: ref.id }, { merge: true })
-
 }

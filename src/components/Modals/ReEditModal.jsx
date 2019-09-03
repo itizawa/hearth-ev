@@ -15,7 +15,7 @@ import firebase from 'firebase/app'
 
 export default class ReEditModal extends React.Component {
 
-  MIN_WORD_COUNT = 1;
+  MIN_WORD_COUNT = 1
   MAX_WORD_COUNT = 150
 
   constructor (props) {
