@@ -12,10 +12,14 @@ import getNow from './getNow'
  * @return {comments} コメントデータを返す
  */
 export const fetchCommentData = async (count = 50) => {
+  let comments = []
+  const snapshot = await firebase.firestore().collection("Comments").orderBy("timestamp", "desc").limit(count).get()
 
-  console.log(count)
+  snapshot.forEach((doc) => {
+    comments.push(doc.data())
+  })
 
-  return count
+  return comments
 }
 
 /**

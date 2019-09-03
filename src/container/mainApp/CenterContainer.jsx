@@ -33,24 +33,9 @@ export default class CenterContainer extends React.Component {
   /**
    * データを取得するイベントハンドラ
    */
-  fetchHomeComment = () => {
-    fetchCommentData(50);
-    // var comments = [];
-    // const db = firebase.firestore();
-    // db.collection("Comments")
-    //   .orderBy("timestamp", "desc")
-    //   .limit(50)
-    //   .get()
-    //   .then((snapshot) => {
-    //     snapshot.forEach((doc) => {
-    //       comments.push(doc.data());
-    //     });
-    //     this.setState({ comments: comments });
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error getting documents", err);
-    //   });
-    // return Promise.all([db]);
+  async fetchHomeComment() {
+    const HomeCommentData = await fetchCommentData(50)
+    this.setState({ comments: HomeCommentData })
   };
 
   render() {
