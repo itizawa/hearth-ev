@@ -37,7 +37,8 @@ export default class CommentModal extends React.Component {
         card_name: '',
         card_id: ''
       },
-      commentText: ''
+      commentText: '',
+      buttonDisable: false
 
     }
 
@@ -91,9 +92,14 @@ export default class CommentModal extends React.Component {
   async onPostComment() {
     const { userData, topicData, cardData, commentText } = this.state
 
+    this.setState({ buttonDisable: true })
     this.toggleModal()
+
     await createNewComment(userData, topicData, cardData, commentText)
     await this.props.fetchComment()
+
+    this.setState({ commentText: '' })
+    this.setState({ buttonDisable: false })
   }
 
   render() {
@@ -163,7 +169,8 @@ export default class CommentModal extends React.Component {
             onClick={this.onPostComment}
             disabled={
               this.state.commentText.length < this.MIN_WORD_COUNT ||
-              this.state.commentText.length > this.MAX_WORD_COUNT
+              this.state.commentText.length > this.MAX_WORD_COUNT ||
+              this.state.buttonDisable
             }
           >
             Submit
