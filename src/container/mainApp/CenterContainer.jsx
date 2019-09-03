@@ -85,15 +85,8 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder='コメントする' />
             </Col>
           </Row>
-          {this.state.isDataFetch ? (
-            <div className='mt-2'>
-              <Spinner style={spinnerStyle} color='primary' />
-            </div>
-          ) : (
-              <>
-                {comment}
-              </>
-            )}
+          {this.state.isDataFetch && <Spinner style={spinnerStyle} color='primary' />}
+          {comment}
         </div>
 
         <CommentModal
