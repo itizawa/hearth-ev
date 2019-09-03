@@ -15,15 +15,17 @@ export default class CenterContainer extends React.Component {
       comments: [],
       isDataFetch: true
     }
-    this.fetchHomeComment()
 
     this.modal_toggle = this.modal_toggle.bind(this)
+  }
+
+  componentDidMount() {
+    this.fetchHomeComment()
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
@@ -37,6 +39,8 @@ export default class CenterContainer extends React.Component {
   async fetchHomeComment() {
     const HomeCommentData = await fetchCommentData(50)
     this.setState({ comments: HomeCommentData })
+    // データを取得した後spinnerを消す
+    this.setState({ isDataFetch: false });
   }
 
   render() {
@@ -86,7 +90,9 @@ export default class CenterContainer extends React.Component {
               <Spinner style={spinnerStyle} color='primary' />
             </div>
           ) : (
-              { comment }
+              <>
+                {comment}
+              </>
             )}
         </div>
 
