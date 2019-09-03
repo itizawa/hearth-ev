@@ -16,11 +16,9 @@ export default class CenterContainer extends React.Component {
       isDataFetch: true
     };
 
-    this.modal_toggle = this.modal_toggle.bind(this);
-  }
-
-  componentDidMount() {
     this.fetchCardComment(this.props.focusCard.id)
+
+    this.modal_toggle = this.modal_toggle.bind(this);
   }
 
   /**
