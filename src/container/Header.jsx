@@ -109,28 +109,28 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const navbar_style = {
+    const navbarStyle = {
       backgroundColor: '#00075d',
       border: '0px'
     }
 
-    const text_style = {
+    const textStyle = {
       color: 'white'
     }
 
-    const dehaze_style = {
+    const dehazeStyle = {
       fontSize: '40px'
     }
 
     return (
       <>
-        <Navbar style={navbar_style} expand='md'>
+        <Navbar style={navbarStyle} expand='md'>
           <NavbarToggler onClick={this.toggleNavbar} className='mr-2 p-0'>
-            <i className='material-icons text-white' style={dehaze_style}>
+            <i className='material-icons text-white' style={dehazeStyle}>
               dehaze
             </i>
           </NavbarToggler>
-          <Link to="/" style={text_style}>
+          <Link to="/" style={textStyle}>
             Hearth EV
             </Link>
           <NavbarToggler onClick={this.toggle} />
@@ -140,13 +140,13 @@ export default class Header extends React.Component {
                 <Button
                   onClick={this.toggle}
                   className='bg-primary border border-white rounded-pill py-1 px-5'
-                  style={text_style}
+                  style={textStyle}
                 >
                   Login
                 </Button>
               ) : (
                   <UncontrolledDropdown direction='left'>
-                    <DropdownToggle style={navbar_style}>
+                    <DropdownToggle style={navbarStyle}>
                       <img
                         className='mr-2 rounded-pill border border-secondary'
                         src={this.props.user_data.photoURL}
@@ -185,7 +185,7 @@ export default class Header extends React.Component {
             <ModalFooter>
               <Button color='primary' onClick={this.onLoginHandler}>
                 ログインする
-              </Button>{' '}
+              </Button>
               <Button color='secondary' onClick={this.toggle}>
                 Cancel
               </Button>
@@ -195,13 +195,18 @@ export default class Header extends React.Component {
             <Collapse isOpen={!this.state.collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <Link to='/' style={text_style}>
+                  <Link to='/' style={textStyle}>
                     ホーム
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link to='/card' style={text_style}>
+                  <Link to='/card' style={textStyle}>
                     カード
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to='/topic' style={textStyle}>
+                    トピック
                   </Link>
                 </NavItem>
               </Nav>

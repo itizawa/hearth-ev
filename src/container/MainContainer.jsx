@@ -48,7 +48,7 @@ export default class MainContainer extends React.Component {
             />
             <Route
               exact
-              path='/topic/:topic_id'
+              path='/topic/:id'
               render={(props) => (
                 <TopicApp {...this.props} match={props.match} />
               )}

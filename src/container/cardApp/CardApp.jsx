@@ -9,14 +9,14 @@ export default class CardApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus_card: {
+      focusCard: {
         id: this.props.match.params.card_id,
         name: "CardPage",
         comments: []
       }
     };
 
-    this.fetchCardData(this.state.focus_card.id);
+    this.fetchCardData(this.state.focusCard.id);
   }
 
   /**
@@ -34,7 +34,7 @@ export default class CardApp extends React.Component {
           console.log("No such document!");
         } else {
           this.setState({
-            focus_card: doc.data()
+            focusCard: doc.data()
           });
         }
       })
@@ -50,13 +50,13 @@ export default class CardApp extends React.Component {
           <Col md="7" className="px-0 mb-2">
             <CenterContainer
               user_data={this.props.user_data}
-              focus_card={this.state.focus_card}
+              focusCard={this.state.focusCard}
             />
           </Col>
           <Col md="5" className="px-1">
             <ViewContainer
               user_data={this.props.user_data}
-              focus_card={this.state.focus_card}
+              focusCard={this.state.focusCard}
             />
           </Col>
         </Row>

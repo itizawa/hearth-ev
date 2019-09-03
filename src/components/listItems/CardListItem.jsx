@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 export default class CardListItem extends React.Component {
-  render () {
+  render() {
     const chat_style = {
       fontSize: '18px'
     }
@@ -16,7 +16,7 @@ export default class CardListItem extends React.Component {
           <h6 className='mb-0'>
             <Link to={'/card/' + card_data.card_id}>
               <strong className='text-body'>{card_data.card_name}</strong>
-              <span>
+              <span className='text-info'>
                 <i className='material-icons ml-1' style={chat_style}>
                   mode_comment
                 </i>

@@ -12,10 +12,10 @@ export default class CenterContainer extends React.Component {
     super(props);
     this.state = {
       show_comment_modal: false,
-      comments: []
+      comments: [],
     };
 
-    this.fetchTopicComment(this.props.focus_topic.id);
+    this.fetchTopicComment(this.props.focusTopic.id);
 
     this.modal_toggle = this.modal_toggle.bind(this);
   }
@@ -32,7 +32,7 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-  fetchTopicComment = (target = this.props.focus_topic.topic_id) => {
+  fetchTopicComment = (target = this.props.focusTopic.topic_id) => {
     var comments = [];
     const db = firebase.firestore();
     db.collection("Comments")
@@ -56,7 +56,7 @@ export default class CenterContainer extends React.Component {
       backgroundColor: "#00075d"
     };
 
-    const { focus_topic, user_data } = this.props;
+    const { focusTopic, user_data } = this.props;
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -73,7 +73,7 @@ export default class CenterContainer extends React.Component {
       <React.Fragment>
         <div className="bg-white border 2px shadow-sm">
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
-            Topic Page : {focus_topic.topic_name}
+            Topic Page : {focusTopic.topic_name}
           </h3>
           <Row className="py-2 mx-0">
             <Col xs="1" className="px-1">
@@ -96,9 +96,7 @@ export default class CenterContainer extends React.Component {
           modal={this.state.show_comment_modal}
           modal_toggle={this.modal_toggle}
           user_data={user_data}
-          topic_name={focus_topic.topic_name}
-          topic_id={focus_topic.topic_id}
-          card_name={focus_topic.card_name}
+          focusTopic={focusTopic}
           pushCommentId={this.props.pushCommentId}
           fetchComment={this.fetchTopicComment}
         />
@@ -109,5 +107,5 @@ export default class CenterContainer extends React.Component {
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object,
-  focus_topic: PropTypes.object
+  focusTopic: PropTypes.object
 };

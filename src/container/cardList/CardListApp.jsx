@@ -8,7 +8,7 @@ export default class UserApp extends React.Component {
     return (
       <>
         <Row>
-          <Col md='7' className='px-0'>
+          <Col md='12' className='px-0'>
             <CenterContainer />
           </Col>
           <Col md='5' className='px-0' />

@@ -5,6 +5,7 @@ import CardView from './CardView'
 
 export default class ViewContainer extends React.Component {
   render () {
+    const { focusCard } = this.props
     const header_style = {
       backgroundColor: '#00075d'
     }
@@ -12,9 +13,9 @@ export default class ViewContainer extends React.Component {
       <>
         <div className='bg-white border 2px shadow-sm'>
           <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
-            {this.props.focus_card.card_name}
+            {focusCard.card_name}
           </h3>
-          <CardView focus_card={this.props.focus_card} />
+          <CardView focusCard={focusCard} />
         </div>
       </>
     )
