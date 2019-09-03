@@ -36,7 +36,7 @@ export default class CenterContainer extends React.Component {
    * コメントデータを取得する
    */
   async fetchCardComment() {
-    const CardCommentData = await fetchTargetCommentData("card_id", this.props.focusCard.id)
+    const CardCommentData = await fetchTargetCommentData("card_id", this.props.focusCard.card_id)
     this.setState({ comments: CardCommentData })
     // データを取得した後spinnerを消す
     this.setState({ isDataFetch: false });
@@ -45,7 +45,7 @@ export default class CenterContainer extends React.Component {
   render() {
     const header_style = {
       backgroundColor: "#00075d"
-    }
+    };
 
     const spinnerStyle = {
       height: '150px',
@@ -105,5 +105,5 @@ export default class CenterContainer extends React.Component {
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object,
-  focus_card: PropTypes.object
+  focusCard: PropTypes.object
 };
