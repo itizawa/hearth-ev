@@ -27,9 +27,9 @@ export const fetchCommentData = async (count = 50) => {
  * @param [String] targetId 特定のデータを取得するためのId
  * @return {comments} コメントデータを返す 
  */
-export const fetchTargetCommentData = async () => {
+export const fetchTargetCommentData = async (target) => {
 
-  console.log('ここはfunction')
+  console.log(target)
 
 }
 
