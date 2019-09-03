@@ -204,6 +204,11 @@ export default class Header extends React.Component {
                     カード
                   </Link>
                 </NavItem>
+                <NavItem>
+                  <Link to='/topic' style={text_style}>
+                    トピック
+                  </Link>
+                </NavItem>
               </Nav>
             </Collapse>
           )}
