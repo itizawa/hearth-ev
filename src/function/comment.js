@@ -12,8 +12,8 @@ import getNow from './getNow'
  * @return {comments} コメントデータを返す
  */
 export const fetchCommentData = async (count = 50) => {
-  let comments = []
-  const snapshot = await firebase.firestore().collection("Comments").orderBy("timestamp", "desc").limit(count).get()
+  const comments = []
+  const snapshot = await firebase.firestore().collection('Comments').orderBy('timestamp', 'desc').limit(count).get()
 
   snapshot.forEach((doc) => {
     comments.push(doc.data())
@@ -30,7 +30,6 @@ export const fetchCommentData = async (count = 50) => {
  * @param [String] commentText コメント
  */
 export const createNewComment = async (userData, topicData, cardData, commentText) => {
-
   const db = firebase.firestore()
 
   const ref = await db.collection('Comments').add({
@@ -64,7 +63,6 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
     db.collection('Topics').doc(topicData.topic_id).update('comments', firebase.firestore.FieldValue.increment(1))
     db.collection('Topics').doc(topicData.topic_id).set(time_data, { merge: true })
   }
-
 }
 
 /**
@@ -76,7 +74,6 @@ export const createNewComment = async (userData, topicData, cardData, commentTex
  * @param [String] creator_id コメント作成者のid
  */
 export const addToLikeList = (comment_id, user_id, creator_id) => {
-
   firebase.firestore().collection('Comments').doc(comment_id).update({
     like: firebase.firestore.FieldValue.arrayUnion(user_id)
   })
@@ -95,7 +92,6 @@ export const addToLikeList = (comment_id, user_id, creator_id) => {
  * @param [String] creator_id コメント作成者のid
  */
 export const removeFromLikeList = (comment_id, user_id, creator_id) => {
-
   firebase.firestore().collection('Comments').doc(comment_id).update({
     like: firebase.firestore.FieldValue.arrayRemove(user_id)
   })

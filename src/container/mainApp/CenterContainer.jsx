@@ -1,22 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Input, Col, Row } from "reactstrap";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Input, Col, Row, Spinner } from 'reactstrap'
 
-import CommentModal from "../../components/Modals/CommentModal";
-import Comment from "../../components/Comment";
+import CommentModal from '../../components/Modals/CommentModal'
+import Comment from '../../components/Comment'
 
-import { fetchCommentData } from "../../function/comment";
+import { fetchCommentData } from '../../function/comment'
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       show_comment_modal: false,
-      comments: []
-    };
-    this.fetchHomeComment();
+      comments: [],
+      isDataFetch: true
+    }
+    this.fetchHomeComment()
 
-    this.modal_toggle = this.modal_toggle.bind(this);
+    this.modal_toggle = this.modal_toggle.bind(this)
   }
 
   /**
@@ -26,8 +27,8 @@ export default class CenterContainer extends React.Component {
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
-    }));
-    this.fetchHomeComment();
+    }))
+    this.fetchHomeComment()
   }
 
   /**
@@ -36,12 +37,18 @@ export default class CenterContainer extends React.Component {
   async fetchHomeComment() {
     const HomeCommentData = await fetchCommentData(50)
     this.setState({ comments: HomeCommentData })
-  };
+  }
 
   render() {
     const header_style = {
-      backgroundColor: "#00075d"
-    };
+      backgroundColor: '#00075d'
+    }
+
+    const spinner_style = {
+      height: '150px',
+      width: '150px',
+      marginLeft: '40%'
+    }
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -51,30 +58,36 @@ export default class CenterContainer extends React.Component {
           user_data={this.props.user_data}
           fetchComment={this.fetchHomeComment}
         />
-      );
-    });
+      )
+    })
 
     return (
-      <React.Fragment>
-        <div className="bg-white border 2px shadow-sm">
-          <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
+      <>
+        <div className='bg-white border 2px shadow-sm'>
+          <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
             Home
           </h3>
-          <Row className="py-2 mx-0">
-            <Col xs="1" className="px-1">
+          <Row className='py-2 mx-0'>
+            <Col xs='1' className='px-1'>
               <img
-                className="rounded-pill"
+                className='rounded-pill'
                 src={this.props.user_data.photoURL}
                 alt={this.props.user_data.photoURL}
-                width="80%"
-                height="auto"
+                width='80%'
+                height='auto'
               />
             </Col>
-            <Col xs="11 pl-0">
-              <Input onClick={this.modal_toggle} placeholder="コメントする" />
+            <Col xs='11 pl-0'>
+              <Input onClick={this.modal_toggle} placeholder='コメントする' />
             </Col>
           </Row>
-          {comment}
+          {this.state.isDataFetch ? (
+            <div className='mt-2'>
+              <Spinner style={spinner_style} color='primary' />
+            </div>
+          ) : (
+              { comment }
+            )}
         </div>
 
         <CommentModal
@@ -83,11 +96,11 @@ export default class CenterContainer extends React.Component {
           user_data={this.props.user_data}
           fetchComment={this.fetchHomeComment}
         />
-      </React.Fragment>
-    );
+      </>
+    )
   }
 }
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object
-};
+}

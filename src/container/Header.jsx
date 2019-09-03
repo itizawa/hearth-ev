@@ -130,9 +130,9 @@ export default class Header extends React.Component {
               dehaze
             </i>
           </NavbarToggler>
-          <Link to="/" style={text_style}>
+          <Link to='/' style={text_style}>
             Hearth EV
-            </Link>
+          </Link>
           <NavbarToggler onClick={this.toggle} />
           <Nav className='ml-auto' navbar>
             <NavItem>
