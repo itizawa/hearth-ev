@@ -40,11 +40,11 @@ export default class CenterContainer extends React.Component {
   }
 
   render() {
-    const header_style = {
+    const headerStyle = {
       backgroundColor: '#00075d'
     }
 
-    const spinner_style = {
+    const spinnerStyle = {
       height: '150px',
       width: '150px',
       marginLeft: '40%'
@@ -64,7 +64,7 @@ export default class CenterContainer extends React.Component {
     return (
       <>
         <div className='bg-white border 2px shadow-sm'>
-          <h3 style={header_style} className='text-white py-2 pl-3 mb-0'>
+          <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             Home
           </h3>
           <Row className='py-2 mx-0'>
@@ -83,7 +83,7 @@ export default class CenterContainer extends React.Component {
           </Row>
           {this.state.isDataFetch ? (
             <div className='mt-2'>
-              <Spinner style={spinner_style} color='primary' />
+              <Spinner style={spinnerStyle} color='primary' />
             </div>
           ) : (
               { comment }
