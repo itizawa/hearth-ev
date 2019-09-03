@@ -27,10 +27,15 @@ export const fetchCommentData = async (count = 50) => {
  * @param [String] targetId 特定のデータを取得するためのId
  * @return {comments} コメントデータを返す 
  */
-export const fetchTargetCommentData = async (target) => {
+export const fetchTargetCommentData = async (target,id) => {
+  let comments = []
+  const snapshot = await firebase.firestore().collection('Comments').where(target, "==", id).orderBy('timestamp', 'desc').get()
 
-  console.log(target)
+  snapshot.forEach((doc) => {
+    comments.push(doc.data())
+  })
 
+  return comments
 }
 
 /**

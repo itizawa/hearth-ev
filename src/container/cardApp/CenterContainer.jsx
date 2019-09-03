@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Input, Col, Row } from "reactstrap"
+import { Input, Col, Row, Spinner } from "reactstrap"
 
 import CommentModal from "../../components/Modals/CommentModal"
 import Comment from "../../components/Comment"
@@ -12,7 +12,8 @@ export default class CenterContainer extends React.Component {
     super(props);
     this.state = {
       show_comment_modal: false,
-      comments: []
+      comments: [],
+      isDataFetch: true
     };
 
     this.modal_toggle = this.modal_toggle.bind(this);
@@ -34,14 +35,23 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-  fetchCardComment() {
-    fetchTargetCommentData(this.props.focusCard.id)
+  async fetchCardComment() {
+    const CardCommentData = await fetchTargetCommentData("card_id", this.props.focusCard.id)
+    this.setState({ comments: CardCommentData })
+    // データを取得した後spinnerを消す
+    this.setState({ isDataFetch: false });
   }
 
   render() {
     const header_style = {
       backgroundColor: "#00075d"
-    };
+    }
+
+    const spinnerStyle = {
+      height: '150px',
+      width: '150px',
+      marginLeft: '40%'
+    }
 
     const { focusCard, user_data } = this.props;
 
@@ -76,6 +86,7 @@ export default class CenterContainer extends React.Component {
               <Input onClick={this.modal_toggle} placeholder="コメントする" />
             </Col>
           </Row>
+          {this.state.isDataFetch && <Spinner style={spinnerStyle} color='primary' />}
           {comment}
         </div>
 
