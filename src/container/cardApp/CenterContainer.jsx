@@ -33,7 +33,6 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-
   fetchCardComment = (target = this.props.focusCard.card_id) => {
     var comments = [];
     const db = firebase.firestore();
