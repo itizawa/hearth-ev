@@ -35,8 +35,8 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-  async fetchCardComment(id= this.props.focusCard.card_id) {
-    const CardCommentData = await fetchTargetCommentData("card_id", id )
+  fetchCardComment = async (id = this.props.focusCard.card_id) => {
+    const CardCommentData = await fetchTargetCommentData("card_id", id)
     this.setState({ comments: CardCommentData })
     // データを取得した後spinnerを消す
     this.setState({ isDataFetch: false });
