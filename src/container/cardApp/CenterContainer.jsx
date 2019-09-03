@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Input, Col, Row } from "reactstrap";
+import React from "react"
+import PropTypes from "prop-types"
+import { Input, Col, Row } from "reactstrap"
 
-import CommentModal from "../../components/Modals/CommentModal";
-import Comment from "../../components/Comment";
+import CommentModal from "../../components/Modals/CommentModal"
+import Comment from "../../components/Comment"
 
-import firebase from "firebase/app";
+import { fetchTargetCommentData } from '../../function/comment'
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
@@ -15,15 +15,16 @@ export default class CenterContainer extends React.Component {
       comments: []
     };
 
-    this.fetchCardComment(this.props.focusCard.id);
-
     this.modal_toggle = this.modal_toggle.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchCardComment()
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
@@ -33,24 +34,9 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-  fetchCardComment = (target = this.props.focusCard.card_id) => {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .where("card_id", "==", target)
-      .orderBy("timestamp", "desc")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch(function(error) {
-        console.log("Error getting documents: ", error);
-      });
-    return Promise.all([db]);
-  };
+  fetchCardComment() {
+    fetchTargetCommentData(this.props.focusCard.id)
+  }
 
   render() {
     const header_style = {
