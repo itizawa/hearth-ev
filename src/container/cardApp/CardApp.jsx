@@ -1,22 +1,22 @@
-import React from "react";
-import { Row, Col } from "reactstrap";
-import ViewContainer from "./ViewContainer";
-import CenterContainer from "./CenterContainer";
+import React from "react"
+import { Row, Col } from "reactstrap"
+import ViewContainer from "./ViewContainer"
+import CenterContainer from "./CenterContainer"
 
-import firebase from "firebase/app";
+import firebase from "firebase/app"
 
 export default class CardApp extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       focusCard: {
         id: this.props.match.params.card_id,
         name: "CardPage",
         comments: []
       }
-    };
+    }
 
-    this.fetchCardData(this.state.focusCard.id);
+    this.fetchCardData(this.state.focusCard.id)
   }
 
   /**
@@ -31,17 +31,17 @@ export default class CardApp extends React.Component {
       .get()
       .then((doc) => {
         if (!doc.exists) {
-          console.log("No such document!");
+          console.log("No such document!")
         } else {
           this.setState({
             focusCard: doc.data()
-          });
+          })
         }
       })
       .catch((err) => {
-        console.log("Error getting document", err);
-      });
-  };
+        console.log("Error getting document", err)
+      })
+  }
 
   render() {
     return (
@@ -61,6 +61,6 @@ export default class CardApp extends React.Component {
           </Col>
         </Row>
       </React.Fragment>
-    );
+    )
   }
 }

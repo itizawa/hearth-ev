@@ -20,7 +20,7 @@ export default class HotTopicBox extends React.Component {
   async fetchTopicData() {
     const HotTopicData = await fetchHotTopicData()
     this.setState({ topics: HotTopicData })
-  };
+  }
 
   render() {
     const headerStyle = {

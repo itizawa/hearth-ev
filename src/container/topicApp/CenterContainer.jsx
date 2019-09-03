@@ -14,11 +14,11 @@ export default class CenterContainer extends React.Component {
       show_comment_modal: false,
       comments: [],
       isDataFetch: true
-    };
+    }
 
-    this.fetchTopicComment(this.props.focusTopic.id);
+    this.fetchTopicComment(this.props.focusTopic.id)
 
-    this.modal_toggle = this.modal_toggle.bind(this);
+    this.modal_toggle = this.modal_toggle.bind(this)
   }
 
   /**
@@ -27,7 +27,7 @@ export default class CenterContainer extends React.Component {
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
-    }));
+    }))
   }
 
   /**
@@ -37,7 +37,7 @@ export default class CenterContainer extends React.Component {
     const TopicCommentData = await fetchTargetCommentData("topic_id", id)
     this.setState({ comments: TopicCommentData })
     // データを取得した後spinnerを消す
-    this.setState({ isDataFetch: false });
+    this.setState({ isDataFetch: false })
   }
 
   render() {

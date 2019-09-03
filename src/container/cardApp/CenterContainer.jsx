@@ -9,16 +9,16 @@ import { fetchTargetCommentData } from '../../function/comment'
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       show_comment_modal: false,
       comments: [],
       isDataFetch: true
-    };
+    }
 
     this.fetchCardComment(this.props.focusCard.id)
 
-    this.modal_toggle = this.modal_toggle.bind(this);
+    this.modal_toggle = this.modal_toggle.bind(this)
   }
 
   /**
@@ -27,7 +27,7 @@ export default class CenterContainer extends React.Component {
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
-    }));
+    }))
   }
 
   /**
@@ -37,13 +37,13 @@ export default class CenterContainer extends React.Component {
     const CardCommentData = await fetchTargetCommentData("card_id", id)
     this.setState({ comments: CardCommentData })
     // データを取得した後spinnerを消す
-    this.setState({ isDataFetch: false });
+    this.setState({ isDataFetch: false })
   }
 
   render() {
     const header_style = {
       backgroundColor: "#00075d"
-    };
+    }
 
     const spinnerStyle = {
       height: '150px',
@@ -51,7 +51,7 @@ export default class CenterContainer extends React.Component {
       marginLeft: '40%'
     }
 
-    const { focusCard, user_data } = this.props;
+    const { focusCard, user_data } = this.props
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -61,8 +61,8 @@ export default class CenterContainer extends React.Component {
           user_data={user_data}
           fetchComment={this.fetchCardComment}
         />
-      );
-    });
+      )
+    })
 
     return (
       <React.Fragment>
@@ -97,11 +97,11 @@ export default class CenterContainer extends React.Component {
           fetchComment={this.fetchCardComment}
         />
       </React.Fragment>
-    );
+    )
   }
 }
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object,
   focusCard: PropTypes.object
-};
+}
