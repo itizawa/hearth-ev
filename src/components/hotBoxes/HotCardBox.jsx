@@ -1,47 +1,47 @@
-import React from "react";
-import firebase from "firebase/app";
+import React from "react"
+import firebase from "firebase/app"
 
-import CardListItem from "../listItems/CardListItem";
+import CardListItem from "../listItems/CardListItem"
 
 export default class HotUserBox extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       cards: []
-    };
-    this.fetchCardData();
+    }
+    this.fetchCardData()
   }
 
   /**
    * カードデータを取得するイベントハンドラ
    */
   fetchCardData = () => {
-    var cards = [];
-    const db = firebase.firestore();
+    var cards = []
+    const db = firebase.firestore()
     db.collection("Cards")
       .orderBy("timestamp", "desc")
       .limit(15)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          cards.push(doc.data());
-        });
-        this.setState({ cards: cards });
+          cards.push(doc.data())
+        })
+        this.setState({ cards: cards })
       })
       .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
-  };
+        console.log("Error getting documents", err)
+      })
+    return Promise.all([db])
+  }
 
   render() {
     const header_style = {
       backgroundColor: "#00075d"
-    };
+    }
 
     const trending_style = {
       fontSize: "33px"
-    };
+    }
 
     return (
       <div className="bg-white border 2px shadow-sm mb-2">
@@ -52,9 +52,9 @@ export default class HotUserBox extends React.Component {
           HotCard
         </h3>
         {this.state.cards.map((card, index) => {
-          return <CardListItem key={index} card_data={card} />;
+          return <CardListItem key={index} card_data={card} />
         })}
       </div>
-    );
+    )
   }
 }

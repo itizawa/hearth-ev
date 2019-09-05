@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Spinner } from "reactstrap"
 
 import Comment from "../../components/Comment";
 
-import firebase from "firebase/app";
+import { fetchTargetCommentData } from '../../function/comment'
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show_comment_modal: false,
-      comments: []
+      comments: [],
+      isDataFetch: true
     };
 
     this.fetchUserComment(this.props.focus_user.id);
@@ -19,29 +21,23 @@ export default class CenterContainer extends React.Component {
   /**
    * コメントデータを取得する
    */
-  fetchUserComment = (user_id = this.props.focus_user.uid) => {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .where("creator_id", "==", user_id)
-      .orderBy("timestamp", "desc")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch(function(error) {
-        console.log("Error getting documents: ", error);
-      });
-    return Promise.all([db]);
+  fetchUserComment = async (id = this.props.focus_user.uid) => {
+    const UserCommentData = await fetchTargetCommentData("creator_id", id)
+    this.setState({ comments: UserCommentData })
+    // データを取得した後spinnerを消す
+    this.setState({ isDataFetch: false })
   };
 
   render() {
     const header_style = {
       backgroundColor: "#00075d"
     };
+
+    const spinnerStyle = {
+      height: '150px',
+      width: '150px',
+      marginLeft: '40%'
+    }
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -60,6 +56,7 @@ export default class CenterContainer extends React.Component {
           <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
             User Page : {this.props.focus_user.name}
           </h3>
+          {this.state.isDataFetch && <Spinner style={spinnerStyle} color='primary' />}
           {comment}
         </div>
       </React.Fragment>

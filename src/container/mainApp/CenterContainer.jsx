@@ -1,62 +1,57 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Input, Col, Row } from "reactstrap";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Input, Col, Row, Spinner } from 'reactstrap'
 
-import CommentModal from "../../components/Modals/CommentModal";
-import Comment from "../../components/Comment";
+import CommentModal from '../../components/Modals/CommentModal'
+import Comment from '../../components/Comment'
 
-import firebase from "firebase/app";
+import { fetchCommentData } from '../../function/comment'
 
 export default class CenterContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       show_comment_modal: false,
-      comments: []
-    };
-    this.fetchHomeComment();
+      comments: [],
+      isDataFetch: true
+    }
 
-    this.modal_toggle = this.modal_toggle.bind(this);
+    this.fetchHomeComment()
+
+    this.modal_toggle = this.modal_toggle.bind(this)
+    this.fetchHomeComment = this.fetchHomeComment.bind(this)
   }
 
   /**
    * モーダル開閉のためのイベントハンドラ
    */
-
   modal_toggle() {
     this.setState((prevState) => ({
       show_comment_modal: !prevState.show_comment_modal
-    }));
-    this.fetchHomeComment();
+    }))
+    this.fetchHomeComment()
   }
 
   /**
    * データを取得するイベントハンドラ
    */
-
-  fetchHomeComment = () => {
-    var comments = [];
-    const db = firebase.firestore();
-    db.collection("Comments")
-      .orderBy("timestamp", "desc")
-      .limit(50)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          comments.push(doc.data());
-        });
-        this.setState({ comments: comments });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
-    return Promise.all([db]);
-  };
+  async fetchHomeComment() {
+    const HomeCommentData = await fetchCommentData(50)
+    this.setState({ comments: HomeCommentData })
+    // データを取得した後spinnerを消す
+    this.setState({ isDataFetch: false });
+  }
 
   render() {
-    const header_style = {
-      backgroundColor: "#00075d"
-    };
+    const headerStyle = {
+      backgroundColor: '#00075d'
+    }
+
+    const spinnerStyle = {
+      height: '150px',
+      width: '150px',
+      marginLeft: '40%'
+    }
 
     const comment = this.state.comments.map((comment) => {
       return (
@@ -66,29 +61,30 @@ export default class CenterContainer extends React.Component {
           user_data={this.props.user_data}
           fetchComment={this.fetchHomeComment}
         />
-      );
-    });
+      )
+    })
 
     return (
-      <React.Fragment>
-        <div className="bg-white border 2px shadow-sm">
-          <h3 style={header_style} className="text-white py-2 pl-3 mb-0">
+      <>
+        <div className='bg-white border 2px shadow-sm'>
+          <h3 style={headerStyle} className='text-white py-2 pl-3 mb-0'>
             Home
           </h3>
-          <Row className="py-2 mx-0">
-            <Col xs="1" className="px-1">
+          <Row className='py-2 mx-0'>
+            <Col xs='1' className='px-1'>
               <img
-                className="rounded-pill"
+                className='rounded-pill'
                 src={this.props.user_data.photoURL}
                 alt={this.props.user_data.photoURL}
-                width="80%"
-                height="auto"
+                width='80%'
+                height='auto'
               />
             </Col>
-            <Col xs="11 pl-0">
-              <Input onClick={this.modal_toggle} placeholder="コメントする" />
+            <Col xs='11 pl-0'>
+              <Input onClick={this.modal_toggle} placeholder='コメントする' />
             </Col>
           </Row>
+          {this.state.isDataFetch && <Spinner style={spinnerStyle} color='primary' />}
           {comment}
         </div>
 
@@ -98,11 +94,11 @@ export default class CenterContainer extends React.Component {
           user_data={this.props.user_data}
           fetchComment={this.fetchHomeComment}
         />
-      </React.Fragment>
-    );
+      </>
+    )
   }
 }
 
 CenterContainer.propTypes = {
   user_data: PropTypes.object
-};
+}
